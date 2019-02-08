@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.netcracker.mapper.AppUserMapper;
 import com.netcracker.model.AppUser;
+import com.netcracker.utils.EncrytedPasswordUtils;
 
 @Repository
 @Transactional
@@ -19,7 +20,16 @@ public class AppUserDAO extends JdbcDaoSupport {
     public AppUserDAO(DataSource dataSource) {
         this.setDataSource(dataSource);
     }
- 
+	
+	public void createNewUser(AppUser newUser) {
+		 String sql = "INSERT INTO app_user (user_id, user_name, encryted_password, enabled) values (4, ?, ?, 1)";
+		 this.getJdbcTemplate()
+		 	.update(sql, new Object[] {
+		 			newUser.getUserName(),
+		 			EncrytedPasswordUtils.encrytePassword(newUser.getEncrytedPassword()
+		 					)});
+	}
+	
     public AppUser findUserAccount(String userName) {
     	
         String sql = AppUserMapper.BASE_SQL + " where u.User_Name = ? ";

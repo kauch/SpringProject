@@ -11,7 +11,7 @@
        
       <h1>Registration</h1>
 		<h3>Enter user name and password:</h3>
-      		<form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+      		<form name='f' th:action="@{/registration}" method='GET'>
          		<table>
             		<tr>
                		<td>User:</td>
@@ -19,7 +19,7 @@
            			</tr>
             		<tr>
                		<td>Password:</td>
-               		<td><input type='password' name='password' /></td>
+               		<td><input type='password' name='password'/></td>
             		</tr>
             		<tr>
                <td><input name="submit" type="submit" value="submit" /></td>
