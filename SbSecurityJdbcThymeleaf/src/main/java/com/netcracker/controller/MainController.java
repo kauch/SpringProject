@@ -37,6 +37,12 @@ public class MainController {
  
         return "loginPage";
     }
+    
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registrationForm(Model model) {
+ 
+        return "registrationForm";
+    }
  
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {

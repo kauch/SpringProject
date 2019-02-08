@@ -24,10 +24,6 @@ public class AppRoleDAO extends JdbcDaoSupport {
                 + " where ur.Role_Id = r.Role_Id and ur.User_Id = ? ";
  
         Object[] params = new Object[] { userId };
- 
-        List<String> roles = this.getJdbcTemplate().queryForList(sql, params, String.class);
- 
-        return roles;
+        return this.getJdbcTemplate().queryForList(sql, params, String.class);
     }
-
 }
