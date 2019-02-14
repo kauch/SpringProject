@@ -2,7 +2,10 @@ package com.netcracker.dao;
 
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -21,17 +24,22 @@ public class AppUserDAO extends JdbcDaoSupport {
         this.setDataSource(dataSource);
     }
 	
+	private static Logger log = LogManager.getLogger(AppUserDAO.class);
+	
 	public void createNewUser(AppUser newUser) {
-		 String sql = "INSERT INTO app_user (user_id, user_name, encryted_password, enabled) values (4, ?, ?, 1)";
-		 this.getJdbcTemplate()
-		 	.update(sql, new Object[] {
-		 			newUser.getUserName(),
-		 			EncrytedPasswordUtils.encrytePassword(newUser.getEncrytedPassword()
-		 					)});
+		 Object[] paramArray = new Object[] {newUser.getUserId(),
+		 							  newUser.getUserName(),
+		 			                  EncrytedPasswordUtils.encrytePassword(newUser.getEncrytedPassword()), 1};
+		 
+		 String sql = "insert into App_User (USER_ID, USER_NAME, ENCRYTED_PASSWORD, ENABLED) values (?, ?, ?, ?)";
+		 try {
+			 this.getJdbcTemplate().update(sql, paramArray);
+		 } catch (DuplicateKeyException e) {
+			 log.info(newUser.getUserName() + " is duplicate!");
+	     }
 	}
 	
     public AppUser findUserAccount(String userName) {
-    	
         String sql = AppUserMapper.BASE_SQL + " where u.User_Name = ? ";
         Object[] params = new Object[] { userName };
         AppUserMapper mapper = new AppUserMapper();

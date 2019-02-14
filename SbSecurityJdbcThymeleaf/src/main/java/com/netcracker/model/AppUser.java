@@ -1,19 +1,48 @@
 package com.netcracker.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 public class AppUser {
 	 
     private Long userId;
     private String userName;
     private String encrytedPassword;
- 
+    private static Logger log = LogManager.getLogger(AppUser.class);
+    
     public AppUser() {
  
     }
  
     public AppUser(Long userId, String userName, String encrytedPassword) {
-        this.userId = userId;
+    	if(userId != null) {
+    		this.userId = userId;
+    	}
+    	else {
+    		this.userId = uniqueID();
+    	}
         this.userName = userName;
         this.encrytedPassword = encrytedPassword;
+    }
+    
+    public Long uniqueID() {
+    	LocalDateTime id = LocalDateTime.now();
+    	DateTimeFormatter fmt = DateTimeFormatter.ofPattern("YYMMDDHHmmssSSS");
+        String dataNew = fmt.format(id);
+        Random myRandom = new Random();
+        StringBuilder bld = new StringBuilder();
+        bld.append(dataNew);
+        for(int i = 0; i < 3; i++){
+        	bld.append(myRandom.nextInt(9));
+        }
+        Long result = Long.valueOf(bld.toString());
+        log.info(result);
+        return result;
     }
  
     public Long getUserId() {
