@@ -51,7 +51,7 @@ public class MainController {
     		@RequestParam(value = "password", required = false) String password,
     		Model model) {
     	if(username != null && password != null) {
-    		appUserDAO.createNewUser(new AppUser(null, username, password));
+    		appUserDAO.createNewUser(new AppUser(username, password));
     	}
         return "registrationForm";
     }

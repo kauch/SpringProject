@@ -19,13 +19,8 @@ public class AppUser {
  
     }
  
-    public AppUser(Long userId, String userName, String encrytedPassword) {
-    	if(userId != null) {
-    		this.userId = userId;
-    	}
-    	else {
-    		this.userId = uniqueID();
-    	}
+    public AppUser(String userName, String encrytedPassword) {
+    	this.userId = uniqueID();
         this.userName = userName;
         this.encrytedPassword = encrytedPassword;
     }
