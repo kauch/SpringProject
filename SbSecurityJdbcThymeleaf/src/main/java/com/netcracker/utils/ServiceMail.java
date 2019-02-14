@@ -1,14 +1,5 @@
 package com.netcracker.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.security.GeneralSecurityException;
-import java.security.Security;
-import java.util.Base64;
-import java.util.Collections;
-import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -17,72 +8,67 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.google.api.client.auth.oauth2.Credential;
-
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.store.FileDataStoreFactory;
-import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.GmailScopes;
-import com.google.api.services.gmail.model.Label;
-import com.google.api.services.gmail.model.ListLabelsResponse;
-import com.sun.mail.smtp.SMTPTransport;
-import com.sun.mail.util.BASE64EncoderStream;
-
-
 public class ServiceMail {
 	private static Logger log = LogManager.getLogger(ServiceMail.class);
 	
 	//private static ServiceMail tlsSender = new ServiceMail("testformydearprogram@gmail.com", "wero58_hop7");
 	//tlsSender.send("This is Subject", "TLS: This is text!", "testformydearprogram@gmail.com", "kst.fis@gmail.com");
+	 public static void main(String args[]) {
+	        final String SMTP_HOST = "smtp.gmail.com";
+	        final String SMTP_PORT = "587";
+	        final String GMAIL_USERNAME = "kst.fis@gmail.com";
+	        final String GMAIL_PASSWORD = "wero58_hop7";
 
+	        System.out.println("Process Started");
 
-    /**
-     * Send an email from the user's mailbox to its recipient.
-     *
-     * @param service Authorized Gmail API instance.
-     * @param userId User's email address. The special value "me"
-     * can be used to indicate the authenticated user.
-     * @param email Email to be sent.
-     * @throws MessagingException
-     * @throws IOException
-     */
-    public static void sendMessage(Gmail service, String userId, MimeMessage email)
-        throws MessagingException, IOException {
-      Message message = createMessageWithEmail(email);
-      message = service.users().messages().send(userId, message).execute();
+	        Properties prop = System.getProperties();
+	        prop.setProperty("mail.smtp.starttls.enable", "true");
+	        prop.setProperty("mail.smtp.host", SMTP_HOST);
+	        prop.setProperty("mail.smtp.user", GMAIL_USERNAME);
+	        prop.setProperty("mail.smtp.password", GMAIL_PASSWORD);
+	        prop.setProperty("mail.smtp.port", SMTP_PORT);
+	        prop.setProperty("mail.smtp.auth", "true");
+	        System.out.println("Props : " + prop);
 
-      System.out.println("Message id: " + message.getId());
-      System.out.println(message.toPrettyString());
-    }
+	        Session session = Session.getInstance(prop, new Authenticator() {
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(GMAIL_USERNAME,
+	                        GMAIL_PASSWORD);
+	            }
+	        });
 
-    /**
-     * Create a Message from an email
-     *
-     * @param email Email to be set to raw of message
-     * @return Message containing base64url encoded email.
-     * @throws IOException
-     * @throws MessagingException
-     */
-    public static Message createMessageWithEmail(MimeMessage email)
-        throws MessagingException, IOException {
-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
-      email.writeTo(baos);
-      String encodedEmail = Base64.encodeBase64URLSafeString(baos.toByteArray());
-      Message message = new Message();
-      message.setRaw(encodedEmail);
-      return message;
-    }
+	        System.out.println("Got Session : " + session);
 
-    // ...
+	        MimeMessage message = new MimeMessage(session);
+	        try {
+	            System.out.println("before sending");
+	            message.setFrom(new InternetAddress(GMAIL_USERNAME));
+	            message.addRecipients(Message.RecipientType.TO,
+	                    InternetAddress.parse(GMAIL_USERNAME));
+	            message.setSubject("My First Email Attempt from Java");
+	            message.setText("Hi, This mail came from Java Application.");
+	            message.setRecipients(Message.RecipientType.TO,
+	                    InternetAddress.parse(GMAIL_USERNAME));
+	            Transport transport = session.getTransport("smtp");
+	            System.out.println("Got Transport" + transport);
+	            transport.connect(SMTP_HOST, GMAIL_USERNAME, GMAIL_PASSWORD);
+	            transport.sendMessage(message, message.getAllRecipients());
+	            System.out.println("message Object : " + message);
+	            System.out.println("Email Sent Successfully");
+	        } catch (AddressException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } catch (MessagingException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	    }
+
 }
