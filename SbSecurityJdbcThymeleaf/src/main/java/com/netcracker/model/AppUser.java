@@ -42,7 +42,7 @@ public class AppUser {
         	bld.append(myRandom.nextInt(9));
         }
         Long result = Long.valueOf(bld.toString());
-        log.info(result);
+        log.info("id new user = " + result);
         return result;
     }
  
