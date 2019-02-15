@@ -48,10 +48,11 @@ public class MainController {
     
     @GetMapping(value = "/registration")
     public String registrationForm(@RequestParam(value = "username", required = false) String username,
+    		@RequestParam(value = "password", required = false) String userEmail,
     		@RequestParam(value = "password", required = false) String password,
     		Model model) {
-    	if(username != null && password != null) {
-    		appUserDAO.createNewUser(new AppUser(username, password));
+    	if(username != null && userEmail != null && password != null) {
+    		appUserDAO.createNewUser(new AppUser(username, userEmail, password));
     	}
         return "registrationForm";
     }

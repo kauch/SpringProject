@@ -12,6 +12,7 @@ public class AppUser {
 	 
     private Long userId;
     private String userName;
+    private String userEmail;
     private String encrytedPassword;
     private static Logger log = LogManager.getLogger(AppUser.class);
     
@@ -19,15 +20,17 @@ public class AppUser {
  
     }
     
-    public AppUser(Long userId, String userName, String encrytedPassword) {
+    public AppUser(Long userId, String userName, String userEmail, String encrytedPassword) {
     	this.userId = userId;
         this.userName = userName;
+        this.userEmail = userEmail;
         this.encrytedPassword = encrytedPassword;
     }
     
-    public AppUser(String userName, String encrytedPassword) {
+    public AppUser(String userName, String userEmail, String encrytedPassword) {
     	this.userId = uniqueID();
         this.userName = userName;
+        this.userEmail = userEmail;
         this.encrytedPassword = encrytedPassword;
     }
     
@@ -62,7 +65,15 @@ public class AppUser {
         this.userName = userName;
     }
  
-    public String getEncrytedPassword() {
+    public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public String getEncrytedPassword() {
         return encrytedPassword;
     }
  

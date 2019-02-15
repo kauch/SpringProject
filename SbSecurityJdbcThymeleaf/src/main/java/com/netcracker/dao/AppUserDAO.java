@@ -29,9 +29,10 @@ public class AppUserDAO extends JdbcDaoSupport {
 	public void createNewUser(AppUser newUser) {
 		 Object[] paramArray = new Object[] {newUser.getUserId(),
 		 							  		 newUser.getUserName(),
+		 							  		 newUser.getUserEmail(),
 		 							  		 EncrytedPasswordUtils.encrytePassword(newUser.getEncrytedPassword()), 1};
 		 
-		 String sql = "insert into App_User (USER_ID, USER_NAME, ENCRYTED_PASSWORD, ENABLED) values (?, ?, ?, ?)";
+		 String sql = "insert into App_User (USER_ID, USER_NAME, USER_EMAIL, ENCRYTED_PASSWORD, ENABLED) values (?, ?, ?, ?)";
 		 try {
 			 this.getJdbcTemplate().update(sql, paramArray);
 		 } catch (DuplicateKeyException e) {
