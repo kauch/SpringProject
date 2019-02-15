@@ -26,18 +26,21 @@ public class AppUserDAO extends JdbcDaoSupport {
 	
 	private static Logger log = LogManager.getLogger(AppUserDAO.class);
 	
-	public void createNewUser(AppUser newUser) {
-		 Object[] paramArray = new Object[] {newUser.getUserId(),
-		 							  		 newUser.getUserName(),
-		 							  		 newUser.getUserEmail(),
-		 							  		 EncrytedPasswordUtils.encrytePassword(newUser.getEncrytedPassword()), 1};
+	public boolean createNewUser(AppUser newUser) {
+		boolean status = false;
+		Object[] paramArray = new Object[] {newUser.getUserId(),
+		 							  		newUser.getUserName(),
+		 							  		newUser.getUserEmail(),
+		 							  		EncrytedPasswordUtils.encrytePassword(newUser.getEncrytedPassword()), 1};
 		 
-		 String sql = "insert into App_User (USER_ID, USER_NAME, USER_EMAIL, ENCRYTED_PASSWORD, ENABLED) values (?, ?, ?, ?)";
-		 try {
-			 this.getJdbcTemplate().update(sql, paramArray);
-		 } catch (DuplicateKeyException e) {
-			 log.info(newUser.getUserName() + " is duplicate!");
-	     }
+		String sql = "insert into App_User (USER_ID, USER_NAME, USER_EMAIL, ENCRYTED_PASSWORD, ENABLED) values (?, ?, ?, ?, ?)";
+		try {
+			this.getJdbcTemplate().update(sql, paramArray);
+			status = true;
+		} catch (DuplicateKeyException e) {
+			log.info(newUser.getUserName() + " is duplicate!");
+	    }
+		return status;
 	}
 	
     public AppUser findUserAccount(String userName) {

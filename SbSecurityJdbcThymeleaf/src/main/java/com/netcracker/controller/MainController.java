@@ -31,12 +31,9 @@ public class MainController {
  
     @GetMapping(value = "/admin")
     public String adminPage(Model model, Principal principal) {
-         
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
- 
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
-         
         return "adminPage";
     }
  
@@ -51,10 +48,17 @@ public class MainController {
     		@RequestParam(value = "password", required = false) String userEmail,
     		@RequestParam(value = "password", required = false) String password,
     		Model model) {
+    	String resultRegistration = "registrationForm";
     	if(username != null && userEmail != null && password != null) {
-    		appUserDAO.createNewUser(new AppUser(username, userEmail, password));
+    		boolean reg = appUserDAO.createNewUser(new AppUser(username, userEmail, password));
+    		if(reg) {
+    			resultRegistration = "loginPage";
+    		}
+    		else {
+    			resultRegistration = "registrationForm";
+    		}
     	}
-        return "registrationForm";
+        return resultRegistration;
     }
  
     @GetMapping(value = "/logoutSuccessful")
@@ -65,35 +69,24 @@ public class MainController {
  
     @GetMapping(value = "/userInfo")
     public String userInfo(Model model, Principal principal) {
-
         String userName = principal.getName();
- 
         System.out.println("User Name: " + userName);
- 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
- 
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
- 
         return "userInfoPage";
     }
  
     @GetMapping(value = "/403")
     public String accessDenied(Model model, Principal principal) {
- 
         if (principal != null) {
             User loginedUser = (User) ((Authentication) principal).getPrincipal();
- 
             String userInfo = WebUtils.toString(loginedUser);
- 
             model.addAttribute("userInfo", userInfo);
- 
             String message = "Hi " + principal.getName() //
                     + "<br> You do not have permission to access this page!";
             model.addAttribute("message", message);
- 
         }
- 
         return "403Page";
     }
 }
