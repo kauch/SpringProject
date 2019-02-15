@@ -23,7 +23,7 @@ public class ServiceMail {
 	 public static void main(String args[]) {
 	        final String SMTP_HOST = "smtp.gmail.com";
 	        final String SMTP_PORT = "587";
-	        final String GMAIL_USERNAME = "kst.fis@gmail.com";
+	        final String GMAIL_USERNAME = "testformydearprogram";
 	        final String GMAIL_PASSWORD = "wero58_hop7";
 
 	        System.out.println("Process Started");
@@ -49,13 +49,13 @@ public class ServiceMail {
 	        MimeMessage message = new MimeMessage(session);
 	        try {
 	            System.out.println("before sending");
-	            message.setFrom(new InternetAddress(GMAIL_USERNAME));
+	            message.setFrom(new InternetAddress("testformydearprogram@gmail.com"));
 	            message.addRecipients(Message.RecipientType.TO,
-	                    InternetAddress.parse(GMAIL_USERNAME));
+	                    InternetAddress.parse("kst.fis@gmail.com"));
 	            message.setSubject("My First Email Attempt from Java");
 	            message.setText("Hi, This mail came from Java Application.");
 	            message.setRecipients(Message.RecipientType.TO,
-	                    InternetAddress.parse(GMAIL_USERNAME));
+	                    InternetAddress.parse("kst.fis@gmail.com"));
 	            Transport transport = session.getTransport("smtp");
 	            System.out.println("Got Transport" + transport);
 	            transport.connect(SMTP_HOST, GMAIL_USERNAME, GMAIL_PASSWORD);

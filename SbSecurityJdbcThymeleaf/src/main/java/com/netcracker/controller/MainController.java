@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.netcracker.dao.AppUserDAO;
 import com.netcracker.model.AppUser;
+import com.netcracker.utils.ServiceMail;
 import com.netcracker.utils.WebUtils;
 
 @Controller
@@ -45,14 +46,16 @@ public class MainController {
     
     @GetMapping(value = "/registration")
     public String registrationForm(@RequestParam(value = "username", required = false) String username,
-    		@RequestParam(value = "password", required = false) String userEmail,
+    		@RequestParam(value = "userEmail", required = false) String userEmail,
     		@RequestParam(value = "password", required = false) String password,
     		Model model) {
     	String resultRegistration = "registrationForm";
     	if(username != null && userEmail != null && password != null) {
     		boolean reg = appUserDAO.createNewUser(new AppUser(username, userEmail, password));
     		if(reg) {
-    			resultRegistration = "loginPage";
+    			resultRegistration = "successRegistrationPage";
+    			String info = "Mail sent to " + userEmail;
+                model.addAttribute("info", info);
     		}
     		else {
     			resultRegistration = "registrationForm";

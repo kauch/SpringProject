@@ -1,10 +1,13 @@
 package com.netcracker.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class EncrytedPasswordUtils {
-	 
-    // Encryte Password with BCryptPasswordEncoder
+	
+	private static Logger log = LogManager.getLogger(EncrytedPasswordUtils.class);
+	
     public static String encrytePassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(password);
@@ -13,8 +16,6 @@ public class EncrytedPasswordUtils {
     public static void main(String[] args) {
         String password = "123";
         String encrytedPassword = encrytePassword(password);
- 
-        System.out.println("Encryted Password: " + encrytedPassword);
+        log.info("Encryted Password: " + encrytedPassword);
     }
- 
 }
