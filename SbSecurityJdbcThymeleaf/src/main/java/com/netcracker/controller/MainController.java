@@ -47,9 +47,9 @@ public class MainController {
     }
     
     @GetMapping(value = "/registration")
-    public String registrationForm(@RequestParam(value = "username", required = false) @Valid String username,
-    							   @RequestParam(value = "userEmail", required = false) @Valid String userEmail,
-    							   @RequestParam(value = "password", required = false) @Valid String password,
+    public String registrationForm(@RequestParam(value = "username", required = false) String username,
+    							   @RequestParam(value = "userEmail", required = false) String userEmail,
+    							   @RequestParam(value = "password", required = false) String password,
     							   Model model) throws AddressException, MessagingException {
     	String resultRegistration = "registrationForm";
 
