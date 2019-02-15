@@ -2,14 +2,16 @@ package com.netcracker.controller;
 
 import java.security.Principal;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.netcracker.dao.AppUserDAO;
@@ -45,17 +47,20 @@ public class MainController {
     }
     
     @GetMapping(value = "/registration")
-    public String registrationForm(@RequestParam(value = "username", required = false) String username,
-    		@RequestParam(value = "userEmail", required = false) String userEmail,
-    		@RequestParam(value = "password", required = false) String password,
-    		Model model) {
+    public String registrationForm(@RequestParam(value = "username", required = false) @Valid String username,
+    							   @RequestParam(value = "userEmail", required = false) @Valid String userEmail,
+    							   @RequestParam(value = "password", required = false) @Valid String password,
+    							   Model model) throws AddressException, MessagingException {
     	String resultRegistration = "registrationForm";
+
     	if(username != null && userEmail != null && password != null) {
     		boolean reg = appUserDAO.createNewUser(new AppUser(username, userEmail, password));
     		if(reg) {
     			resultRegistration = "successRegistrationPage";
     			String info = "Mail sent to " + userEmail;
                 model.addAttribute("info", info);
+                ServiceMail mail = new ServiceMail();
+                mail.send(userEmail);
     		}
     		else {
     			resultRegistration = "registrationForm";

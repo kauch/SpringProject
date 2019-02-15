@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,14 +14,14 @@ import org.apache.logging.log4j.Logger;
 public class AppUser {
 	 
     private Long userId;
+    @NotNull
     private String userName;
+    @NotNull @Email
     private String userEmail;
+    @NotNull
     private String encrytedPassword;
-    private static Logger log = LogManager.getLogger(AppUser.class);
     
-    public AppUser() {
- 
-    }
+    private static Logger log = LogManager.getLogger(AppUser.class);
     
     public AppUser(Long userId, String userName, String userEmail, String encrytedPassword) {
     	this.userId = userId;
@@ -34,7 +37,11 @@ public class AppUser {
         this.encrytedPassword = encrytedPassword;
     }
     
-    public Long uniqueID() {
+    public AppUser() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Long uniqueID() {
     	LocalDateTime id = LocalDateTime.now();
     	DateTimeFormatter fmt = DateTimeFormatter.ofPattern("YYMMDDHHmmssSSS");
         String dataNew = fmt.format(id);

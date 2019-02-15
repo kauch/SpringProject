@@ -17,58 +17,37 @@ import org.apache.logging.log4j.Logger;
 
 public class ServiceMail {
 	private static Logger log = LogManager.getLogger(ServiceMail.class);
+	//sendMailForMyProgram@yandex.ru
+	//wero58_hop7
+	//testformydearprogram@gmail.com 
 	
-	//private static ServiceMail tlsSender = new ServiceMail("testformydearprogram@gmail.com", "wero58_hop7");
-	//tlsSender.send("This is Subject", "TLS: This is text!", "testformydearprogram@gmail.com", "kst.fis@gmail.com");
-	 public static void main(String args[]) {
-	        final String SMTP_HOST = "smtp.gmail.com";
-	        final String SMTP_PORT = "587";
-	        final String GMAIL_USERNAME = "testformydearprogram";
-	        final String GMAIL_PASSWORD = "wero58_hop7";
+	public void send(String to) throws AddressException, MessagingException
+	{
+		Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.yandex.ru");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-	        System.out.println("Process Started");
+        Session session = Session.getInstance(props,
+                new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication("sendMailForMyProgram", "wero58_hop7");
+                    }
+                });
 
-	        Properties prop = System.getProperties();
-	        prop.setProperty("mail.smtp.starttls.enable", "true");
-	        prop.setProperty("mail.smtp.host", SMTP_HOST);
-	        prop.setProperty("mail.smtp.user", GMAIL_USERNAME);
-	        prop.setProperty("mail.smtp.password", GMAIL_PASSWORD);
-	        prop.setProperty("mail.smtp.port", SMTP_PORT);
-	        prop.setProperty("mail.smtp.auth", "true");
-	        System.out.println("Props : " + prop);
-
-	        Session session = Session.getInstance(prop, new Authenticator() {
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication(GMAIL_USERNAME,
-	                        GMAIL_PASSWORD);
-	            }
-	        });
-
-	        System.out.println("Got Session : " + session);
-
-	        MimeMessage message = new MimeMessage(session);
-	        try {
-	            System.out.println("before sending");
-	            message.setFrom(new InternetAddress("testformydearprogram@gmail.com"));
-	            message.addRecipients(Message.RecipientType.TO,
-	                    InternetAddress.parse("kst.fis@gmail.com"));
-	            message.setSubject("My First Email Attempt from Java");
-	            message.setText("Hi, This mail came from Java Application.");
-	            message.setRecipients(Message.RecipientType.TO,
-	                    InternetAddress.parse("kst.fis@gmail.com"));
-	            Transport transport = session.getTransport("smtp");
-	            System.out.println("Got Transport" + transport);
-	            transport.connect(SMTP_HOST, GMAIL_USERNAME, GMAIL_PASSWORD);
-	            transport.sendMessage(message, message.getAllRecipients());
-	            System.out.println("message Object : " + message);
-	            System.out.println("Email Sent Successfully");
-	        } catch (AddressException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (MessagingException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
-	    }
-
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress("sendMailForMyProgram@yandex.ru"));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+        message.setSubject("Subject");
+        message.setText("Text");
+        
+        Transport transport = session.getTransport("smtp");
+        transport.connect("smtp.yandex.ru", "sendMailForMyProgram", "wero58_hop7");
+        transport.sendMessage(message, message.getAllRecipients());
+        transport.close();
+        Transport.send(message);
+	}
 }
