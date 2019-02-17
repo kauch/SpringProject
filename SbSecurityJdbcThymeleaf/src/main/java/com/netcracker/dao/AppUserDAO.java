@@ -18,13 +18,13 @@ import com.netcracker.utils.EncrytedPasswordUtils;
 @Repository
 @Transactional
 public class AppUserDAO extends JdbcDaoSupport {
-
+	
+	private static Logger log = LogManager.getLogger(AppUserDAO.class);
+	
 	@Autowired
     public AppUserDAO(DataSource dataSource) {
         this.setDataSource(dataSource);
     }
-	
-	private static Logger log = LogManager.getLogger(AppUserDAO.class);
 	
 	public boolean createNewUser(AppUser newUser) {
 		boolean status = false;

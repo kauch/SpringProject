@@ -34,14 +34,10 @@ alter table APP_ROLE
 -- Create table
 create table USER_ROLE
 (
-  ID      BIGINT not null,
   USER_ID BIGINT not null,
   ROLE_ID BIGINT not null
 );
 --  
-alter table USER_ROLE
-  add constraint USER_ROLE_PK primary key (ID);
- 
 alter table USER_ROLE
   add constraint USER_ROLE_UK unique (USER_ID, ROLE_ID);
  
@@ -84,13 +80,13 @@ values (2, 'ROLE_USER');
  
 ---
  
-insert into user_role (ID, USER_ID, ROLE_ID)
-values (1, 1, 1);
+insert into user_role (USER_ID, ROLE_ID)
+values (1, 1);
  
-insert into user_role (ID, USER_ID, ROLE_ID)
-values (2, 1, 2);
+insert into user_role (USER_ID, ROLE_ID)
+values (1, 2);
  
-insert into user_role (ID, USER_ID, ROLE_ID)
-values (3, 2, 2);
+insert into user_role (USER_ID, ROLE_ID)
+values (2, 2);
 ---
 Commit;

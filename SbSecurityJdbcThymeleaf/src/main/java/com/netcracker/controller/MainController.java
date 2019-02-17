@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.netcracker.dao.AppRoleDAO;
 import com.netcracker.dao.AppUserDAO;
 import com.netcracker.model.AppUser;
 import com.netcracker.utils.ServiceMail;
@@ -23,6 +24,9 @@ public class MainController {
 
 	@Autowired
     private AppUserDAO appUserDAO;
+	
+	@Autowired
+    private AppRoleDAO appRoleDAO;
 	
     @GetMapping(value = { "/", "/welcome" })
     public String welcomePage(Model model) {
@@ -49,7 +53,7 @@ public class MainController {
     public String registrationForm(@RequestParam(value = "username", required = false) String username,
     							   @RequestParam(value = "userEmail", required = false) String userEmail,
     							   @RequestParam(value = "password", required = false) String password,
-    							   Model model) throws AddressException, MessagingException {
+    							   Model model) throws MessagingException {
     	String resultRegistration = "registrationForm";
 
     	if(username != null && userEmail != null && password != null) {
@@ -59,6 +63,8 @@ public class MainController {
     			String info = "Mail sent to " + userEmail;
                 model.addAttribute("info", info);
                 ServiceMail mail = new ServiceMail();
+                AppUser user = appUserDAO.findUserAccount(username);
+                appRoleDAO.addRolesForUser(user.getUserId(), (long) 1);
                 mail.send(userEmail);
     		}
     		else {
