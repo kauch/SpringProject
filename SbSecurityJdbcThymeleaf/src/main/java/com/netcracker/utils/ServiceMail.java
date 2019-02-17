@@ -6,7 +6,6 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -23,7 +22,7 @@ public class ServiceMail {
 	 * 
 	 */
 	
-	public void send(String to) throws AddressException, MessagingException
+	public void send(String to) throws MessagingException
 	{
 		final Properties properties = new Properties();
 		
@@ -43,5 +42,6 @@ public class ServiceMail {
 		tr.connect(null, "GUIKL_89_ubu3");
 		tr.sendMessage(message, message.getAllRecipients());
 		tr.close();
+		log.info("Message sending!");
 	}
 }
