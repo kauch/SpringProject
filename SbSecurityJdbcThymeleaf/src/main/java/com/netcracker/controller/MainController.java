@@ -64,7 +64,7 @@ public class MainController {
                 model.addAttribute("info", info);
                 ServiceMail mail = new ServiceMail();
                 AppUser user = appUserDAO.findUserAccount(username);
-                appRoleDAO.addRolesForUser(user.getUserId(), (long) 1);
+                appRoleDAO.addRolesForUser(user.getUserId(), 2L);
                 mail.send(userEmail);
     		}
     		else {

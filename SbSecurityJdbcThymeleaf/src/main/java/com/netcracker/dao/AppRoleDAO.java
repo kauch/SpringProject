@@ -25,8 +25,7 @@ public class AppRoleDAO extends JdbcDaoSupport {
     
     public void addRolesForUser(Long userID, Long roleID) {
     	Object[] paramArray = new Object[] {userID, roleID};
-    	
-    	String sql = "insert into user_role (ID, USER_ID, ROLE_ID) values (?, ?)";
+    	String sql = "insert into user_role (USER_ID, ROLE_ID) values (?, ?)";
     	try {
 			this.getJdbcTemplate().update(sql, paramArray);
 		} catch (DuplicateKeyException e) {
