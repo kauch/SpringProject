@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
       <head>
    		<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
-		<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-		<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
    </head>
    
    <body class="bg-light">
@@ -13,6 +12,8 @@
       <h1>Registration Successful!</h1>
       
       <div th:if="${info != null}" th:utext="${info}"></div>
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
    </body>
     
 </html>
