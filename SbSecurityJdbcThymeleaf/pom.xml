@@ -62,6 +62,13 @@
     		<version>1.6.2</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
+		<dependency>
+    		<groupId>org.webjars</groupId>
+    		<artifactId>bootstrap</artifactId>
+    		<version>4.3.1</version>
+		</dependency>
+		
+		
 	</dependencies>
 
 	<build>

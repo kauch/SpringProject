@@ -1,19 +1,13 @@
-<div xmlns:th="http://www.thymeleaf.org"
-     style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
- 
-  <a th:href="@{/}">Home</a>
- 
-     | &nbsp;
-  
-   <a th:href="@{/userInfo}">User Info</a>
-  
-     | &nbsp;
-  
-   <a th:href="@{/admin}">Admin</a>
-    
-     | &nbsp;
-
-   <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
-  	 
-   <a th:if="${#request.userPrincipal == null}" th:href="@{/registration}">Registration</a>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <div xmlns:th="http://www.thymeleaf.org">
+	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    	<div class="navbar-nav">
+		   <a class="nav-item nav-link" th:href="@{/}">Home</a>
+		   <a class="nav-item nav-link" th:href="@{/userInfo}">User Info</a>
+		   <a class="nav-item nav-link" th:href="@{/admin}">Admin</a>
+		   <a class="nav-item nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+		   <a class="nav-item nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/registration}">Registration</a>
+		</div>
+	</div>
+ </div>
+</nav>
