@@ -4,14 +4,10 @@
 	   	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />	
       <title>Login</title>
    </head>
-   <body >
+   <body class="bg-light h-100">
       <!-- Include _menu.html -->
       <th:block th:include="/_menu"></th:block>
-      <div class="d-flex align-items-center flex-column ">
-       		
-				      <h3>Login</h3>
-				       
-				      <!-- /login?error=true -->
+      <!-- /login?error=true -->
 				      <div th:if="${#request.getParameter('error') == 'true'}"
 				            style="color:red;margin:10px 0px;">
 				         Login Failed!!!<br />
@@ -23,6 +19,11 @@
 				           
 				      </div>
 				      
+      <div class="d-flex align-items-center flex-column justify-content-center h-100"> 
+  
+
+				      <h3>Login</h3>
+
 				      <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
 				         
 				         <div class="form-group row">
