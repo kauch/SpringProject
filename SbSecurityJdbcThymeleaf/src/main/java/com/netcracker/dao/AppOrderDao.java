@@ -47,6 +47,7 @@ public class AppOrderDao extends JdbcDaoSupport {
    public List<AppOrder> getAllOrders(){
         return this.getJdbcTemplate().query(AppOrderMapper.BASE_SQL, new AppOrderMapper());
    }
+   
    public List<AppOrder> getOwnerOrders(AppUser owner){ // Метод для получения заказов одного пользователя
 
 	    String query = AppOrderMapper.BASE_SQL + " where Owner_ID = ?";
