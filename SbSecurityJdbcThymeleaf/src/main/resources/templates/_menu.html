@@ -13,6 +13,7 @@
     	<div class="navbar-nav">
 		   <a class="nav-item nav-link text-light" th:href="@{/}">Home</a>
 		   <a class="nav-item nav-link text-light" th:href="@{/userInfo}">User Info</a>
+		   <a class="nav-item nav-link text-light" th:if="${#request.userPrincipal != null}" th:href="@{/createOrder}">Create Order</a>
 		   <a class="nav-item nav-link text-light" th:href="@{/admin}">Admin</a>
 		   <a class="nav-item nav-link text-light" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
 		   <a class="nav-item nav-link text-light" th:if="${#request.userPrincipal == null}" th:href="@{/registration}">Registration</a>

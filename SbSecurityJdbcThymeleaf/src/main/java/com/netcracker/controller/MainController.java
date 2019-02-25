@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.netcracker.dao.AppOrderDao;
 import com.netcracker.dao.AppRoleDAO;
 import com.netcracker.dao.AppUserDAO;
+import com.netcracker.model.AppOrder;
 import com.netcracker.model.AppUser;
 import com.netcracker.utils.ServiceMail;
 import com.netcracker.utils.WebUtils;
@@ -26,6 +28,9 @@ public class MainController {
 	
 	@Autowired
     private AppRoleDAO appRoleDAO;
+	
+	@Autowired
+	private AppOrderDao appOrderDao;
 	
     @GetMapping(value = { "/", "/welcome" })
     public String welcomePage(Model model) {
@@ -88,6 +93,22 @@ public class MainController {
         model.addAttribute("userInfo", userInfo);
         return "userInfoPage";
     }
+    
+    @GetMapping(value = "/createOrder")
+    public String createOrderPage(@RequestParam(value = "OrderID", required = false) String orderID,
+			   					  @RequestParam(value = "OrderWeight", required = false) String orderWeight,
+			                      @RequestParam(value = "Destination", required = false) String destination,
+			                      Model model, Principal principal) {
+    	String userName = principal.getName();
+    	AppUser user = appUserDAO.findUserAccount(userName);
+    	if(orderID != null && orderWeight != null && destination != null) {
+	    	Long id = Long.parseLong(orderID);
+	    	int weight = Integer.parseInt(orderWeight);
+	    	appOrderDao.createOrder(new AppOrder(user.getUserId(), id, weight, destination));
+    	}
+        return "createOrderPage";
+    }
+    
  
     @GetMapping(value = "/403")
     public String accessDenied(Model model, Principal principal) {
