@@ -8,18 +8,13 @@
   		</style>
       <title>Registration</title>
    </head>
-   <body class="bg-light">
+   <body class="text-center bg-light">
       <!-- Include _menu.html -->
-      <th:block th:include="/_menu"></th:block>
-      <div class="d-sm-flex justify-content-center">
-      
-       
+      <th:block th:include="/_menu"></th:block>    
        		
-       		  <div class="d-flex flex-column">
-			      <h1>Registration</h1>
-			      
+       		 <!-- <div class="d-flex text-center justify-content-center"> -->
 			      <form name='f' th:action="@{/registration}" method='GET'>
-
+						<h3>Registration</h3>
 			         	  <div class="form-group row">
 						    <label for="inputName" class="col-sm-3 col-form-label">Name</label>
 						    <div class="col-sm-9">
@@ -46,8 +41,8 @@
 
 			         
 			      </form>
-			      </div>
-			 </div>
+			     <!--  </div> -->
+			
        	
      	<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
 		<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
