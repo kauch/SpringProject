@@ -1,5 +1,7 @@
 package com.netcracker.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.apache.logging.log4j.LogManager;
@@ -41,6 +43,16 @@ public class AppUserDAO extends JdbcDaoSupport {
 			log.info(newUser.getUserName() + " is duplicate!");
 	    }
 		return status;
+	}
+	
+	public List<AppUser> getAll(){
+
+	    try {
+	    	return this.getJdbcTemplate().query(AppUserMapper.BASE_SQL, new AppUserMapper());
+	    }catch (EmptyResultDataAccessException e ){
+	    	log.info("There's some problems with getting list of user");
+        }
+		return null;
 	}
 	
     public AppUser findUserAccount(String userName) {

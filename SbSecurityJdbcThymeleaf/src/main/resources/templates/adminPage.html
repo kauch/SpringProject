@@ -12,7 +12,24 @@
       <h3>Welcome :
          <span th:utext="${#request.userPrincipal.name}"></span>
       </h3>
-      <b>This is protected page!</b>  
+      <b>This is protected page!</b>
+      
+      <table class = "table table-striped">
+         <thead>
+         <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>UserEmail</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr th:each="user :${usersList}">
+            <td th:text="${user.getUserId()}">User ID</td>
+            <td th:text="${user.getUserName()}">User Name</td>
+            <td th:text="${user.getUserEmail()}">UserEmail</td>
+         </tr>
+         </tbody>
+      </table> 
        
       <br/><br/>
        
