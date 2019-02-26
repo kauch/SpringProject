@@ -12,10 +12,10 @@ alter table APP_USER
   add constraint APP_USER_PK primary key (USER_ID);
  
 alter table APP_USER
-  add constraint APP_USER_UK unique (USER_NAME);
+  add constraint APP_USER_UK1 unique (USER_NAME);
  
  alter table APP_USER
-  add constraint APP_USER_UK unique (USER_EMAIL);
+  add constraint APP_USER_UK2 unique (USER_EMAIL);
   
 -- Create table
 CREATE table APP_ROLE
