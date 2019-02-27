@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 	<link rel="stylesheet" href="../css/styleNavbar.css" type="text/css">
@@ -26,8 +27,7 @@
 		   			
 		   <a class="nav-item nav-link text-light"
 		   		th:if="${#request.userPrincipal != null}" 
-		   		th:href="@{/admin}" 
-		   			sec:authorize="hasRole('ROLE_ADMIN')" >Admin</a>
+		   		th:href="@{/admin}" sec:authorize = "hasRole('ROLE_ADMIN')">Admin</a>
 		   		
 		   <a class="nav-item nav-link text-light" 
 		   		th:if="${#request.userPrincipal != null}" 

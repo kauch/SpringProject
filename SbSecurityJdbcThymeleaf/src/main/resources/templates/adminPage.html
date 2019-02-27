@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
    <head>
   		<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
       <title th:utext="${title}"></title>
@@ -13,6 +13,39 @@
          <span th:utext="${#request.userPrincipal.name}"></span>
       </h3>
       <b>This is protected page!</b>
+      
+      
+      
+       <div class="row" sec:authorize="isAuthenticated()">
+        <h2 style="color:green">User is Logged In</h2>
+        <p sec:authentication="principal.username">username</p>
+    </div>
+
+    <div class="row" sec:authorize="!isAuthenticated()">
+        <h2 style="color:red">User is Logged Out</h2>
+    </div>
+
+    <div class="row" sec:authorize="hasRole('ROLE_ADMIN')">
+        <h2>This will only be displayed if authenticated user has role ROLE_ADMIN.</h2>
+    </div>
+
+    <div class="row" sec:authorize="hasRole('ROLE_USER')">
+        <h2>This will only be displayed if authenticated user has role ROLE_USER.</h2>
+    </div>
+
+      <div class="row" sec:authorize="hasRole('ROLE_ADMIN')">
+    <div class="col-md-10 col-md-offset-2">
+        <h2>User Has Role Admin</h2>
+    </div>
+	</div>
+	<div class="row" sec:authorize="hasAuthority('ADMIN')">
+    <div class="col-md-10 col-md-offset-2">
+        <h2>User Has Authority Admin</h2>
+    </div>
+	</div>
+      
+      
+      
       
       <table class = "table table-striped">
          <thead>

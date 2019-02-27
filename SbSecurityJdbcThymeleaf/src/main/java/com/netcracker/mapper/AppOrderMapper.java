@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.netcracker.model.AppOrder;
-import com.netcracker.model.AppUser;
 
 public class AppOrderMapper implements RowMapper<AppOrder> {
 
