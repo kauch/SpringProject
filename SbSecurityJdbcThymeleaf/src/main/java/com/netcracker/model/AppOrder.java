@@ -10,9 +10,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class AppOrder {
-    @NotNull
+	@NotNull
     private Long ownerID;
-    @NotNull
+	@NotNull
     private String destPoint; 
     private Long orderID;
     private int weight;

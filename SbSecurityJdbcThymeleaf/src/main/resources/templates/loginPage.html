@@ -19,12 +19,14 @@
 				           
 				      </div>
 				      
-      <div class="d-flex align-items-center flex-column justify-content-center h-100"> 
-  
-
-				      <h3>Login</h3>
-
+       <div class="container h-100">
+      		<div class="row h-100">
+  			<div class="col-sm-2 col-md-3 d-none d-sm-block"></div>
+  				<div class="col-12 col-sm-8 col-md-6">
+				 
 				      <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+				      
+				         <h3 class="text-center">Login</h3>
 				         
 				         <div class="form-group row">
 						    <label for="inputName" class="col-sm-3 col-form-label">Name</label>
@@ -51,8 +53,12 @@
 				        <li>dbuser1/123</li>
 				        <li>dbadmin1/123</li>
 				      </ul>  
-				  </div>
-
+				  
+			</div>
+			
+ 			 <div class="col-sm-2 col-md-3 d-none d-sm-block"></div>
+		</div>   
+</div>
 		<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
 		<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
    </body>
