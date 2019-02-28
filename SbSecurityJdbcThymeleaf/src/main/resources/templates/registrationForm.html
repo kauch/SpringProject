@@ -1,22 +1,23 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" class="h-100">
    <head>
    		<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 
-		<style>
+		<style type="text/css">
    			input[type="password"]::-ms-reveal
   		</style>
+		
       <title>Registration</title>
    </head>
    <body class="bg-light h-100">
-      <!-- Include _menu.html -->
-      <th:block th:include="/_menu"></th:block> 
+      <!-- Include _menu.html  -->
+      <th:block th:include="/_menu"></th:block>
       <div class="container h-100">
-      		<div class="row h-100">
+      		<div class="row h-100 align-items-center">
   			<div class="col-sm-2 col-md-3 d-none d-sm-block"></div>
   				<div class="col-12 col-sm-8 col-md-6">
 
-			      <form name='f' th:action="@{/registration}" method='GET'>
+			      <form name='f' th:action="@{/registration}" method='POST'>
 						<h3 class="text-center">Registration</h3>
 			         	  <div class="form-group row">
 						    <label for="inputName" class="col-sm-3 col-form-label">Name</label>
