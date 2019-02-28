@@ -17,8 +17,8 @@
 		   		
 		   <a class="nav-item nav-link text-light" 
 		   		th:if="${#request.userPrincipal != null}"
-		   		th:href="@{/userInfo}" 
-		   			sec:authorize="hasRole('ROLE_USER')">User Info</a>
+		   		th:href="@{/userInfo}"
+		   			sec:authorize="isAuthenticated()">User Info</a>
 		   			
 		   <a class="nav-item nav-link text-light" 
 		   		th:if="${#request.userPrincipal != null}" 
@@ -27,11 +27,13 @@
 		   			
 		   <a class="nav-item nav-link text-light"
 		   		th:if="${#request.userPrincipal != null}" 
-		   		th:href="@{/admin}" sec:authorize = "hasRole('ROLE_ADMIN')">Admin</a>
+		   		th:href="@{/admin}" 
+		   			sec:authorize = "hasRole('ROLE_ADMIN')">Admin</a>
 		   		
 		   <a class="nav-item nav-link text-light" 
 		   		th:if="${#request.userPrincipal != null}" 
-		   		th:href="@{/logout}">Logout</a>
+		   		th:href="@{/logout}"
+		   			sec:authorize="isAuthenticated()">Logout</a>
 		   		
 		   <a class="nav-item nav-link text-light" 
 		   		th:if="${#request.userPrincipal == null}" 

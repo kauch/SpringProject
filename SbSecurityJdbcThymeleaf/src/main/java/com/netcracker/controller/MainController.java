@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.netcracker.dao.AppOrderDao;
+import com.netcracker.dao.AppOrderDAO;
 import com.netcracker.dao.AppRoleDAO;
 import com.netcracker.dao.AppUserDAO;
 import com.netcracker.model.AppOrder;
@@ -30,7 +30,7 @@ public class MainController {
     private AppRoleDAO appRoleDAO;
 	
 	@Autowired
-	private AppOrderDao appOrderDao;
+	private AppOrderDAO appOrderDAO;
 	
     @GetMapping(value = { "/", "/welcome" })
     public String welcomePage(Model model) {
@@ -92,6 +92,8 @@ public class MainController {
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
+
+        model.addAttribute("ordersList", appOrderDAO.getOwnerOrders(appUserDAO.findUserAccount(userName)));
         return "userInfoPage";
     }
     
@@ -100,14 +102,16 @@ public class MainController {
 			   					  @RequestParam(value = "OrderWeight", required = false) String orderWeight,
 			                      @RequestParam(value = "Destination", required = false) String destination,
 			                      Model model, Principal principal) {
+    	String resultCreateOrder = "createOrderPage";
     	String userName = principal.getName();
     	AppUser user = appUserDAO.findUserAccount(userName);
     	if(orderID != null && orderWeight != null && destination != null) {
 	    	Long id = Long.parseLong(orderID);
 	    	int weight = Integer.parseInt(orderWeight);
-	    	appOrderDao.createOrder(new AppOrder(user.getUserId(), id, weight, destination));
+	    	appOrderDAO.createOrder(new AppOrder(user.getUserId(), id, weight, destination));
+	    	resultCreateOrder = userInfo(model, principal);
     	}
-        return "createOrderPage";
+        return resultCreateOrder;
     }
     
  

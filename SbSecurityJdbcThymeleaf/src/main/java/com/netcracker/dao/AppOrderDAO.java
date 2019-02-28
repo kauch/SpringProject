@@ -19,12 +19,12 @@ import com.netcracker.model.AppUser;
 
 @Repository
 @Transactional
-public class AppOrderDao extends JdbcDaoSupport {
+public class AppOrderDAO extends JdbcDaoSupport {
 	
-	private static Logger log = LogManager.getLogger(AppOrderDao.class);
+	private static Logger log = LogManager.getLogger(AppOrderDAO.class);
 	
 	@Autowired
-    AppOrderDao(DataSource source){
+    AppOrderDAO(DataSource source){
         this.setDataSource(source);
     }
 
@@ -54,7 +54,7 @@ public class AppOrderDao extends JdbcDaoSupport {
 	    List<AppOrder> orders = null;
 	    AppOrderMapper mapper = new AppOrderMapper();
 	    try {
-	             orders = this.getJdbcTemplate().query(query, mapper, owner);
+	             orders = this.getJdbcTemplate().query(query, mapper, owner.getUserId());
 	    }catch (EmptyResultDataAccessException e){
 	    	log.info("There is some problems with getting orders for user" + owner.toString());
 	    }

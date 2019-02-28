@@ -39,21 +39,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
  
         log.info("Found User: " + appUser);
- 
-        // [ROLE_USER, ROLE_ADMIN,..]
+
         List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId());
- 
         List<GrantedAuthority> grantList = new ArrayList<>();
         if (roleNames != null) {
             for (String role : roleNames) {
-                // ROLE_USER, ROLE_ADMIN,..
                 GrantedAuthority authority = new SimpleGrantedAuthority(role);
                 grantList.add(authority);
                 log.info("authority " + authority);
             }
         }
  
-        return (UserDetails) new User(appUser.getUserName(), appUser.getEncrytedPassword(), grantList);
+        UserDetails userDetails = (UserDetails) new User(appUser.getUserName(), //
+                appUser.getEncrytedPassword(), grantList);
+ 
+        return userDetails;
     }
-
+    
 }
