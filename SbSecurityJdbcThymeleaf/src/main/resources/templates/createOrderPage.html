@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+	<meta charset="UTF-8">
+	<title>Create order</title>
+</head>
+<body class="bg-light">
+ 	<th:block th:include="/_menu"></th:block>
+ 	
+ 	<div class="d-flex align-items-center flex-column justify-content-center h-100"> 
+
+				      <h3>Create Order</h3>
+<!--th:action="@{/j_spring_security_check}"-->
+				      <form name='f'  method='GET'>
+				         
+				         <div class="form-group row">
+						    <label for="inputOrderID" class="col-sm-3 col-form-label">OrderID</label>
+						    <div class="col-sm-9">
+						      <input name='OrderID' type="text" class="form-control" id="inputOrderID" placeholder="ID" value=''>
+						    </div>
+						  </div>
+						  <div class="form-group row">
+						    <label for="inputOrderWeight" class="col-sm-3 col-form-label">Weight</label>
+						    <div class="col-sm-9">
+						      <input name='OrderWeight' type="text" class="form-control" id="inputOrderWeight" placeholder="Weight" value=''>
+						    </div>
+						  </div>
+						  <div class="form-group row">
+						    <label for="inputDestination" class="col-sm-3 col-form-label">Destination</label>
+						    <div class="col-sm-9">
+						      <input name='Destination' type="text" class="form-control" id="inputDestination" placeholder="Destination" value=''>
+						    </div>
+						  </div>
+						  <div class="form-group row">
+						    <div class="col-sm-9 offset-sm-3">
+						      <button name="submit" type="submit" class="btn btn-outline-primary" value="submit">Create order</button>
+						    </div>
+						  </div>
+				      </form>
+				  </div>
+
+		<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+		<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
    <head>
   		<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
       <title th:utext="${title}"></title>
    </head>
-   <body class="bg-light">
+   <body class="text-center bg-light">
       <!-- Include _menu.html -->
       <th:block th:include="/_menu"></th:block>
        
@@ -12,7 +13,24 @@
       <h3>Welcome :
          <span th:utext="${#request.userPrincipal.name}"></span>
       </h3>
-      <b>This is protected page!</b>  
+      <b>This is protected page!</b>
+      
+      <table class = "table table-striped">
+         <thead>
+         <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>UserEmail</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr th:each="user :${usersList}">
+            <td th:text="${user.getUserId()}">User ID</td>
+            <td th:text="${user.getUserName()}">User Name</td>
+            <td th:text="${user.getUserEmail()}">User Email</td>
+         </tr>
+         </tbody>
+      </table> 
        
       <br/><br/>
        

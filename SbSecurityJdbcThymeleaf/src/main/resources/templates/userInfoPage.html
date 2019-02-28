@@ -5,7 +5,7 @@
 
       <title>User Info</title>
    </head>
-   <body class="bg-light">
+   <body class="text-center bg-light">
       <!-- Include _menu.html -->
       <th:block th:include="/_menu"></th:block>
        
@@ -14,7 +14,22 @@
       <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
       <b>This is protected page!</b>  
        
-      <br/><br/>
+      <table class = "table table-striped">
+         <thead>
+         <tr>
+            <th>Order ID</th>
+            <th>Weight</th>
+            <th>Destination</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr th:each="order :${ordersList}">
+            <td th:text="${order.getOrderID()}">Order ID</td>
+            <td th:text="${order.getWeight()}">Weight</td>
+            <td th:text="${order.getDestPoint()}">Destination</td>
+         </tr>
+         </tbody>
+      </table>
        
       <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
       <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
