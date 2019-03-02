@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(schema = "delivery_schema", name = "Users",
 	uniqueConstraints = {
-        @UniqueConstraint(name = "USERS_UK", columnNames = "user_name")})
+        @UniqueConstraint(name = "USERS_UK", columnNames = "user_id")})
 public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_gen")
@@ -38,11 +39,13 @@ public class Users {
 	private boolean enabled;
 
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "Users_Roles", 
         joinColumns = { @JoinColumn(name = "user_id") }, 
         inverseJoinColumns = { @JoinColumn(name = "role_id")})
+	
+	
     private Set<Roles> roles = new HashSet<>();
 	
 	public Users() {

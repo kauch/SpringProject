@@ -20,7 +20,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(schema = "delivery_schema", name = "Roles",
 	uniqueConstraints = {
-        @UniqueConstraint(name = "ROLES_UK", columnNames = "role_name") })
+        @UniqueConstraint(name = "ROLES_UK", columnNames = "role_id") })
 public class Roles {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_gen")
@@ -31,12 +31,7 @@ public class Roles {
     @Column(name = "role_name", length = 30, nullable = false)
     private String roleName;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "Users_Roles", 
-        joinColumns = { @JoinColumn(name = "role_id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "user_id")}
-        )
+    @ManyToMany(mappedBy = "roles")
     private Set<Users> users = new HashSet<>();
     
 	public Roles() {
