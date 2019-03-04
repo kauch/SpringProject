@@ -43,6 +43,14 @@ public class Users {
 		//
 	}
 
+	public Users(Long userId, String userName, String encrytedPassword, boolean enabled, Set<Roles> roles) {
+		this.userId = userId;
+		this.userName = userName;
+		this.encrytedPassword = encrytedPassword;
+		this.enabled = enabled;
+		this.roles = roles;
+	}
+
 	public Long getUserId() {
 		return userId;
 	}

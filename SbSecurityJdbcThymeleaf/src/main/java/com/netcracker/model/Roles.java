@@ -28,6 +28,11 @@ public class Roles {
 		//
 	}
 
+	public Roles(Long roleId, String roleName) {
+		this.roleId = roleId;
+		this.roleName = roleName;
+	}
+
 	public Long getRoleId() {
 		return roleId;
 	}
