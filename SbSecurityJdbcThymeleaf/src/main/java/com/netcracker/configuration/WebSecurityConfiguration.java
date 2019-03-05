@@ -1,4 +1,4 @@
-package com.netcracker.config;
+package com.netcracker.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ import com.netcracker.service.UserDetailsServiceImpl;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
  
     @Autowired
     UserDetailsServiceImpl userDetailsService;
