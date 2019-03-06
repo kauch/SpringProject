@@ -3,18 +3,24 @@ package com.netcracker;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.netcracker.dao.AppOrderDAO;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
 import com.netcracker.repositories.RolesRepository;
 import com.netcracker.repositories.UsersRepository;
 
 @SpringBootTest
+@RunWith(SpringRunner.class)
 public class TestUserAndRoles {
 
 	@Autowired
@@ -30,6 +36,7 @@ public class TestUserAndRoles {
 		Roles testRole1 = new Roles();
 		testRole1.setRoleId(1L);
 		testRole1.setRoleName("ROLE_ADMIN");
+		//System.out.println(rolesRepository);
 		rolesRepository.save(testRole1);
 
 		Roles testRole2 = new Roles();
@@ -53,7 +60,7 @@ public class TestUserAndRoles {
 
 		Users testUser2 = new Users();
 		testUser2.setUserId(2L);
-		testUser2.setUserName("duser1");
+		testUser2.setUserName("dbuser1");
 		testUser2.setUserEmail("testUser@myprj.kostya");
 		testUser2.setEncrytedPassword("123");
 		testUser2.setEnabled(true);
