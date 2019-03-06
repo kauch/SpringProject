@@ -26,9 +26,6 @@ import com.netcracker.utils.WebUtils;
 @Controller
 public class MainController {
 
-//	@Autowired
-//    private AppUserDAO appUserDAO;
-
 	@Autowired
 	private UsersRepository usersRepository;
 
@@ -37,12 +34,6 @@ public class MainController {
 
 	@Autowired
 	private RolesRepository rolesRepository;
-
-//	@Autowired
-//	private AppRoleDAO appRoleDAO;
-
-//	@Autowired
-//	private AppOrderDAO appOrderDAO;
 
 	@GetMapping(value = { "/", "/welcome" })
 	public String welcomePage(Model model) {
@@ -74,9 +65,7 @@ public class MainController {
 		String resultRegistration = "registrationForm";
 
 		if (username != null && userEmail != null && password != null) {
-			// boolean reg = appUserDAO.createNewUser(new AppUser(username, userEmail,
-			// password));
-			Set<Roles> roleUser = new HashSet();
+			Set<Roles> roleUser = new HashSet<Roles>();
 			roleUser.add(rolesRepository.findByRoleName("ROLE_USER"));
 			Users newUser = new Users();
 			newUser.setUserName(username);
@@ -85,18 +74,12 @@ public class MainController {
 			newUser.setRoles(roleUser);
 			try {
 				usersRepository.save(newUser);
-				// if (reg) {
 				resultRegistration = "successRegistrationPage";
 				String info = "Mail sent to " + userEmail;
 				model.addAttribute("info", info);
 				ServiceMail mail = new ServiceMail();
-				Users user = usersRepository.findByUserName(username);
-				// AppUser user = appUserDAO.findUserAccount(username);
-				// appRoleDAO.addRolesForUser(user.getUserId(), 2L);
 				mail.send(userEmail);
-			}
-			// } else {
-			catch (Exception e) {
+			} catch (Exception e) {
 				resultRegistration = "registrationForm";
 			}
 		}
@@ -129,7 +112,6 @@ public class MainController {
 		String resultCreateOrder = "createOrderPage";
 		String userName = principal.getName();
 		Users user = usersRepository.findByUserName(userName);
-		// AppUser user = appUserDAO.findUserAccount(userName);
 		if (orderID != null && orderWeight != null && destination != null) {
 			Long id = Long.parseLong(orderID);
 			int weight = Integer.parseInt(orderWeight);
@@ -138,8 +120,6 @@ public class MainController {
 			newOrder.setDestPoint(destination);
 			newOrder.setWeight(weight);
 			newOrder.setOrderId(id);
-			// appOrderDAO.createOrder(new AppOrder(user.getUserId(), id, weight,
-			// destination));
 			resultCreateOrder = userInfo(model, principal);
 		}
 		return resultCreateOrder;

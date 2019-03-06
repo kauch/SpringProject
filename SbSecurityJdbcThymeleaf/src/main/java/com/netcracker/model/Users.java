@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.netcracker.utils.EncrytedPasswordUtils;
 
 @Entity
 @Table(schema = "delivery_schema", name = "users")
@@ -41,7 +44,7 @@ public class Users {
 	@JoinColumn(name = "owner_id", referencedColumnName = "user_id")
 	private List<Order> orders;
 
-	@ManyToMany(targetEntity = Roles.class)
+	@ManyToMany(targetEntity = Roles.class, fetch = FetchType.EAGER)
 	@JoinTable(schema = "delivery_schema", name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
 	private Set<Roles> roles = new HashSet<>();
 
@@ -78,7 +81,7 @@ public class Users {
 	}
 
 	public void setEncrytedPassword(String encrytedPassword) {
-		this.encrytedPassword = encrytedPassword;
+		this.encrytedPassword = EncrytedPasswordUtils.encrytePassword(encrytedPassword);
 	}
 
 	public boolean isEnabled() {
