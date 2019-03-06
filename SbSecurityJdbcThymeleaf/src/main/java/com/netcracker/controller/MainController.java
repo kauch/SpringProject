@@ -120,6 +120,7 @@ public class MainController {
 			newOrder.setDestPoint(destination);
 			newOrder.setWeight(weight);
 			newOrder.setOrderId(id);
+			orderRepository.save(newOrder);
 			resultCreateOrder = userInfo(model, principal);
 		}
 		return resultCreateOrder;
