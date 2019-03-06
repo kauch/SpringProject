@@ -65,7 +65,7 @@ public class MainController {
 		String resultRegistration = "registrationForm";
 
 		if (username != null && userEmail != null && password != null) {
-			Set<Roles> roleUser = new HashSet<Roles>();
+			Set<Roles> roleUser = new HashSet<>();
 			roleUser.add(rolesRepository.findByRoleName("ROLE_USER"));
 			Users newUser = new Users();
 			newUser.setUserName(username);
