@@ -7,23 +7,29 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(schema = "delivery_schema", name = "users")
 public class Users {
 	@Id
-	@GeneratedValue
-	@Column(name = "user_id", updatable = false, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_gen")
+	@SequenceGenerator(name = "delivery_gen", initialValue = 1, allocationSize = 1, schema = "delivery_schema")
+	@Column(name = "user_id", updatable = false, nullable = false, unique = true)
 	private Long userId;
 
-	@Column(name = "user_name", length = 36, nullable = false)
+	@Column(name = "user_name", length = 36, nullable = false, unique = true)
 	private String userName;
+
+	@Column(name = "user_Email", length = 128, nullable = false, unique = true)
+	private String userEmail;
 
 	@Column(name = "encryted_password", length = 128, nullable = false)
 	private String encrytedPassword;
@@ -43,14 +49,6 @@ public class Users {
 		//
 	}
 
-	public Users(Long userId, String userName, String encrytedPassword, boolean enabled, Set<Roles> roles) {
-		this.userId = userId;
-		this.userName = userName;
-		this.encrytedPassword = encrytedPassword;
-		this.enabled = enabled;
-		this.roles = roles;
-	}
-
 	public Long getUserId() {
 		return userId;
 	}
@@ -65,6 +63,14 @@ public class Users {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	public String getEncrytedPassword() {

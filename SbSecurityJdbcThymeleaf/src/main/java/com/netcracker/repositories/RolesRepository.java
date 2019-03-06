@@ -7,5 +7,5 @@ import com.netcracker.model.Roles;
 
 @Repository
 public interface RolesRepository extends JpaRepository<Roles, Long> {
-
+	public Roles findByRoleName(String nameRoles);
 }

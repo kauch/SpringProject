@@ -2,6 +2,7 @@ package com.netcracker.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,46 +15,42 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.netcracker.dao.AppRoleDAO;
-import com.netcracker.dao.AppUserDAO;
-import com.netcracker.model.AppUser;
+import com.netcracker.model.Roles;
+import com.netcracker.model.Users;
+import com.netcracker.repositories.UsersRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private AppUserDAO appUserDAO;
- 
-    @Autowired
-    private AppRoleDAO appRoleDAO;
- 
-    private static Logger log = LogManager.getLogger(UserDetailsServiceImpl.class);
-    
-    @Override
-    public UserDetails loadUserByUsername(String userName) {
-        AppUser appUser = this.appUserDAO.findUserAccount(userName);
- 
-        if (appUser == null) {
-            log.info("User not found! " + userName);
-            throw new UsernameNotFoundException("User " + userName + " was not found in the database");
-        }
- 
-        log.info("Found User: " + appUser);
+	@Autowired
+	private UsersRepository usersRepository;
 
-        List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId());
-        List<GrantedAuthority> grantList = new ArrayList<>();
-        if (roleNames != null) {
-            for (String role : roleNames) {
-                GrantedAuthority authority = new SimpleGrantedAuthority(role);
-                grantList.add(authority);
-                log.info("authority " + authority);
-            }
-        }
- 
-        UserDetails userDetails = (UserDetails) new User(appUser.getUserName(), //
-                appUser.getEncrytedPassword(), grantList);
- 
-        return userDetails;
-    }
-    
+	private static Logger log = LogManager.getLogger(UserDetailsServiceImpl.class);
+
+	@Override
+	public UserDetails loadUserByUsername(String userName) {
+		Users user = this.usersRepository.findByUserName(userName);
+		if (user == null) {
+			log.info("User not found! " + userName);
+			throw new UsernameNotFoundException("User " + userName + " was not found in the database");
+		}
+
+		log.info("Found User: " + user);
+
+		Set<Roles> setRoles = user.getRoles();
+		List<GrantedAuthority> grantList = new ArrayList<>();
+		if (setRoles != null) {
+			for (Roles role : setRoles) {
+				String roleName = role.getRoleName();
+				GrantedAuthority authority = new SimpleGrantedAuthority(roleName);
+				grantList.add(authority);
+				log.info("authority " + authority);
+			}
+		}
+
+		UserDetails userDetails = (UserDetails) new User(user.getUserName(), user.getEncrytedPassword(), grantList);
+
+		return userDetails;
+	}
+
 }
