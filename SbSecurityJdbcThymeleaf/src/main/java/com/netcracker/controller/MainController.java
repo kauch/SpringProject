@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.mail.MessagingException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -25,6 +27,8 @@ import com.netcracker.utils.WebUtils;
 
 @Controller
 public class MainController {
+
+	private static Logger log = LogManager.getLogger(MainController.class.getName());
 
 	@Autowired
 	private UsersRepository usersRepository;
@@ -95,11 +99,10 @@ public class MainController {
 	@GetMapping(value = "/userInfo")
 	public String userInfo(Model model, Principal principal) {
 		String userName = principal.getName();
-		System.out.println("User Name: " + userName);
+		log.info("User Name: " + userName);
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String userInfo = WebUtils.toString(loginedUser);
 		model.addAttribute("userInfo", userInfo);
-
 		model.addAttribute("ordersList", orderRepository.findByUser(usersRepository.findByUserName(userName)));
 		return "userInfoPage";
 	}

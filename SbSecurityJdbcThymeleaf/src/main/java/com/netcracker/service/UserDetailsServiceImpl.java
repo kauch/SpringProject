@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UsersRepository usersRepository;
 
-	private static Logger log = LogManager.getLogger(UserDetailsServiceImpl.class);
+	private static Logger log = LogManager.getLogger(UserDetailsServiceImpl.class.getName());
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) {

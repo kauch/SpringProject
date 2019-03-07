@@ -108,4 +108,19 @@ public class Users {
 		this.orders = orders;
 	}
 
+//	public Long uniqueID() {
+//    	LocalDateTime id = LocalDateTime.now();
+//    	DateTimeFormatter fmt = DateTimeFormatter.ofPattern("YYMMDDHHmmssSSS");
+//        String dataNew = fmt.format(id);
+//        Random myRandom = new Random();
+//        StringBuilder bld = new StringBuilder();
+//        bld.append(dataNew);
+//        for(int i = 0; i < 3; i++){
+//        	bld.append(myRandom.nextInt(9));
+//        }
+//        Long result = Long.valueOf(bld.toString());
+//        log.info("id new user = " + result);
+//        return result;
+//    }
+
 }
