@@ -1,16 +1,19 @@
 package com.netcracker.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
 @Table(schema = "delivery_schema", name = "storage")
-public class Storage {
+public class Storage implements Serializable {
 
-    @Id
+	private static final long serialVersionUID = -4004529835314522513L;
+
+	@Id
     @GeneratedValue
-    @Column(name = "storage_id", nullable = false, updatable = false)
+    @Column(name = "storage_id", nullable = false, updatable = false, unique = true)
     private Long id;
 
     @Column(name = "storage_name", length = 36)
@@ -33,7 +36,7 @@ public class Storage {
 	private Address address;  
 	
 	@OneToMany(targetEntity = Order.class)
-	@JoinColumn(name = "orders_id", referencedColumnName = "storage_id")
+	@JoinColumn(name = "stock", referencedColumnName = "storage_id")
 	private List<Order> orders;
 	
     public Long getId() {

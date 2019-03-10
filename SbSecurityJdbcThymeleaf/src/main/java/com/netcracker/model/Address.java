@@ -1,5 +1,6 @@
 package com.netcracker.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,9 +8,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(schema = "delivery_schema", name = "address")
-public class Address {
+public class Address implements Serializable {
 
-    @Id
+	private static final long serialVersionUID = -7480677280768347426L;
+
+	@Id
     @GeneratedValue
     @Column(name = "address_id",updatable = false, nullable = false, unique = true)
     private Long id;

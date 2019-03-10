@@ -1,5 +1,6 @@
 package com.netcracker.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,10 +22,13 @@ import com.netcracker.utils.EncrytedPasswordUtils;
 
 @Entity
 @Table(schema = "delivery_schema", name = "users")
-public class Users {
+public class Users implements Serializable {
+
+	private static final long serialVersionUID = -634944125467394660L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_gen")
-	@SequenceGenerator(name = "delivery_gen", initialValue = 1, allocationSize = 1, schema = "delivery_schema")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_gen_user")
+	@SequenceGenerator(name = "delivery_gen_user", initialValue = 1, allocationSize = 1, schema = "delivery_schema")
 	@Column(name = "user_id", updatable = false, nullable = false, unique = true)
 	private Long userId;
 

@@ -1,4 +1,4 @@
-package com.netcracker.service;
+package com.netcracker.services;
 
 import java.util.ArrayList;
 import java.util.List;

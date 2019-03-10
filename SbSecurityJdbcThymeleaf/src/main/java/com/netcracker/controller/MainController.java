@@ -108,21 +108,18 @@ public class MainController {
 	}
 
 	@GetMapping(value = "/createOrder")
-	public String createOrderPage(@RequestParam(value = "OrderID", required = false) String orderID,
-			@RequestParam(value = "OrderWeight", required = false) String orderWeight,
+	public String createOrderPage(@RequestParam(value = "OrderWeight", required = false) String orderWeight,
 			@RequestParam(value = "Destination", required = false) String destination, Model model,
 			Principal principal) {
 		String resultCreateOrder = "createOrderPage";
 		String userName = principal.getName();
 		Users user = usersRepository.findByUserName(userName);
-		if (orderID != null && orderWeight != null && destination != null) {
-			Long id = Long.parseLong(orderID);
+		if (orderWeight != null && destination != null) {
 			int weight = Integer.parseInt(orderWeight);
 			Order newOrder = new Order();
 			newOrder.setUser(user);
 			newOrder.setDestPoint(destination);
 			newOrder.setWeight(weight);
-			newOrder.setOrderId(id);
 			orderRepository.save(newOrder);
 			resultCreateOrder = userInfo(model, principal);
 		}
