@@ -1,12 +1,6 @@
 package com.netcracker.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(schema = "delivery_schema", name = "order")
@@ -22,6 +16,10 @@ public class Order {
 	@Column(name = "weight", updatable = false, nullable = false)
 	private int weight;
 
+	@ManyToOne(targetEntity = Adress.class)
+	@JoinColumn(name = "delivery_adress", referencedColumnName = "adress_id")  // check this
+	private Adress adress;
+
 	@ManyToOne(targetEntity = Users.class)
 	@JoinColumn(name = "owner_id", referencedColumnName = "user_id")
 	private Users user;
@@ -29,6 +27,15 @@ public class Order {
 	public Order() {
 		//
 	}
+
+	public Adress getAdress() {
+		return adress;
+	}
+
+	public void setAdress(Adress adress) {
+		this.adress = adress;
+	}
+
 
 	public Long getOrderId() {
 		return orderId;
