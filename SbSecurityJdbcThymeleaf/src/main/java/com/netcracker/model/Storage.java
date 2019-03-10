@@ -1,5 +1,6 @@
 package com.netcracker.model;
 
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -12,24 +13,29 @@ public class Storage {
     @Column(name = "storage_id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "storage_name")
+    @Column(name = "storage_name", length = 36)
     private String storageName;
 
     @Column(name = "capicity")
     private int slots;
 
-    @Column(name = "country")
+    @Column(name = "country", length = 36)
     private String country;
 
-    @Column(name = "state")
+    @Column(name = "state", length = 36)
     private String state;
 
-    @Column(name = "town")
+    @Column(name = "town", length = 36)
     private String town;
 
-    @Column(name = "adress")
-    private Adress adress;          // check this
-
+	@OneToOne(targetEntity = Address.class)
+	@JoinColumn(name = "address", referencedColumnName = "address_id")
+	private Address address;  
+	
+	@OneToMany(targetEntity = Order.class)
+	@JoinColumn(name = "orders_id", referencedColumnName = "storage_id")
+	private List<Order> orders;
+	
     public Long getId() {
         return id;
     }
@@ -78,14 +84,20 @@ public class Storage {
         this.town = town;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
+	public List<Order> getOrders() {
+		return orders;
+	}
 
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 
 }

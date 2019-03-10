@@ -31,14 +31,11 @@ public class Users {
 	@Column(name = "user_name", length = 36, nullable = false, unique = true)
 	private String userName;
 
-	@Column(name = "user_Email", length = 128, nullable = false, unique = true)
+	@Column(name = "user_email", length = 128, nullable = false, unique = true)
 	private String userEmail;
 
 	@Column(name = "encryted_password", length = 128, nullable = false)
 	private String encrytedPassword;
-
-	@Column(name = "enabled", length = 1, nullable = false)
-	private boolean enabled;
 
 	@OneToMany(targetEntity = Order.class)
 	@JoinColumn(name = "owner_id", referencedColumnName = "user_id")
@@ -47,6 +44,10 @@ public class Users {
 	@ManyToMany(targetEntity = Roles.class, fetch = FetchType.EAGER)
 	@JoinTable(schema = "delivery_schema", name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
 	private Set<Roles> roles = new HashSet<>();
+	
+	@ManyToMany(targetEntity = Address.class, fetch = FetchType.EAGER)
+	@JoinTable(schema = "delivery_schema", name = "users_address", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "address_id"))
+	private Set<Address> address = new HashSet<>();
 
 	public Users() {
 		//
@@ -84,14 +85,6 @@ public class Users {
 		this.encrytedPassword = EncrytedPasswordUtils.encrytePassword(encrytedPassword);
 	}
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 	public Set<Roles> getRoles() {
 		return roles;
 	}
@@ -106,6 +99,14 @@ public class Users {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	public Set<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(Set<Address> address) {
+		this.address = address;
 	}
 
 //	public Long uniqueID() {

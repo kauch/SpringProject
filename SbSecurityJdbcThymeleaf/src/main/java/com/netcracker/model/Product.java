@@ -1,5 +1,8 @@
 package com.netcracker.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,12 +14,18 @@ public class Product {
     @Column(name = "product_id", nullable = false, updatable = false)
     private Long productId;
 
-    @Column(name = "product_name")
+    @Column(name = "product_name", length = 36)
     private String productName;
 
-    @Column(name = "producer")
+    @Column(name = "producer", length = 36)
     private String producer;
-
+    
+    @Column(name = "unit", length = 36)
+    private String unit;
+    
+	@ManyToMany(targetEntity = Order.class, mappedBy = "products")
+	private Set<Order> orders = new HashSet<>();
+    
     public Long getProductId() {
         return productId;
     }
@@ -49,5 +58,11 @@ public class Product {
         this.unit = unit;
     }
 
-    private String unit;
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
 }

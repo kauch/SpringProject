@@ -50,7 +50,6 @@ public class TestUserAndRoles {
 		testUser1.setUserName("dbadmin1");
 		testUser1.setUserEmail("testAdmin@myprj.kostya");
 		testUser1.setEncrytedPassword("123");
-		testUser1.setEnabled(true);
 		testUser1.setRoles(adminSet);
 		usersRepository.save(testUser1);
 
@@ -59,7 +58,6 @@ public class TestUserAndRoles {
 		testUser2.setUserName("dbuser1");
 		testUser2.setUserEmail("testUser@myprj.kostya");
 		testUser2.setEncrytedPassword("123");
-		testUser2.setEnabled(true);
 		testUser2.setRoles(userSet);
 		usersRepository.save(testUser2);
 	}
