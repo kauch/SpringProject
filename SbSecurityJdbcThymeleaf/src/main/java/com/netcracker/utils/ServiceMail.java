@@ -16,8 +16,9 @@ public class ServiceMail {
 	private static Logger log = LogManager.getLogger(ServiceMail.class.getName());
 
 	/**
-	 * sendMailForMyProgram@yandex.ru GUIKL_89_ubu3 testformydearprogram@gmail.com
-	 * 
+	 * sendMailForMyProgram@yandex.ru  
+	 * GUIKL_89_ubu3
+	 * testformydearprogram@gmail.com
 	 */
 
 	public void send(String to) throws MessagingException {

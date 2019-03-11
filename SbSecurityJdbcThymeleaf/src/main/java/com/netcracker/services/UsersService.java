@@ -16,8 +16,8 @@ public class UsersService implements IUsersService {
 	UsersRepository usersRepository;
 
 	@Override
-	public Users getUserByName(String userName) {
-		return usersRepository.findByUserName(userName);
+	public Users getUserByName(String login) {
+		return usersRepository.findByLogin(login);
 	}
 
 	@Override

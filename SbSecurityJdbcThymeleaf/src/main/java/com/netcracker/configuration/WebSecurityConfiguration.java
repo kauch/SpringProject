@@ -20,7 +20,7 @@ import com.netcracker.services.UserDetailsServiceImpl;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	UserDetailsServiceImpl userDetailsService;
+	private UserDetailsServiceImpl userDetailsService;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
