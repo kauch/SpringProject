@@ -16,12 +16,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.netcracker.enums.OrderStatus;
 import com.netcracker.model.Order;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
-import com.netcracker.repositories.OrderRepository;
 import com.netcracker.repositories.RolesRepository;
 import com.netcracker.repositories.UsersRepository;
+import com.netcracker.services.OrderService;
 import com.netcracker.utils.ServiceMail;
 import com.netcracker.utils.WebUtils;
 
@@ -34,7 +35,7 @@ public class MainController {
 	private UsersRepository usersRepository;
 
 	@Autowired
-	private OrderRepository orderRepository;
+	private OrderService orderService;
 
 	@Autowired
 	private RolesRepository rolesRepository;
@@ -103,7 +104,7 @@ public class MainController {
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String userInfo = WebUtils.toString(loginedUser);
 		model.addAttribute("userInfo", userInfo);
-		model.addAttribute("ordersList", orderRepository.findByUser(usersRepository.findByUserName(userName)));
+		model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersRepository.findByUserName(userName)));
 		return "userInfoPage";
 	}
 
@@ -120,7 +121,8 @@ public class MainController {
 			newOrder.setUser(user);
 			newOrder.setDestPoint(destination);
 			newOrder.setWeight(weight);
-			orderRepository.save(newOrder);
+			newOrder.setStatus(OrderStatus.PENDING);
+			orderService.saveOrder(newOrder);
 			resultCreateOrder = userInfo(model, principal);
 		}
 		return resultCreateOrder;
