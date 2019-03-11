@@ -48,7 +48,7 @@ public class TestUserAndRoles {
 
 		Users testUser1 = new Users();
 		testUser1.setUserId(1L);
-		testUser1.setLogin("dbadmin1");
+		testUser1.setUserName("dbadmin1");
 		testUser1.setUserEmail("testAdmin@myprj.kostya");
 		testUser1.setEncrytedPassword("123");
 		testUser1.setRoles(adminSet);
@@ -56,7 +56,7 @@ public class TestUserAndRoles {
 
 		Users testUser2 = new Users();
 		testUser2.setUserId(2L);
-		testUser2.setLogin("dbuser1");
+		testUser2.setUserName("dbuser1");
 		testUser2.setUserEmail("testUser@myprj.kostya");
 		testUser2.setEncrytedPassword("123");
 		testUser2.setRoles(userSet);

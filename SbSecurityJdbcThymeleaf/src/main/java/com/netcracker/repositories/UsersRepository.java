@@ -7,5 +7,5 @@ import com.netcracker.model.Users;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
-	public Users findByLogin(String login);
+	public Users findByUserName(String userName);
 }
