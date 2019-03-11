@@ -11,6 +11,7 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.netcracker.enums.RolesName;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
 import com.netcracker.repositories.RolesRepository;
@@ -32,12 +33,12 @@ public class TestUserAndRoles {
 	public void test() {
 		Roles testRole1 = new Roles();
 		testRole1.setRoleId(1L);
-		testRole1.setRoleName("ROLE_ADMIN");
+		testRole1.setRoleName(RolesName.ROLE_ADMIN);
 		rolesRepository.save(testRole1);
 
 		Roles testRole2 = new Roles();
 		testRole2.setRoleId(2L);
-		testRole2.setRoleName("ROLE_USER");
+		testRole2.setRoleName(RolesName.ROLE_USER);
 		rolesRepository.save(testRole2);
 
 		Set<Roles> adminSet = new HashSet<>();

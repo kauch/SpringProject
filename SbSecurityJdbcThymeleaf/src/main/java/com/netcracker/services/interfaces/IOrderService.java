@@ -10,4 +10,6 @@ public interface IOrderService {
 	public List<Order> getAllOrdersForUser(Users user);
 
 	public Order saveOrder(Order order);
+
+	public List<Order> getAllOrders();
 }

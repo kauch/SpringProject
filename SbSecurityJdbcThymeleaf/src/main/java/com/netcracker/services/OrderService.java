@@ -25,4 +25,9 @@ public class OrderService implements IOrderService {
 	public Order saveOrder(Order order) {
 		return orderRepository.saveAndFlush(order);
 	}
+
+	@Override
+	public List<Order> getAllOrders() {
+		return orderRepository.findAll();
+	}
 }

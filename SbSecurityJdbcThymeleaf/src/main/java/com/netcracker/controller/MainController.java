@@ -20,9 +20,9 @@ import com.netcracker.enums.OrderStatus;
 import com.netcracker.model.Order;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
-import com.netcracker.repositories.RolesRepository;
-import com.netcracker.repositories.UsersRepository;
 import com.netcracker.services.OrderService;
+import com.netcracker.services.RolesService;
+import com.netcracker.services.UsersService;
 import com.netcracker.utils.ServiceMail;
 import com.netcracker.utils.WebUtils;
 
@@ -32,13 +32,13 @@ public class MainController {
 	private static Logger log = LogManager.getLogger(MainController.class.getName());
 
 	@Autowired
-	private UsersRepository usersRepository;
+	private UsersService usersService;
 
 	@Autowired
 	private OrderService orderService;
 
 	@Autowired
-	private RolesRepository rolesRepository;
+	private RolesService rolesService;
 
 	@GetMapping(value = { "/", "/welcome" })
 	public String welcomePage(Model model) {
@@ -52,7 +52,7 @@ public class MainController {
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String userInfo = WebUtils.toString(loginedUser);
 		model.addAttribute("userInfo", userInfo);
-		model.addAttribute("usersList", usersRepository.findAll());
+		model.addAttribute("usersList", usersService.getAllUsers());
 		return "adminPage";
 	}
 
@@ -71,14 +71,14 @@ public class MainController {
 
 		if (username != null && userEmail != null && password != null) {
 			Set<Roles> roleUser = new HashSet<>();
-			roleUser.add(rolesRepository.findByRoleName("ROLE_USER"));
+			roleUser.add(rolesService.getRoleByName("ROLE_USER"));
 			Users newUser = new Users();
 			newUser.setUserName(username);
 			newUser.setUserEmail(userEmail);
 			newUser.setEncrytedPassword(password);
 			newUser.setRoles(roleUser);
 			try {
-				usersRepository.save(newUser);
+				usersService.saveUser(newUser);
 				resultRegistration = "successRegistrationPage";
 				String info = "Mail sent to " + userEmail;
 				model.addAttribute("info", info);
@@ -104,7 +104,7 @@ public class MainController {
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String userInfo = WebUtils.toString(loginedUser);
 		model.addAttribute("userInfo", userInfo);
-		model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersRepository.findByUserName(userName)));
+		model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByName(userName)));
 		return "userInfoPage";
 	}
 
@@ -114,7 +114,7 @@ public class MainController {
 			Principal principal) {
 		String resultCreateOrder = "createOrderPage";
 		String userName = principal.getName();
-		Users user = usersRepository.findByUserName(userName);
+		Users user = usersService.getUserByName(userName);
 		if (orderWeight != null && destination != null) {
 			int weight = Integer.parseInt(orderWeight);
 			Order newOrder = new Order();

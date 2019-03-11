@@ -6,10 +6,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.netcracker.enums.RolesName;
 
 @Entity
 @Table(schema = "delivery_schema", name = "roles")
@@ -23,7 +27,8 @@ public class Roles  implements Serializable {
 	private Long roleId;
 
 	@Column(name = "role_name", length = 30, nullable = false)
-	private String roleName;
+	@Enumerated(EnumType.STRING)
+	private RolesName roleName;
 
 	@ManyToMany(targetEntity = Users.class, mappedBy = "roles")
 	private Set<Users> users = new HashSet<>();
@@ -40,11 +45,11 @@ public class Roles  implements Serializable {
 		this.roleId = roleId;
 	}
 
-	public String getRoleName() {
+	public RolesName getRoleName() {
 		return roleName;
 	}
 
-	public void setRoleName(String roleName) {
+	public void setRoleName(RolesName roleName) {
 		this.roleName = roleName;
 	}
 
