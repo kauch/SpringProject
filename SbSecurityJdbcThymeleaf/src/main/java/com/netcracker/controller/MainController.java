@@ -59,7 +59,6 @@ public class MainController {
 
 	@GetMapping(value = "/login")
 	public String loginPage(Model model) {
-
 		return "loginPage";
 	}
 
