@@ -16,13 +16,18 @@ public class RolesService implements IRolesService {
 	RolesRepository rolesRepository;
 
 	@Override
-	public Roles getRoleByName(String roleName) {
-		return rolesRepository.findByRoleName(roleName);
+	public List<Roles> getAllRoles() {
+		return rolesRepository.findAll();
 	}
 
 	@Override
-	public List<Roles> getAllRoles() {
-		return rolesRepository.findAll();
+	public Roles saveRole(Roles role) {
+		return rolesRepository.saveAndFlush(role);
+	}
+
+	@Override
+	public Roles getRoleByName(String roleName) {
+		return rolesRepository.findByRoleName(roleName);
 	}
 
 }

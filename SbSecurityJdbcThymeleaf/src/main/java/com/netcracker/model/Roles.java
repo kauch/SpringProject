@@ -27,8 +27,7 @@ public class Roles  implements Serializable {
 	private Long roleId;
 
 	@Column(name = "role_name", length = 30, nullable = false)
-	@Enumerated(EnumType.STRING)
-	private RolesName roleName;
+	private String roleName;
 
 	@ManyToMany(targetEntity = Users.class, mappedBy = "roles")
 	private Set<Users> users = new HashSet<>();
@@ -45,11 +44,11 @@ public class Roles  implements Serializable {
 		this.roleId = roleId;
 	}
 
-	public RolesName getRoleName() {
+	public String getRoleName() {
 		return roleName;
 	}
 
-	public void setRoleName(RolesName roleName) {
+	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
 

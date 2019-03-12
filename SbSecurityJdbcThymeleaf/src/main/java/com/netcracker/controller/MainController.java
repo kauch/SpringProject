@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.netcracker.enums.OrderStatus;
+import com.netcracker.enums.RolesName;
 import com.netcracker.model.Order;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
@@ -71,7 +72,7 @@ public class MainController {
 
 		if (username != null && userEmail != null && password != null) {
 			Set<Roles> roleUser = new HashSet<>();
-			roleUser.add(rolesService.getRoleByName("ROLE_USER"));
+			roleUser.add(rolesService.getRoleByName(RolesName.ROLE_USER.name()));
 			Users newUser = new Users();
 			newUser.setUserName(username);
 			newUser.setUserEmail(userEmail);

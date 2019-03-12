@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.netcracker.enums.RolesName;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
 import com.netcracker.repositories.UsersRepository;
@@ -42,8 +41,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		List<GrantedAuthority> grantList = new ArrayList<>();
 		if (setRoles != null) {
 			for (Roles role : setRoles) {
-				RolesName roleName = role.getRoleName();
-				GrantedAuthority authority = new SimpleGrantedAuthority(roleName.name());
+				String roleName = role.getRoleName();
+				GrantedAuthority authority = new SimpleGrantedAuthority(roleName);
 				grantList.add(authority);
 				log.info("authority " + authority);
 			}

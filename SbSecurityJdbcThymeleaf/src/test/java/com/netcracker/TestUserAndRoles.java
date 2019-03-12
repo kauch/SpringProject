@@ -14,18 +14,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.netcracker.enums.RolesName;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
-import com.netcracker.repositories.RolesRepository;
-import com.netcracker.repositories.UsersRepository;
+import com.netcracker.services.RolesService;
+import com.netcracker.services.UsersService;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class TestUserAndRoles {
 
 	@Autowired
-	private UsersRepository usersRepository;
+	private UsersService usersService;
 
 	@Autowired
-	private RolesRepository rolesRepository;
+	private RolesService rolesService;
 
 	@Test
 	@Transactional
@@ -33,13 +33,13 @@ public class TestUserAndRoles {
 	public void test() {
 		Roles testRole1 = new Roles();
 		testRole1.setRoleId(1L);
-		testRole1.setRoleName(RolesName.ROLE_ADMIN);
-		rolesRepository.save(testRole1);
+		testRole1.setRoleName(RolesName.ROLE_ADMIN.name());
+		rolesService.saveRole(testRole1);
 
 		Roles testRole2 = new Roles();
 		testRole2.setRoleId(2L);
-		testRole2.setRoleName(RolesName.ROLE_USER);
-		rolesRepository.save(testRole2);
+		testRole2.setRoleName(RolesName.ROLE_USER.name());
+		rolesService.saveRole(testRole2);
 
 		Set<Roles> adminSet = new HashSet<>();
 		adminSet.add(testRole1);
@@ -52,7 +52,7 @@ public class TestUserAndRoles {
 		testUser1.setUserEmail("testAdmin@myprj.kostya");
 		testUser1.setEncrytedPassword("123");
 		testUser1.setRoles(adminSet);
-		usersRepository.save(testUser1);
+		usersService.saveUser(testUser1);
 
 		Users testUser2 = new Users();
 		testUser2.setUserId(2L);
@@ -60,7 +60,7 @@ public class TestUserAndRoles {
 		testUser2.setUserEmail("testUser@myprj.kostya");
 		testUser2.setEncrytedPassword("123");
 		testUser2.setRoles(userSet);
-		usersRepository.save(testUser2);
+		usersService.saveUser(testUser2);
 	}
 
 }
