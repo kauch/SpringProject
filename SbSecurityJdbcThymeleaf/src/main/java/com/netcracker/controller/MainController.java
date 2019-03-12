@@ -16,9 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.netcracker.enums.OrderStatus;
 import com.netcracker.enums.RolesName;
-import com.netcracker.model.Order;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
 import com.netcracker.services.OrderService;
@@ -106,26 +104,6 @@ public class MainController {
 		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByName(userName)));
 		return "userInfoPage";
-	}
-
-	@GetMapping(value = "/createOrder")
-	public String createOrderPage(@RequestParam(value = "OrderWeight", required = false) String orderWeight,
-			@RequestParam(value = "Destination", required = false) String destination, Model model,
-			Principal principal) {
-		String resultCreateOrder = "createOrderPage";
-		String userName = principal.getName();
-		Users user = usersService.getUserByName(userName);
-		if (orderWeight != null && destination != null) {
-			int weight = Integer.parseInt(orderWeight);
-			Order newOrder = new Order();
-			newOrder.setUser(user);
-			newOrder.setDestPoint(destination);
-			newOrder.setWeight(weight);
-			newOrder.setStatus(OrderStatus.PENDING);
-			orderService.saveOrder(newOrder);
-			resultCreateOrder = userInfo(model, principal);
-		}
-		return resultCreateOrder;
 	}
 
 	@GetMapping(value = "/403")
