@@ -1,21 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-		<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
-			<link rel="shortcut icon" href="../img/favicon.png" type="image/png"/>
-	<title>Access Denied</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
+    <title>Access Denied</title>
 </head>
- 
+
 <body class="text-center bg-light">
-    <!-- Include _menu.html -->
     <th:block th:include="/_menu"></th:block>
- 
+
     <h3 th:if="${message != null}" th:utext="${message}" style="color: red;"></h3>
- 
+
     <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
-     
-     <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-	 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 </body>
- 
+
 </html>

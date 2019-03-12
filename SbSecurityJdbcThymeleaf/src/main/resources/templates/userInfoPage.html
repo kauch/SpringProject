@@ -1,39 +1,40 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-   		<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
-		<link rel="shortcut icon" href="../img/favicon.png" type="image/png"/>
-      <title>User Info</title>
-   </head>
-   <body class="text-center bg-light">
-      <!-- Include _menu.html -->
-      <th:block th:include="/_menu"></th:block>
 
-      <h2>User Info Page</h2>
-      <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
-       
-      <table class = "table table-striped">
-         <thead>
-         <tr>
-            <th>Order ID</th>
-            <th>Weight</th>
-            <th>Status</th>
-            <th>Destination</th>
-         </tr>
-         </thead>
-         <tbody>
-         <tr th:each="order :${ordersList}">
-            <td th:text="${order.getOrderId()}">Order ID</td>
-            <td th:text="${order.getWeight()}">Weight</td>
-            <td th:text="${order.getStatus()}">Status</td>
-            <td th:text="${order.getDestPoint()}">Destination</td>
-         </tr>
-         </tbody>
-      </table>
-       
-      <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
-      <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-	  <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-   </body>
-    
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
+    <title>User Info</title>
+</head>
+
+<body class="text-center bg-light">
+    <th:block th:include="/_menu"></th:block>
+
+    <h2>User Info Page</h2>
+    <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Weight</th>
+                <th>Status</th>
+                <th>Destination</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order :${ordersList}">
+                <td th:text="${order.getOrderId()}">Order ID</td>
+                <td th:text="${order.getWeight()}">Weight</td>
+                <td th:text="${order.getStatus()}">Status</td>
+                <td th:text="${order.getDestPoint()}">Destination</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</body>
+
 </html>

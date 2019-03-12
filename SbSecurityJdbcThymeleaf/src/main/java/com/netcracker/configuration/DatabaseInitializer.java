@@ -28,31 +28,56 @@ public class DatabaseInitializer implements CommandLineRunner {
 	}
 
 	private void createRolesAndUsers() {
-		Roles testRole1 = new Roles();
-		testRole1.setRoleName(RolesName.ROLE_ADMIN.name());
-		rolesService.saveRole(testRole1);
-
-		Roles testRole2 = new Roles();
-		testRole2.setRoleName(RolesName.ROLE_USER.name());
-		rolesService.saveRole(testRole2);
+		Roles adminRole = new Roles();
+		adminRole.setRoleName(RolesName.ROLE_ADMIN.name());
+		rolesService.saveRole(adminRole);
+		Roles userRole = new Roles();
+		userRole.setRoleName(RolesName.ROLE_USER.name());
+		rolesService.saveRole(userRole);
+		Roles managerRole = new Roles();
+		managerRole.setRoleName(RolesName.ROLE_MANAGER.name());
+		rolesService.saveRole(managerRole);
+		Roles courierRole = new Roles();
+		courierRole.setRoleName(RolesName.ROLE_COURIER.name());
+		rolesService.saveRole(courierRole);
 
 		Set<Roles> adminSet = new HashSet<>();
-		adminSet.add(testRole1);
+		adminSet.add(adminRole);
 		Set<Roles> userSet = new HashSet<>();
-		userSet.add(testRole2);
+		userSet.add(userRole);
+		Set<Roles> managerSet = new HashSet<>();
+		managerSet.add(managerRole);
+		Set<Roles> courierSet = new HashSet<>();
+		courierSet.add(courierRole);
 
-		Users testUser1 = new Users();
-		testUser1.setUserName("dbadmin1");
-		testUser1.setUserEmail("testAdmin@myprj.kostya");
-		testUser1.setEncrytedPassword("123");
-		testUser1.setRoles(adminSet);
-		usersService.saveUser(testUser1);
+		Users admin = new Users();
+		admin.setUserName("dbAdmin");
+		admin.setUserEmail("testAdmin@myprj.kostya");
+		admin.setEncrytedPassword("123");
+		admin.setRoles(adminSet);
+		usersService.saveUser(admin);
 
-		Users testUser2 = new Users();
-		testUser2.setUserName("dbuser1");
-		testUser2.setUserEmail("testUser@myprj.kostya");
-		testUser2.setEncrytedPassword("123");
-		testUser2.setRoles(userSet);
-		usersService.saveUser(testUser2);
+		Users user = new Users();
+		user.setUserName("dbUser");
+		user.setUserEmail("testUser@myprj.kostya");
+		user.setEncrytedPassword("123");
+		user.setRoles(userSet);
+		usersService.saveUser(user);
+		
+		Users manager = new Users();
+		manager.setUserName("dbManager");
+		manager.setUserEmail("testManager@myprj.kostya");
+		manager.setEncrytedPassword("123");
+		manager.setRoles(managerSet);
+		usersService.saveUser(manager);
+
+		Users courier = new Users();
+		courier.setUserName("dbCourier");
+		courier.setUserEmail("testCourier@myprj.kostya");
+		courier.setEncrytedPassword("123");
+		courier.setRoles(courierSet);
+		usersService.saveUser(courier);
 	}
+	
+	
 }
