@@ -6,8 +6,8 @@ import java.util.Set;
 
 import javax.mail.MessagingException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -30,7 +30,7 @@ import com.netcracker.utils.WebUtils;
 @Controller
 public class MainController {
 
-	private static Logger log = LogManager.getLogger(MainController.class.getName());
+	public static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	@Autowired
 	private UsersService usersService;
@@ -101,7 +101,7 @@ public class MainController {
 	@GetMapping(value = "/userInfo")
 	public String userInfo(Model model, Principal principal) {
 		String userName = principal.getName();
-		log.info("User Name: " + userName);
+		logger.info("User Name:  {}", userName);
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String userInfo = WebUtils.toString(loginedUser);
 		model.addAttribute("userInfo", userInfo);

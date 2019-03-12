@@ -9,12 +9,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ServiceMail {
-	private static Logger log = LogManager.getLogger(ServiceMail.class.getName());
-
+	public static final Logger logger = LoggerFactory.getLogger(ServiceMail.class);
 	/**
 	 * sendMailForMyProgram@yandex.ru  
 	 * GUIKL_89_ubu3
@@ -40,6 +39,6 @@ public class ServiceMail {
 		tr.connect(null, "GUIKL_89_ubu3");
 		tr.sendMessage(message, message.getAllRecipients());
 		tr.close();
-		log.info("Message sending!");
+		logger.info("Message sending!");
 	}
 }
