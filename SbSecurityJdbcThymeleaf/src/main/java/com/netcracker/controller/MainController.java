@@ -77,13 +77,13 @@ public class MainController {
 			newUser.setRoles(roleUser);
 			try {
 				usersService.saveUser(newUser);
-				resultRegistration = "successRegistrationPage";
+				resultRegistration = "redirect:/successRegistrationPage";
 				String info = "Mail sent to " + userEmail;
 				model.addAttribute("info", info);
 				ServiceMail mail = new ServiceMail();
 				mail.send(userEmail);
 			} catch (Exception e) {
-				resultRegistration = "registrationForm";
+				logger.info("Exception {}", e);
 			}
 		}
 		return resultRegistration;

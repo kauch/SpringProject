@@ -32,8 +32,7 @@ public class OrderController {
 			@RequestParam(value = "Destination", required = false) String destination, Model model,
 			Principal principal) {
 		String resultCreateOrder;
-		String userName = principal.getName();
-		Users user = usersService.getUserByName(userName);
+		Users user = usersService.getUserByName(principal.getName());
 		try {
 			int weight = Integer.parseInt(orderWeight);
 			Order newOrder = new Order();
