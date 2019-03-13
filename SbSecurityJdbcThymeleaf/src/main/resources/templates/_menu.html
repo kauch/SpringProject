@@ -12,23 +12,24 @@
     <nav class="navbar navbar-expand">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link text-light" th:href="@{/}">Home</a>
+                <a class="nav-item nav-link" th:href="@{/}">Home</a>
 
-                <a class="nav-item nav-link text-light" th:if="${#request.userPrincipal != null}" th:href="@{/userInfo}" sec:authorize="isAuthenticated()">User Info</a>
+                <a class="nav-item nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/userInfo}" sec:authorize="isAuthenticated()">User Info</a>
 
-                <a class="nav-item nav-link text-light" th:if="${#request.userPrincipal != null}" th:href="@{/createOrder}" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')">Create Order</a>
+                <a class="nav-item nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/createOrder}" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')">Create Order</a>
 
-                <a class="nav-item nav-link text-light" th:if="${#request.userPrincipal != null}" th:href="@{/admin}" sec:authorize="hasRole('ROLE_ADMIN')">Admin</a>
+                <a class="nav-item nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/admin}" sec:authorize="hasRole('ROLE_ADMIN')">Admin</a>
 
-                <a class="nav-item nav-link text-light" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
+                <a class="nav-item nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
 
-                <a class="nav-item nav-link text-light" th:if="${#request.userPrincipal == null}" th:href="@{/login}">Login</a>
+                <a class="nav-item nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/login}">Login</a>
 
-                <a class="nav-item nav-link text-light" th:if="${#request.userPrincipal == null}" th:href="@{/registration}">Registration</a>
+                <a class="nav-item nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/registration}">Registration</a>
             </div>
         </div>
     </nav>
     <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 </body>
 
