@@ -79,5 +79,12 @@ public class DatabaseInitializer implements CommandLineRunner {
 		usersService.saveUser(courier);
 	}
 	
+	private void createOrders() {
+		
+	}
+	
+	private void createStorage() {
+		
+	}
 	
 }
