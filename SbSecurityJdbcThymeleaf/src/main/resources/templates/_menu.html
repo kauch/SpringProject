@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
     <link rel="stylesheet" href="../css/styleNavbar.css" type="text/css">
-    <meta http-equiv="Content-Type" >
+    <meta http-equiv="Content-Type">
 </head>
 
 <body>
@@ -15,39 +15,39 @@
                 <li class="nav-item">
                     <a class="nav-item nav-link" th:href="@{/}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/userInfo}" sec:authorize="isAuthenticated()">User Info</a>
+                <li class="nav-item" th:if="${#request.userPrincipal != null}" sec:authorize="isAuthenticated()">
+                    <a class="nav-item nav-link" th:href="@{/userInfo}">User Info</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/createOrder}" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')">Create Order</a>
+                <li class="nav-item" th:if="${#request.userPrincipal != null}" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')">
+                    <a class="nav-item nav-link" th:href="@{/createOrder}">Create Order</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/admin}" sec:authorize="hasRole('ROLE_ADMIN')">Admin</a>
+                <li class="nav-item" th:if="${#request.userPrincipal == null}">
+                    <a class="nav-item nav-link" th:href="@{/login}">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/login}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" th:if="${#request.userPrincipal == null}" th:href="@{/registration}">Registration</a>
+                <li class="nav-item" th:if="${#request.userPrincipal == null}">
+                    <a class="nav-item nav-link" th:href="@{/registration}">Registration</a>
                 </li>
                 
-                      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
+                <li class="nav-item dropdown" th:if="${#request.userPrincipal != null}" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" th:href="@{/admin}">Action</a>
-          <a class="dropdown-item" th:href="@{/userInfo}">Another action</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" th:href="@{/admin}">Identity management</a>
+                        <a class="dropdown-item" th:href="@{/userInfo}">Data loading</a>
 
-        </div>
-      </li>
+                    </div>
+                </li>
+                
+                <li class="nav-item" th:if="${#request.userPrincipal != null}" sec:authorize="isAuthenticated()">
+                    <a class="nav-item nav-link" th:href="@{/logout}">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>
-
+    <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.14.6/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 </body>
 
 </html>
