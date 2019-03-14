@@ -17,8 +17,8 @@
 				                Static summary
 				         </span>
     </div>
-    <div class="container h-100">
-        <div class="row h-100  align-items-center">
+    <div class="container" style ="height: calc(100% - 80px)">
+        <div class="row align-items-center"  style ="height: calc(100% - 80px)">
             <div class="col-sm-2 col-md-3 d-none d-sm-block"></div>
             <div class="col-12 col-sm-8 col-md-6">
                 <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
@@ -41,13 +41,7 @@
                         </div>
                     </div>
                 </form>
-                <br> Username/pass:
-                <ul>
-                    <li>dbAdmin/123</li>
-                    <li>dbUser/123</li>
-                    <li>dbManager/123</li>
-                    <li>dbCourier/123</li>
-                </ul>
+                    <p>dbAdmin/dbUser/dbManager/dbCourier/123</p>
             </div>
             <div class="col-sm-2 col-md-3 d-none d-sm-block"></div>
         </div>
