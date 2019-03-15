@@ -5,6 +5,8 @@ import java.security.Principal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import com.netcracker.model.Order;
 import com.netcracker.model.Users;
 import com.netcracker.services.OrderService;
 import com.netcracker.services.UsersService;
+import com.netcracker.utils.WebUtils;
 
 @Controller
 public class OrderController {
@@ -41,11 +44,33 @@ public class OrderController {
 			newOrder.setWeight(weight);
 			newOrder.setStatus(OrderStatus.PENDING);
 			orderService.saveOrder(newOrder);
-			resultCreateOrder = "redirect:/userInfo";
+			resultCreateOrder = "redirect:/myOrders";
 		}
 		catch(Exception e) {
 			resultCreateOrder = "createOrderPage";
 		}
 		return resultCreateOrder;
+	}
+	
+	@GetMapping(value = "/myOrders")
+	public String myOrders(Model model, Principal principal) {
+		String userName = principal.getName();
+		logger.info("User Name:  {}", userName);
+		User loginedUser = (User) ((Authentication) principal).getPrincipal();
+		String userInfo = WebUtils.toString(loginedUser);
+		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByName(userName)));
+		return "myOrdersPage";
+	}
+	
+	@GetMapping(value = "/allOrders")
+	public String allOrders(Model model, Principal principal) {
+		String userName = principal.getName();
+		logger.info("User Name:  {}", userName);
+		User loginedUser = (User) ((Authentication) principal).getPrincipal();
+		String userInfo = WebUtils.toString(loginedUser);
+		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("ordersList", orderService.getAllOrders());
+		return "allOrdersPage";
 	}
 }

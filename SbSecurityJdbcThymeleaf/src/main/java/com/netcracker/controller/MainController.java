@@ -102,7 +102,6 @@ public class MainController {
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String userInfo = WebUtils.toString(loginedUser);
 		model.addAttribute("userInfo", userInfo);
-		model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByName(userName)));
 		return "userInfoPage";
 	}
 

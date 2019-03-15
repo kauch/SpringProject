@@ -39,7 +39,8 @@
         </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" th:href="@{/createOrder}">Create order</a>
-                        <a class="dropdown-item" th:href="@{/userInfo}">My orders</a>
+                        <a class="dropdown-item" th:href="@{/allOrders}" sec:authorize="hasRole('ROLE_MANAGER')">All orders</a>
+                        <a class="dropdown-item" th:href="@{/myOrders}" sec:authorize="hasRole('ROLE_USER')">My orders</a>
                     </div>
                 </li>
 

@@ -57,12 +57,26 @@ public class DatabaseInitializer implements CommandLineRunner {
 		admin.setRoles(adminSet);
 		usersService.saveUser(admin);
 
-		Users user = new Users();
-		user.setUserName("dbUser");
-		user.setUserEmail("testUser@myprj.kostya");
-		user.setEncrytedPassword("123");
-		user.setRoles(userSet);
-		usersService.saveUser(user);
+		Users user1 = new Users();
+		user1.setUserName("dbUser1");
+		user1.setUserEmail("testUser1@myprj.kostya");
+		user1.setEncrytedPassword("123");
+		user1.setRoles(userSet);
+		usersService.saveUser(user1);
+		
+		Users user2 = new Users();
+		user2.setUserName("dbUser2");
+		user2.setUserEmail("testUser2@myprj.kostya");
+		user2.setEncrytedPassword("123");
+		user2.setRoles(userSet);
+		usersService.saveUser(user2);
+		
+		Users user3 = new Users();
+		user3.setUserName("dbUser3");
+		user3.setUserEmail("testUser3@myprj.kostya");
+		user3.setEncrytedPassword("123");
+		user3.setRoles(userSet);
+		usersService.saveUser(user3);
 		
 		Users manager = new Users();
 		manager.setUserName("dbManager");

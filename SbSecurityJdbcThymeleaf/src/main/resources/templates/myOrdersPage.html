@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
+    <title>My Orders</title>
+</head>
+
+<body class="text-center bg-light">
+    <th:block th:include="/_menu"></th:block>
+
+    <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Weight</th>
+                <th>Status</th>
+                <th>Destination</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order :${ordersList}">
+                <td th:text="${order.getOrderId()}">Order ID</td>
+                <td th:text="${order.getWeight()}">Weight</td>
+                <td th:text="${order.getStatus()}">Status</td>
+                <td th:text="${order.getDestPoint()}">Destination</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+   
+</body>
+
+</html>
