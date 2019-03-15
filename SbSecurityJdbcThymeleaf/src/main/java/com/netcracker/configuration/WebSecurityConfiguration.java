@@ -46,13 +46,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 
-		http.authorizeRequests().antMatchers("/", "/login", "/logout", "/registration", "/webjars/**", "/css/*").permitAll();
+		http.authorizeRequests()
+			.antMatchers("/", "/login", "/logout", "/registration", "/webjars/**", "/css/*").permitAll();
 		
-		http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_COURIER')");
+		http.authorizeRequests()
+			.antMatchers("/userInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_COURIER')");
 		
-		http.authorizeRequests().antMatchers("/createOrder").access("hasAnyRole('ROLE_USER', 'ROLE_MANAGER')");
+		http.authorizeRequests()
+			.antMatchers("/createOrder").access("hasAnyRole('ROLE_USER', 'ROLE_MANAGER')");
 		
-		http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests()
+			.antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
 		
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
