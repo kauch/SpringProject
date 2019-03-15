@@ -67,9 +67,6 @@ public class OrderController {
 	public String allOrders(Model model, Principal principal) {
 		String userName = principal.getName();
 		logger.info("User Name:  {}", userName);
-		User loginedUser = (User) ((Authentication) principal).getPrincipal();
-		String userInfo = WebUtils.toString(loginedUser);
-		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("ordersList", orderService.getAllOrders());
 		return "allOrdersPage";
 	}

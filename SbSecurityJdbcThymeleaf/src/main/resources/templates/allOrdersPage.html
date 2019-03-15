@@ -9,9 +9,9 @@
 
 <body class="text-center bg-light">
     <th:block th:include="/_menu"></th:block>
-
-    <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
-
+    <br/>
+    <h2>Orders list</h2>
+    <br/>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -32,9 +32,6 @@
             </tr>
         </tbody>
     </table>
-
-    <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
-   
 </body>
 
 </html>
