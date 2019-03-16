@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.netcracker.enums.OrderStatus;
@@ -30,7 +31,7 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@GetMapping(value = "/createOrder")
+	@PostMapping(value = "/createOrder")
 	public String createOrderPage(@RequestParam(value = "OrderWeight", required = false) String orderWeight,
 			@RequestParam(value = "Destination", required = false) String destination, Model model,
 			Principal principal) {
@@ -50,6 +51,11 @@ public class OrderController {
 			resultCreateOrder = "createOrderPage";
 		}
 		return resultCreateOrder;
+	}
+	
+	@GetMapping(value = "/createOrder")
+	public String viewOrderPage(Model model) {
+		return "createOrderPage";
 	}
 	
 	@GetMapping(value = "/myOrders")
