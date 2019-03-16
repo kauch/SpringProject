@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.netcracker.enums.RolesName;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
-import com.netcracker.services.OrderService;
 import com.netcracker.services.RolesService;
 import com.netcracker.services.UsersService;
 import com.netcracker.utils.ServiceMail;
@@ -34,23 +33,15 @@ public class MainController {
 	private UsersService usersService;
 
 	@Autowired
-	private OrderService orderService;
-
-	@Autowired
 	private RolesService rolesService;
 
 	@GetMapping(value = { "/", "/welcome" })
 	public String welcomePage(Model model) {
-		model.addAttribute("title", "Welcome");
-		model.addAttribute("message", "This is welcome page!");
 		return "welcomePage";
 	}
 
 	@GetMapping(value = "/admin")
 	public String adminPage(Model model, Principal principal) {
-		User loginedUser = (User) ((Authentication) principal).getPrincipal();
-		String userInfo = WebUtils.toString(loginedUser);
-		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("usersList", usersService.getAllUsers());
 		return "adminPage";
 	}
@@ -102,7 +93,6 @@ public class MainController {
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String userInfo = WebUtils.toString(loginedUser);
 		model.addAttribute("userInfo", userInfo);
-		model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByName(userName)));
 		return "userInfoPage";
 	}
 

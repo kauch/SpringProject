@@ -9,12 +9,9 @@
 
 <body class="text-center bg-light">
     <th:block th:include="/_menu"></th:block>
-
-    <h2>Admin Page</h2>
-    <h3>Welcome :
-         <span th:utext="${#request.userPrincipal.name}"></span>
-      </h3>
-
+    <br/>
+    <h2>Identity management</h2>
+    <br/>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -31,12 +28,5 @@
             </tr>
         </tbody>
     </table>
-
-    <br/>
-    <br/>
-
-    <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
-
 </body>
-
 </html>
