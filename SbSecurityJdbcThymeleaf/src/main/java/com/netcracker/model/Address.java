@@ -13,6 +13,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(schema = "delivery_schema", name = "address")
 public class Address implements Serializable {
@@ -43,59 +46,4 @@ public class Address implements Serializable {
 	@ManyToMany(targetEntity = Users.class, mappedBy = "address")
 	private Set<Users> users = new HashSet<>();
 	
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-	public Storage getStorage() {
-		return storage;
-	}
-
-	public void setStorage(Storage storage) {
-		this.storage = storage;
-	}
-
-	public Set<Users> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<Users> users) {
-		this.users = users;
-	}
 }

@@ -20,6 +20,9 @@ import javax.persistence.Table;
 
 import com.netcracker.utils.EncrytedPasswordUtils;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(schema = "delivery_schema", name = "users")
 public class Users implements Serializable {
@@ -53,64 +56,8 @@ public class Users implements Serializable {
 	@JoinTable(schema = "delivery_schema", name = "users_address", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "address_id"))
 	private Set<Address> address = new HashSet<>();
 
-	public Users() {
-		//
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserEmail() {
-		return userEmail;
-	}
-
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-
-	public String getEncrytedPassword() {
-		return encrytedPassword;
-	}
-
 	public void setEncrytedPassword(String encrytedPassword) {
 		this.encrytedPassword = EncrytedPasswordUtils.encrytePassword(encrytedPassword);
-	}
-
-	public Set<Roles> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Roles> roles) {
-		this.roles = roles;
-	}
-
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
-	public Set<Address> getAddress() {
-		return address;
-	}
-
-	public void setAddress(Set<Address> address) {
-		this.address = address;
 	}
 
 //	public Long uniqueID() {

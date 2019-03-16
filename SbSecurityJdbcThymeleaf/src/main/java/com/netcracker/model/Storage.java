@@ -3,8 +3,18 @@ package com.netcracker.model;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(schema = "delivery_schema", name = "storage")
 public class Storage implements Serializable {
@@ -39,68 +49,4 @@ public class Storage implements Serializable {
 	@JoinColumn(name = "stock", referencedColumnName = "storage_id")
 	private List<Order> orders;
 	
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStorageName() {
-        return storageName;
-    }
-
-    public void setStorageName(String storageName) {
-        this.storageName = storageName;
-    }
-
-    public int getSlots() {
-        return slots;
-    }
-
-    public void setSlots(int slots) {
-        this.slots = slots;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
 }

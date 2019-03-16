@@ -21,6 +21,9 @@ import javax.persistence.Table;
 
 import com.netcracker.enums.OrderStatus;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(schema = "delivery_schema", name = "order")
 public class Order implements Serializable {
@@ -55,63 +58,4 @@ public class Order implements Serializable {
 	@JoinColumn(name = "stock", referencedColumnName = "storage_id")
 	private Storage storage;
 
-	public Order() {
-		//
-	}
-
-	public Long getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
-
-	public String getDestPoint() {
-		return destPoint;
-	}
-
-	public void setDestPoint(String destPoint) {
-		this.destPoint = destPoint;
-	}
-
-	public int getWeight() {
-		return weight;
-	}
-
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-
-	public OrderStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(OrderStatus status) {
-		this.status = status;
-	}
-
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
-	}
-
-	public Set<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
-
-	public Storage getStorage() {
-		return storage;
-	}
-
-	public void setStorage(Storage storage) {
-		this.storage = storage;
-	}
 }

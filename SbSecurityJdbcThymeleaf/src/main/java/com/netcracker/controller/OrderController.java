@@ -31,7 +31,7 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@PostMapping(value = "/createOrder")
+	@PostMapping(value = "/order")
 	public String createOrderPage(@RequestParam(value = "OrderWeight", required = false) String orderWeight,
 			@RequestParam(value = "Destination", required = false) String destination, Model model,
 			Principal principal) {
@@ -53,7 +53,7 @@ public class OrderController {
 		return resultCreateOrder;
 	}
 	
-	@GetMapping(value = "/createOrder")
+	@GetMapping(value = "/order")
 	public String viewOrderPage(Model model) {
 		return "createOrderPage";
 	}
