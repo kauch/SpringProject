@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
+    <meta charset="UTF-8">
+    <title>Map</title>
+</head>
+
+<body class="bg-light">
+    <th:block th:include="/_menu"></th:block>
+            <h1>Our Google map</h1>
+        <div id="map"></div>
+        <script>
+            function  initMap() { // Не уверен насчет расположения в контейнере
+                var options = {
+                    zoom:8,
+                    center: {
+                        lat: 55.751244, lng: -37.618423}
+                };
+                var map = new google.maps.Map(document.getElementById('map'), options)
+                google.maps.event.addListener(map, 'click', function (event) {
+                    //adding marker through click on map
+                    addMarker({coords:event.latLng})
+                });
+            }
+            //Define function to add marker
+            function addMarker(coords) {
+                var marker = new google.maps.Marker({
+                    position:coords,
+                    map:map
+                });
+
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaAcmZnU1n_WrInQTAwaI-n-nJpTwm1cs&callback=initMap"
+                async defer></script>
+
+</body>
+</html>

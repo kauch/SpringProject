@@ -18,6 +18,11 @@
                 <li class="nav-item">
                     <a class="nav-item nav-link" th:href="@{/}">Home</a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-item nav-link" th:href="@{/map}">Map</a>
+                </li> 
+                
                 <li class="nav-item" th:if="${#request.userPrincipal != null}" sec:authorize="isAuthenticated()">
                     <a class="nav-item nav-link" th:href="@{/userInfo}">User Info</a>
                 </li>

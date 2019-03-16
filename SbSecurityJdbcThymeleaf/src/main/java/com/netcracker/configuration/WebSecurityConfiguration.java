@@ -47,7 +47,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		http.authorizeRequests()
-			.antMatchers("/", "/login", "/logout", "/registration", "/webjars/**", "/css/*").permitAll();
+			.antMatchers("/", "/login", "/logout", "/registration", "/webjars/**", "/css/*", "/map").permitAll();
 		
 		http.authorizeRequests()
 			.antMatchers("/userInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_COURIER')");

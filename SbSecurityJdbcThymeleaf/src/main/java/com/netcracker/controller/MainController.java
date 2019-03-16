@@ -108,4 +108,10 @@ public class MainController {
 		}
 		return "403Page";
 	}
+	
+	
+	@GetMapping(value = "/map")
+	public String getMap(Model model) {
+		return "mapPage";
+	}
 }
