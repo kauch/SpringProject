@@ -11,12 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-
-@Data
 @Entity
 @Table(schema = "delivery_schema", name = "roles")
-public class Roles  implements Serializable {
+public class Roles implements Serializable {
 
 	private static final long serialVersionUID = 2791130208399609774L;
 
@@ -31,4 +28,31 @@ public class Roles  implements Serializable {
 	@ManyToMany(targetEntity = Users.class, mappedBy = "roles")
 	private Set<Users> users = new HashSet<>();
 
+	public Roles() {
+		super();
+	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public Set<Users> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<Users> users) {
+		this.users = users;
+	}
 }
