@@ -33,7 +33,8 @@ public class ServiceMail {
 		message.setFrom(new InternetAddress("testformydearprogram@gmail.com"));
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 		message.setSubject("Confirm registration");
-		message.setText("Welcome!");
+		//message.setText("Welcome!");
+		message.setContent("<h1>This is actual message</h1>", "text/html");
 
 		Transport tr = mailSession.getTransport();
 		tr.connect(null, "GUIKL_89_ubu3");

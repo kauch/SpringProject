@@ -68,13 +68,15 @@ public class MainController {
 			newUser.setRoles(roleUser);
 			try {
 				usersService.saveUser(newUser);
-				resultRegistration = "redirect:/successRegistrationPage";
+				
 				String info = "Mail sent to " + userEmail;
 				model.addAttribute("info", info);
 				ServiceMail mail = new ServiceMail();
 				mail.send(userEmail);
+				resultRegistration = success(model);
 			} catch (Exception e) {
 				logger.info("Exception {}", e);
+				resultRegistration = "registrationForm";
 			}
 		}
 		return resultRegistration;
@@ -109,6 +111,10 @@ public class MainController {
 		return "403Page";
 	}
 	
+	@GetMapping(value = "/registration/success")
+	public String success(Model model) {
+		return "successRegistrationPage";
+	}
 	
 	@GetMapping(value = "/map")
 	public String getMap(Model model) {

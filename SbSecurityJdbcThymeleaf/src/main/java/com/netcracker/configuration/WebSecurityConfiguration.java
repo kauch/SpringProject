@@ -48,7 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().antMatchers("/", "/logout", "/webjars/**", "/css/*", "/map").permitAll();
 
-		http.authorizeRequests().antMatchers("/login", "/registration").anonymous();
+		http.authorizeRequests().antMatchers("/login", "/registration/**").anonymous();
 
 		http.authorizeRequests().antMatchers("/userInfo")
 				.access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_COURIER')");
@@ -60,7 +60,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
 
-		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/welcome");
+		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
 		http.authorizeRequests().and().formLogin().loginProcessingUrl("/j_spring_security_check").loginPage("/login")
 				.defaultSuccessUrl("/userInfo").failureUrl("/login?error=true").usernameParameter("username")
