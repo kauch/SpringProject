@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.netcracker.enums.RolesName;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
-import com.netcracker.services.RolesService;
-import com.netcracker.services.UsersService;
+import com.netcracker.services.impl.RolesServiceImpl;
+import com.netcracker.services.impl.UsersServiceImpl;
 import com.netcracker.utils.ServiceMail;
 import com.netcracker.utils.WebUtils;
 
@@ -30,10 +30,10 @@ public class MainController {
 	public static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	@Autowired
-	private UsersService usersService;
+	private UsersServiceImpl usersService;
 
 	@Autowired
-	private RolesService rolesService;
+	private RolesServiceImpl rolesService;
 
 	@GetMapping(value = { "/", "/welcome" })
 	public String welcomePage(Model model) {

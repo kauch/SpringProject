@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.netcracker.enums.OrderStatus;
 import com.netcracker.model.Order;
 import com.netcracker.model.Users;
-import com.netcracker.services.OrderService;
-import com.netcracker.services.UsersService;
+import com.netcracker.services.impl.OrderServiceImpl;
+import com.netcracker.services.impl.UsersServiceImpl;
 import com.netcracker.utils.WebUtils;
 
 @Controller
@@ -26,10 +26,10 @@ public class OrderController {
 	public static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
 	@Autowired
-	private UsersService usersService;
+	private UsersServiceImpl usersService;
 
 	@Autowired
-	private OrderService orderService;
+	private OrderServiceImpl orderService;
 	
 	@PostMapping(value = "/order")
 	public String createOrderPage(@RequestParam(value = "OrderWeight", required = false) String orderWeight,

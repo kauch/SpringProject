@@ -2,32 +2,14 @@ package com.netcracker.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.netcracker.model.Order;
 import com.netcracker.model.Users;
-import com.netcracker.repositories.OrderRepository;
-import com.netcracker.services.interfaces.IOrderService;
 
-@Service
-public class OrderService implements IOrderService {
+public interface OrderService {
 
-	@Autowired
-	OrderRepository orderRepository;
+	public List<Order> getAllOrdersForUser(Users user);
 
-	@Override
-	public List<Order> getAllOrdersForUser(Users user) {
-		return orderRepository.findByUser(user);
-	}
+	public Order saveOrder(Order order);
 
-	@Override
-	public Order saveOrder(Order order) {
-		return orderRepository.saveAndFlush(order);
-	}
-
-	@Override
-	public List<Order> getAllOrders() {
-		return orderRepository.findAll();
-	}
+	public List<Order> getAllOrders();
 }

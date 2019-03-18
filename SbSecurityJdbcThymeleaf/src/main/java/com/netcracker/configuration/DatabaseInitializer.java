@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 import com.netcracker.enums.RolesName;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
-import com.netcracker.services.RolesService;
-import com.netcracker.services.UsersService;
+import com.netcracker.services.impl.RolesServiceImpl;
+import com.netcracker.services.impl.UsersServiceImpl;
 
 @Component
 public class DatabaseInitializer implements CommandLineRunner {
 	
 	@Autowired
-	private UsersService usersService;
+	private UsersServiceImpl usersService;
 
 	@Autowired
-	private RolesService rolesService;
+	private RolesServiceImpl rolesService;
 	
 	@Override
 	public void run(String... args) throws Exception {
