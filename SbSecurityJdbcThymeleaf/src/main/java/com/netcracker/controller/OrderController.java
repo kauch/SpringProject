@@ -35,20 +35,22 @@ public class OrderController {
 	public String createOrderPage(@RequestParam(value = "OrderWeight", required = false) String orderWeight,
 			@RequestParam(value = "Destination", required = false) String destination, Model model,
 			Principal principal) {
-		String resultCreateOrder;
+		String resultCreateOrder = "createOrderPage";
 		Users user = usersService.getUserByName(principal.getName());
-		try {
-			int weight = Integer.parseInt(orderWeight);
-			Order newOrder = new Order();
-			newOrder.setUser(user);
-			newOrder.setDestPoint(destination);
-			newOrder.setWeight(weight);
-			newOrder.setStatus(OrderStatus.PENDING);
-			orderService.saveOrder(newOrder);
-			resultCreateOrder = "redirect:/myOrders";
-		}
-		catch(Exception e) {
-			resultCreateOrder = "createOrderPage";
+		if(destination != null && orderWeight != null) {
+			try {
+				int weight = Integer.parseInt(orderWeight);
+				Order newOrder = new Order();
+				newOrder.setUser(user);
+				newOrder.setDestPoint(destination);
+				newOrder.setWeight(weight);
+				newOrder.setStatus(OrderStatus.PENDING);
+				orderService.saveOrder(newOrder);
+				resultCreateOrder = "redirect:/myOrders";
+			}
+			catch(Exception e) {
+				resultCreateOrder = "createOrderPage";
+			}
 		}
 		return resultCreateOrder;
 	}

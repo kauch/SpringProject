@@ -57,10 +57,10 @@ public class ServiceMail {
 		message.setFrom(new InternetAddress("testformydearprogram@gmail.com"));
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getUserEmail()));
 		message.setSubject("Confirm registration");
-		String s = new String(Files.readAllBytes(Paths.get("src/main/resources/mail/textTemplate/successAutorize.html")));
+		String templateMessage = new String(Files.readAllBytes(Paths.get("src/main/resources/mail/textTemplate/successAutorize.html")));
 
 		BodyPart messageBodyPart = new MimeBodyPart();
-		messageBodyPart.setContent("<p>Hi, " + user.getUserName() + "!!!</p><br />" + s, "text/html;charset=UTF-8");
+		messageBodyPart.setContent("<p>Hi, " + user.getUserName() + "!!!</p><br />" + templateMessage, "text/html;charset=UTF-8");
 		Multipart multipart = new MimeMultipart();
 		multipart.addBodyPart(messageBodyPart);
 		message.setContent(multipart, "text/html;charset=UTF-8");
