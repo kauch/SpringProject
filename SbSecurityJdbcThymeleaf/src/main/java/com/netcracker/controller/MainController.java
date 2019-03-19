@@ -14,9 +14,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.netcracker.enums.RolesName;
+import com.netcracker.enums.TypeMessage;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
 import com.netcracker.services.impl.RolesServiceImpl;
@@ -35,7 +37,7 @@ public class MainController {
 	@Autowired
 	private RolesServiceImpl rolesService;
 
-	@GetMapping(value = { "/", "/welcome" })
+	@GetMapping(value = {"/", "/welcome"})
 	public String welcomePage(Model model) {
 		return "welcomePage";
 	}
@@ -51,13 +53,12 @@ public class MainController {
 		return "loginPage";
 	}
 
-	@GetMapping(value = "/registration")
+	@PostMapping(value = "/registration")
 	public String registrationForm(@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "userEmail", required = false) String userEmail,
 			@RequestParam(value = "password", required = false) String password, Model model)
 			throws MessagingException {
 		String resultRegistration = "registrationForm";
-
 		if (username != null && userEmail != null && password != null) {
 			Set<Roles> roleUser = new HashSet<>();
 			roleUser.add(rolesService.getRoleByName(RolesName.ROLE_USER.name()));
@@ -68,12 +69,11 @@ public class MainController {
 			newUser.setRoles(roleUser);
 			try {
 				usersService.saveUser(newUser);
-				
 				String info = "Mail sent to " + userEmail;
 				model.addAttribute("info", info);
 				ServiceMail mail = new ServiceMail();
-				mail.send(userEmail);
-				resultRegistration = success(model);
+				mail.send(newUser, TypeMessage.REGISTRATION);
+				resultRegistration = successRegistrationPage(model);
 			} catch (Exception e) {
 				logger.info("Exception {}", e);
 				resultRegistration = "registrationForm";
@@ -82,6 +82,11 @@ public class MainController {
 		return resultRegistration;
 	}
 
+	@GetMapping(value = "/registration")
+	public String registrationForm(Model model){
+		return "registrationForm";
+	}
+	
 	@GetMapping(value = "/logoutSuccessful")
 	public String logoutSuccessfulPage(Model model) {
 		model.addAttribute("title", "Logout");
@@ -112,7 +117,7 @@ public class MainController {
 	}
 	
 	@GetMapping(value = "/registration/success")
-	public String success(Model model) {
+	public String successRegistrationPage(Model model) {
 		return "successRegistrationPage";
 	}
 	

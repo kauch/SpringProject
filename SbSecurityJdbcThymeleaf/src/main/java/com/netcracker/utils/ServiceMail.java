@@ -19,6 +19,9 @@ import javax.mail.internet.MimeMultipart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.netcracker.enums.TypeMessage;
+import com.netcracker.model.Users;
+
 public class ServiceMail {
 	public static final Logger logger = LoggerFactory.getLogger(ServiceMail.class);
 
@@ -37,33 +40,30 @@ public class ServiceMail {
 		return properties;
 	}
 
-	public void send(String to) throws MessagingException, IOException {
+	public void send(Users user, TypeMessage type) throws MessagingException, IOException {
 		Session mailSession = Session.getDefaultInstance(setProperties());
 		MimeMessage message = new MimeMessage(mailSession);
-		message.setFrom(new InternetAddress("testformydearprogram@gmail.com"));
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-		message.setSubject("Confirm registration");
-
-		String s = new String(
-				Files.readAllBytes(Paths.get("src/main/resources/mail/textTemplate/successAutorize.html")));
-
-		BodyPart messageBodyPart = new MimeBodyPart();
-		messageBodyPart.setContent("<p>Hi, " + to + "!!!</p><br />" + s, "text/html");
-
-		Multipart multipart = new MimeMultipart();
-		multipart.addBodyPart(messageBodyPart);
-
-		message.setContent(multipart, "text/html");
-
+		if(type.equals(TypeMessage.REGISTRATION)) {
+			message = createMessageRegistration(message, user);
+		}
 		Transport tr = mailSession.getTransport();
 		tr.connect(null, "GUIKL_89_ubu3");
 		tr.sendMessage(message, message.getAllRecipients());
 		tr.close();
 		logger.info("Message sending!");
 	}
+	
+	public MimeMessage createMessageRegistration(MimeMessage message, Users user) throws MessagingException, IOException {
+		message.setFrom(new InternetAddress("testformydearprogram@gmail.com"));
+		message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getUserEmail()));
+		message.setSubject("Confirm registration");
+		String s = new String(Files.readAllBytes(Paths.get("src/main/resources/mail/textTemplate/successAutorize.html")));
 
-	public static void main(String[] args) throws MessagingException, IOException {
-		ServiceMail mail = new ServiceMail();
-		mail.send("kst.fis@gmail.com");
+		BodyPart messageBodyPart = new MimeBodyPart();
+		messageBodyPart.setContent("<p>Hi, " + user.getUserName() + "!!!</p><br />" + s, "text/html;charset=UTF-8");
+		Multipart multipart = new MimeMultipart();
+		multipart.addBodyPart(messageBodyPart);
+		message.setContent(multipart, "text/html;charset=UTF-8");
+		return message;
 	}
 }
