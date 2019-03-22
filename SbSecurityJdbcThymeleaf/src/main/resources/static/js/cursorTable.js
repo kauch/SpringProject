@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
   $(".cursor-hand").click(function(){
     $(this).hide();
   });
