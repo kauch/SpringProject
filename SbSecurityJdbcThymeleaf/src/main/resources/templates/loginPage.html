@@ -12,7 +12,7 @@
 </head>
 
 <body class="bg-light h-100">
-    <th:block th:include="/_menu"></th:block>
+    <th:block th:insert="/_menu"></th:block>
     <!-- /login?error=true -->
     <div th:if="${#request.getParameter('error') == 'true'}" style="color:red;margin:10px 0px;">
         Login Failed!!!

@@ -10,7 +10,7 @@
 </head>
 
 <body class="text-center bg-light">
-    <th:block th:include="/_menu"></th:block>
+    <th:block th:insert="/_menu"></th:block>
     <h1>Registration Successful!</h1>
     <div th:if="${info != null}" th:utext="${info}"></div>
     
