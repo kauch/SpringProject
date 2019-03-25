@@ -37,11 +37,10 @@ public class MainController {
 	@Autowired
 	private RolesServiceImpl rolesService;
 
-	@GetMapping(value = {"/", "/welcome"})
+	@GetMapping(value = { "/", "/welcome" })
 	public String welcomePage(Model model) {
 		return "welcomePage";
 	}
-
 
 	@GetMapping(value = "/login")
 	public String loginPage(Model model) {
@@ -78,10 +77,10 @@ public class MainController {
 	}
 
 	@GetMapping(value = "/registration")
-	public String registrationForm(Model model){
+	public String registrationForm(Model model) {
 		return "registrationForm";
 	}
-	
+
 	@GetMapping(value = "/logoutSuccessful")
 	public String logoutSuccessfulPage(Model model) {
 		model.addAttribute("title", "Logout");
@@ -110,12 +109,12 @@ public class MainController {
 		}
 		return "403Page";
 	}
-	
+
 	@GetMapping(value = "/registration/success")
 	public String successRegistrationPage(Model model) {
 		return "successRegistrationPage";
 	}
-	
+
 	@GetMapping(value = "/map")
 	public String getMap(Model model) {
 		return "mapPage";
