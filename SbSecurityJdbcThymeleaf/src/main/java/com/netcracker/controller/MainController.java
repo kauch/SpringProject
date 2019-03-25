@@ -42,11 +42,6 @@ public class MainController {
 		return "welcomePage";
 	}
 
-	@GetMapping(value = "/admin")
-	public String adminPage(Model model, Principal principal) {
-		model.addAttribute("usersList", usersService.getAllUsers());
-		return "adminPage";
-	}
 
 	@GetMapping(value = "/login")
 	public String loginPage(Model model) {
