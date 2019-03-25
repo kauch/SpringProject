@@ -43,7 +43,7 @@ public class ServiceMail {
 	public void send(Users user, TypeMessage type) throws MessagingException, IOException {
 		Session mailSession = Session.getDefaultInstance(setProperties());
 		MimeMessage message = new MimeMessage(mailSession);
-		if(type.equals(TypeMessage.REGISTRATION)) {
+		if (type.equals(TypeMessage.REGISTRATION)) {
 			message = createMessageRegistration(message, user);
 		}
 		Transport tr = mailSession.getTransport();
@@ -52,15 +52,18 @@ public class ServiceMail {
 		tr.close();
 		logger.info("Message sending!");
 	}
-	
-	public MimeMessage createMessageRegistration(MimeMessage message, Users user) throws MessagingException, IOException {
+
+	public MimeMessage createMessageRegistration(MimeMessage message, Users user)
+			throws MessagingException, IOException {
 		message.setFrom(new InternetAddress("testformydearprogram@gmail.com"));
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getUserEmail()));
 		message.setSubject("Confirm registration");
-		String templateMessage = new String(Files.readAllBytes(Paths.get("src/main/resources/mail/textTemplate/successAutorize.html")));
+		String templateMessage = new String(
+				Files.readAllBytes(Paths.get("src/main/resources/mail/textTemplate/successAutorize.html")));
 
 		BodyPart messageBodyPart = new MimeBodyPart();
-		messageBodyPart.setContent("<p>Hi, " + user.getUserName() + "!!!</p><br />" + templateMessage, "text/html;charset=UTF-8");
+		messageBodyPart.setContent("<p>Hi, " + user.getLogin() + "!!!</p><br />" + templateMessage,
+				"text/html;charset=UTF-8");
 		Multipart multipart = new MimeMultipart();
 		multipart.addBodyPart(messageBodyPart);
 		message.setContent(multipart, "text/html;charset=UTF-8");

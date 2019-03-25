@@ -48,16 +48,16 @@ public class MainController {
 	}
 
 	@PostMapping(value = "/registration")
-	public String registrationForm(@RequestParam(value = "username", required = false) String username,
+	public String registrationForm(@RequestParam(value = "username", required = false) String login,
 			@RequestParam(value = "userEmail", required = false) String userEmail,
 			@RequestParam(value = "password", required = false) String password, Model model)
 			throws MessagingException {
 		String resultRegistration = "registrationForm";
-		if (username != null && userEmail != null && password != null) {
+		if (login != null && userEmail != null && password != null) {
 			Set<Roles> roleUser = new HashSet<>();
 			roleUser.add(rolesService.getRoleByName(RolesName.ROLE_USER.name()));
 			Users newUser = new Users();
-			newUser.setUserName(username);
+			newUser.setLogin(login);
 			newUser.setUserEmail(userEmail);
 			newUser.setEncrytedPassword(password);
 			newUser.setRoles(roleUser);

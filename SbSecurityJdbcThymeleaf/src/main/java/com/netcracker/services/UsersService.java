@@ -6,7 +6,7 @@ import com.netcracker.model.Users;
 
 public interface UsersService {
 
-	public Users getUserByName(String userName);
+	public Users getUserByLogin(String login);
 
 	public Users getUserById(Long userId);
 

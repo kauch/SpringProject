@@ -39,14 +39,18 @@ public class IdentityManagementController {
 
 	@PostMapping(value = "admin/edit/{id}")
 	public String updateUser(@PathVariable("id") long id,
-			@RequestParam(value = "userEmail", required = false) String email, @Valid Users user, BindingResult result,
-			Model model) {
+			@RequestParam(value = "userEmail", required = false) String email,
+			@RequestParam(value = "userFirstName", required = false) String firstName,
+			@RequestParam(value = "userSecondName", required = false) String secondName, @Valid Users user,
+			BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			user.setUserId(id);
 			return "userEditPage";
 		}
 		Users edit = usersService.getUserById(id);
 		edit.setUserEmail(email);
+		edit.setFirstName(firstName);
+		edit.setSecondName(secondName);
 		usersService.saveUser(edit);
 		model.addAttribute("usersList", usersService.getAllUsers());
 		return "redirect:/admin";

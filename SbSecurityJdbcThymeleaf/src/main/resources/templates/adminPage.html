@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-	
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.14.6/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
@@ -24,22 +23,31 @@
                 <th>ID</th>
                 <th>Login</th>
                 <th>Email</th>
+                <th>First name</th>
+                <th>Second name</th>
+                <th>Sex</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            <tr class = "cursor-hand" th:each="user :${usersList}" > <!-- data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="static" -->
-                <td th:text="${user.getUserId()}">User ID</td>
-                <td th:text="${user.getUserName()}">User Name</td>
-                <td th:text="${user.getUserEmail()}">User Email</td>
-                <td><a th:href="@{admin/edit/{id}(id=${user.userId})}"><img src="img/edit-icons.png" width="24" 
-   height="24" border="0"></a></td>
-   				<td><a th:href="@{admin/delete/{id}(id=${user.userId})}"><img src="img/delete-icons.png" width="24" 
-   height="24" border="0"></a></td>
+            <tr class="cursor-hand" th:each="user :${usersList}"> <!-- data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="static" -->
+                <td th:text="${user.getUserId()}"></td>
+                <td th:text="${user.getLogin()}"></td>
+                <td th:text="${user.getUserEmail()}"></td>
+                <td th:text="${user.getFirstName()}"></td>
+                <td th:text="${user.getSecondName()}"></td>
+                <td th:text="${user.isSex()}"></td>
+                <td>
+                    <a th:href="@{admin/edit/{id}(id=${user.userId})}"><img src="img/edit-icons.png" width="24" height="24" border="0"></a>
+                </td>
+                <td>
+                    <a th:href="@{admin/delete/{id}(id=${user.userId})}"><img src="img/delete-icons.png" width="24" height="24" border="0"></a>
+                </td>
             </tr>
         </tbody>
     </table>
 
 </body>
+
 </html>

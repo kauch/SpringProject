@@ -28,11 +28,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private static Logger log = LogManager.getLogger(UserDetailsServiceImpl.class.getName());
 
 	@Override
-	public UserDetails loadUserByUsername(String userName) {
-		Users user = this.usersRepository.findByUserName(userName);
+	public UserDetails loadUserByUsername(String login) {
+		Users user = this.usersRepository.findByLogin(login);
 		if (user == null) {
-			log.info("User not found! " + userName);
-			throw new UsernameNotFoundException("User " + userName + " was not found in the database");
+			log.info("User not found! " + login);
+			throw new UsernameNotFoundException("User " + login + " was not found in the database");
 		}
 
 		log.info("Found User: " + user);
@@ -48,6 +48,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			}
 		}
 
-		return (UserDetails) new User(user.getUserName(), user.getEncrytedPassword(), grantList);
+		return (UserDetails) new User(user.getLogin(), user.getEncrytedPassword(), grantList);
 	}
 }
