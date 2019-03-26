@@ -63,7 +63,7 @@ public class OrderController {
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
 		Order order = orderService.getOrderById(id);
 		model.addAttribute("order", order);
-		return "userEditPage";
+		return "orderEditPage";
 	}
 
 	@GetMapping(value = "/my-orders")
@@ -95,6 +95,7 @@ public class OrderController {
 		} else {
 			newPath = path.concat("/");
 		}
+		logger.info(reqest.getHeader("referer"));
 		return newPath;
 	}
 }
