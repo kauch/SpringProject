@@ -31,7 +31,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="cursor-hand" th:each="user :${usersList}"> <!-- data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="static" -->
+            <tr th:each="user :${usersList}"> <!-- data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="static" -->
                 <td th:text="${user.getUserId()}"></td>
                 <td th:text="${user.getLogin()}"></td>
                 <td th:text="${user.getUserEmail()}"></td>
@@ -39,10 +39,10 @@
                 <td th:text="${user.getSecondName()}"></td>
                 <td th:text="${user.isSex()}"></td>
                 <td>
-                    <a th:href="@{admin/edit/{id}(id=${user.userId})}"><img src="img/edit-icons.png" width="24" height="24" border="0"></a>
+                    <a th:href="@{admin/edit/{id}(id=${user.userId})}"><img src="img/edit-icons.png" class="cursor-hand" width="24" height="24" border="0"></a>
                 </td>
                 <td>
-                    <a th:href="@{admin/delete/{id}(id=${user.userId})}"><img src="img/delete-icons.png" width="24" height="24" border="0"></a>
+                    <a th:href="@{admin/delete/{id}(id=${user.userId})}"><img src="img/delete-icons.png" class="cursor-hand" width="24" height="24" border="0"></a>
                 </td>
             </tr>
         </tbody>

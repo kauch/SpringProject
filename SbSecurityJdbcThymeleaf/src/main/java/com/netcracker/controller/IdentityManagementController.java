@@ -1,5 +1,7 @@
 package com.netcracker.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +40,17 @@ public class IdentityManagementController {
 	@PostMapping(value = "admin/edit/{id}")
 	public String updateUser(@PathVariable("id") long id,
 			@RequestParam(value = "userEmail", required = false) String email,
-			@RequestParam(value = "userFirstName", required = false) String firstName,
-			@RequestParam(value = "userSecondName", required = false) String secondName, Users user,
+			@RequestParam(value = "firstName", required = false) String firstName,
+			@RequestParam(value = "secondName", required = false) String secondName, @Valid Users user,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			user.setUserId(id);
 			return "userEditPage";
 		}
 		Users edit = usersService.getUserById(id);
+		logger.info("First name: {}", firstName);
+		logger.info("Second name: {}", secondName);
+		logger.info("Email: {}", email);
 		edit.setUserEmail(email);
 		edit.setFirstName(firstName);
 		edit.setSecondName(secondName);

@@ -20,34 +20,53 @@
 
 				<form name='f' th:action="@{{id}(id=${user.userId})}" th:object="${user}" method="post">
 					<div class="form-group row">
-                        <label for="login" class="col-sm-3 col-form-label">Login:</label>
+                        <label for="inputLogin" class="col-sm-3 col-form-label">Login:</label>
                         <div class="col-sm-9">
-                            <input name='login' readonly class="form-control-plaintext" th:field="*{login}" type="text" id="login" placeholder="Login">
+                            <input readonly class="form-control-plaintext" th:field="*{login}" type="text" id="inputLogin" placeholder="Login">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email" class="col-sm-3 col-form-label">Email:</label>
+                        <label for="inputEmail" class="col-sm-3 col-form-label">Email:</label>
                         <div class="col-sm-9">
-                            <input name='userEmail'class="form-control" th:field="*{userEmail}" type="email" id="email" placeholder="Email">
+                            <input class="form-control" th:field="*{userEmail}" type="email" id="inputEmail" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="firstName" class="col-sm-3 col-form-label">First name:</label>
+                        <label for="inputFirstName" class="col-sm-3 col-form-label">First name:</label>
                         <div class="col-sm-9">
-                            <input name='userFirstName'class="form-control" th:field="*{firstName}" type="text" id="firstName" placeholder="First name">
+                            <input class="form-control" th:field="*{firstName}" type="text" id="inputFirstName" placeholder="First name">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="secondName" class="col-sm-3 col-form-label">Second name:</label>
+                        <label for="inputSecondName" class="col-sm-3 col-form-label">Second name:</label>
                         <div class="col-sm-9">
-                            <input name='userSecondName'class="form-control" th:field="*{secondName}" type="text" id="secondName" placeholder="Second name">
+                            <input class="form-control" th:field="*{secondName}" type="text" id="inputSecondName" placeholder="Second name">
                         </div>
                     </div>
+                    
+                    	
                     <div class="form-group row">
+                    	<label class="col-sm-3 col-form-label">Sex:</label>
+		                    <div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+							  <label class="form-check-label" for="exampleRadios1">
+							    Man
+							  </label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+							  <label class="form-check-label" for="exampleRadios2">
+							    Woman
+							  </label>
+						</div>	 	    
+					</div>	
+					
+					<div class="form-group row">
                         <div class="col-sm-9 offset-sm-3">
-                            <button name="submit" type="submit" class="btn btn-outline-secondary" value="Update User">Update User</button>
+                            <button name="submit" type="submit" class="btn btn-outline-secondary" value="Save User">Save User</button>
                         </div>
-                    </div>		    			
+                    </div>
+							
 				</form>
 				
             </div>
