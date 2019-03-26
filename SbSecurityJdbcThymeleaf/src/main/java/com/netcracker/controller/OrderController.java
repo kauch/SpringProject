@@ -58,7 +58,7 @@ public class OrderController {
 	public String viewOrderPage(Model model) {
 		return "createOrderPage";
 	}
-	
+
 	@GetMapping(value = "order/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
 		Order order = orderService.getOrderById(id);
@@ -78,24 +78,24 @@ public class OrderController {
 		model.addAttribute("ordersList", orderService.getAllOrders());
 		return "allOrdersPage";
 	}
-	
+
 	@GetMapping(value = "order/delete/{id}")
 	public String deleteUser(@PathVariable("id") long id, Model model, HttpServletRequest reqest, Principal principal) {
 		String path = "redirect:";
 		String login = principal.getName();
 		String newPath;
 		Order order = orderService.getOrderById(id);
-		orderService.deleteOrder(order);
-		if(reqest.getHeader("referer").equals("/my-orders")) {
+		if (reqest.getHeader("referer").contains("/my-orders")) {
 			newPath = path.concat("/my-orders");
 			model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByLogin(login)));
-		} else if(reqest.getHeader("referer").equals("/all-orders")) {
+			orderService.deleteOrder(order);
+		} else if (reqest.getHeader("referer").contains("/all-orders")) {
 			newPath = path.concat("/all-orders");
 			model.addAttribute("ordersList", orderService.getAllOrders());
+			orderService.deleteOrder(order);
 		} else {
 			newPath = path.concat("/");
 		}
-		logger.info(reqest.getHeader("referer"));
 		return newPath;
 	}
 }

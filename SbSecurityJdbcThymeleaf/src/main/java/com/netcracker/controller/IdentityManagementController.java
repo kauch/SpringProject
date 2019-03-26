@@ -44,13 +44,9 @@ public class IdentityManagementController {
 			@RequestParam(value = "secondName", required = false) String secondName, @Valid Users user,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			user.setUserId(id);
 			return "userEditPage";
 		}
 		Users edit = usersService.getUserById(id);
-		logger.info("First name: {}", firstName);
-		logger.info("Second name: {}", secondName);
-		logger.info("Email: {}", email);
 		edit.setUserEmail(email);
 		edit.setFirstName(firstName);
 		edit.setSecondName(secondName);
