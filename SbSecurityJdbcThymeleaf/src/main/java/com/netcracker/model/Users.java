@@ -41,7 +41,7 @@ public class Users implements Serializable {
 	@Column(name = "second_name", length = 36, nullable = false)
 	private String secondName;
 
-	@Column(name = "sex", length = 1, nullable = false)
+	@Column(name = "sex", length = 5, nullable = false)
 	private boolean sex;
 
 	@Column(name = "user_email", length = 128, nullable = false, unique = true)
