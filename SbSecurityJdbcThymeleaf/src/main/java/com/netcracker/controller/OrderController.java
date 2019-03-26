@@ -2,14 +2,15 @@ package com.netcracker.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,7 +19,6 @@ import com.netcracker.model.Order;
 import com.netcracker.model.Users;
 import com.netcracker.services.impl.OrderServiceImpl;
 import com.netcracker.services.impl.UsersServiceImpl;
-import com.netcracker.utils.WebUtils;
 
 @Controller
 public class OrderController {
@@ -58,23 +58,43 @@ public class OrderController {
 	public String viewOrderPage(Model model) {
 		return "createOrderPage";
 	}
+	
+	@GetMapping(value = "order/edit/{id}")
+	public String showUpdateForm(@PathVariable("id") long id, Model model) {
+		Order order = orderService.getOrderById(id);
+		model.addAttribute("order", order);
+		return "userEditPage";
+	}
 
 	@GetMapping(value = "/my-orders")
 	public String myOrders(Model model, Principal principal) {
 		String login = principal.getName();
-		logger.info("User Name:  {}", login);
-		User loginedUser = (User) ((Authentication) principal).getPrincipal();
-		String userInfo = WebUtils.toString(loginedUser);
-		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByLogin(login)));
 		return "myOrdersPage";
 	}
 
 	@GetMapping(value = "/all-orders")
-	public String allOrders(Model model, Principal principal) {
-		String login = principal.getName();
-		logger.info("User Name:  {}", login);
+	public String allOrders(Model model) {
 		model.addAttribute("ordersList", orderService.getAllOrders());
 		return "allOrdersPage";
+	}
+	
+	@GetMapping(value = "order/delete/{id}")
+	public String deleteUser(@PathVariable("id") long id, Model model, HttpServletRequest reqest, Principal principal) {
+		String path = "redirect:";
+		String login = principal.getName();
+		String newPath;
+		Order order = orderService.getOrderById(id);
+		orderService.deleteOrder(order);
+		if(reqest.getHeader("referer").equals("/my-orders")) {
+			newPath = path.concat("/my-orders");
+			model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByLogin(login)));
+		} else if(reqest.getHeader("referer").equals("/all-orders")) {
+			newPath = path.concat("/all-orders");
+			model.addAttribute("ordersList", orderService.getAllOrders());
+		} else {
+			newPath = path.concat("/");
+		}
+		return newPath;
 	}
 }

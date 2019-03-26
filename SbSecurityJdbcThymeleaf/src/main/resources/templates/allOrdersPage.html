@@ -5,9 +5,9 @@
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.14.6/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="../css/styleCursor.css" type="text/css">
-    <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/png"/>
     <title>All Orders</title>
 </head>
 
@@ -24,6 +24,8 @@
                 <th>Status</th>
                 <th>Destination</th>
                 <th>Owner</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +34,13 @@
                 <td th:text="${order.getWeight()}">Weight</td>
                 <td th:text="${order.getStatus()}">Status</td>
                 <td th:text="${order.getDestPoint()}">Destination</td>
-                <td th:text="${order.getUser().getUserName()}">Owner</td>
+                <td th:text="${order.getUser().getLogin()}">Owner</td>
+                <td>
+                    <a th:href="@{order/edit/{id}(id=${order.orderId})}"><img src="img/edit-icons.png" class="cursor-hand" width="24" height="24" border="0"></a>
+                </td>
+                <td>
+                    <a th:href="@{order/delete/{id}(id=${order.orderId})}"><img src="img/delete-icons.png" class="cursor-hand" width="24" height="24" border="0"></a>
+                </td>
             </tr>
         </tbody>
     </table>

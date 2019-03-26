@@ -15,13 +15,15 @@
     <br/>
     <h2>My orders</h2>
     <br/>
-    <table class="table table-striped">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Order ID</th>
                 <th>Weight</th>
                 <th>Status</th>
                 <th>Destination</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +32,12 @@
                 <td th:text="${order.getWeight()}">Weight</td>
                 <td th:text="${order.getStatus()}">Status</td>
                 <td th:text="${order.getDestPoint()}">Destination</td>
+                <td>
+                    <a th:href="@{order/edit/{id}(id=${order.orderId})}"><img src="img/edit-icons.png" class="cursor-hand" width="24" height="24" border="0"></a>
+                </td>
+                <td>
+                    <a th:href="@{order/delete/{id}(id=${order.orderId})}"><img src="img/delete-icons.png" class="cursor-hand" width="24" height="24" border="0"></a>
+                </td>
             </tr>
         </tbody>
     </table>  

@@ -11,4 +11,6 @@ import com.netcracker.model.Users;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 	public List<Order> findByUser(Users user);
+	
+	public Order findByOrderId(Long orderId);
 }
