@@ -41,8 +41,8 @@ public class Users implements Serializable {
 	@Column(name = "second_name", length = 36, nullable = false)
 	private String secondName;
 
-	@Column(name = "sex", length = 5, nullable = false)
-	private boolean sex;
+	@Column(name = "gender", length = 5, nullable = false)
+	private boolean gender;
 
 	@Column(name = "user_email", length = 128, nullable = false, unique = true)
 	private String userEmail;
@@ -98,12 +98,12 @@ public class Users implements Serializable {
 		this.secondName = secondName;
 	}
 
-	public boolean isSex() {
-		return sex;
+	public boolean isGender() {
+		return gender;
 	}
 
-	public void setSex(boolean sex) {
-		this.sex = sex;
+	public void setGender(boolean gender) {
+		this.gender = gender;
 	}
 
 	public String getUserEmail() {
@@ -144,6 +144,10 @@ public class Users implements Serializable {
 
 	public void setEncrytedPassword(String encrytedPassword) {
 		this.encrytedPassword = EncrytedPasswordUtils.encrytePassword(encrytedPassword);
+	}
+
+	public String getTextGender(boolean gender) {
+		return (gender) ? "Male" : "Female";
 	}
 
 //	public Long uniqueID() {

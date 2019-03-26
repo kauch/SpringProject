@@ -41,15 +41,18 @@ public class IdentityManagementController {
 	public String updateUser(@PathVariable("id") long id,
 			@RequestParam(value = "userEmail", required = false) String email,
 			@RequestParam(value = "firstName", required = false) String firstName,
-			@RequestParam(value = "secondName", required = false) String secondName, @Valid Users user,
+			@RequestParam(value = "secondName", required = false) String secondName,
+			@RequestParam(value = "exampleRadios", required = false) boolean gender, @Valid Users user,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "userEditPage";
 		}
+		logger.info("{}", gender);
 		Users edit = usersService.getUserById(id);
 		edit.setUserEmail(email);
 		edit.setFirstName(firstName);
 		edit.setSecondName(secondName);
+		edit.setGender(gender);
 		usersService.saveUser(edit);
 		model.addAttribute("usersList", usersService.getAllUsers());
 		return "redirect:/admin";

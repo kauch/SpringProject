@@ -72,7 +72,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		admin.setEncrytedPassword("123");
 		admin.setFirstName("Vova");
 		admin.setSecondName("Pupkin");
-		admin.setSex(true);
+		admin.setGender(true);
 		admin.setRoles(adminSet);
 		usersService.saveUser(admin);
 
@@ -82,7 +82,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		user1.setEncrytedPassword("123");
 		user1.setFirstName("Serezha");
 		user1.setSecondName("Sidorov");
-		user1.setSex(true);
+		user1.setGender(true);
 		user1.setRoles(userSet);
 		usersService.saveUser(user1);
 
@@ -92,7 +92,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		user2.setEncrytedPassword("123");
 		user2.setFirstName("Elena");
 		user2.setSecondName("Premudraia");
-		user2.setSex(false);
+		user2.setGender(false);
 		user2.setRoles(userSet);
 		usersService.saveUser(user2);
 
@@ -102,7 +102,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		user3.setEncrytedPassword("123");
 		user3.setFirstName("Test");
 		user3.setSecondName("Testov");
-		user3.setSex(true);
+		user3.setGender(true);
 		user3.setRoles(userSet);
 		usersService.saveUser(user3);
 
@@ -112,7 +112,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		manager.setEncrytedPassword("123");
 		manager.setFirstName("Sova");
 		manager.setSecondName("Manager");
-		manager.setSex(false);
+		manager.setGender(false);
 		manager.setRoles(managerSet);
 		usersService.saveUser(manager);
 
@@ -122,7 +122,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		courier.setEncrytedPassword("123");
 		courier.setFirstName("Yandex");
 		courier.setSecondName("Eda");
-		courier.setSex(true);
+		courier.setGender(true);
 		courier.setRoles(courierSet);
 		usersService.saveUser(courier);
 
@@ -132,7 +132,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		superAdmin.setEncrytedPassword("123");
 		superAdmin.setFirstName("Super");
 		superAdmin.setSecondName("Puper");
-		superAdmin.setSex(true);
+		superAdmin.setGender(true);
 		superAdmin.setRoles(allRolesSet);
 		usersService.saveUser(superAdmin);
 	}
@@ -154,7 +154,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
 		Order order3 = new Order();
 		order3.setUser(user3);
-		order3.setDestPoint("Орел");
+		order3.setDestPoint("Орёл");
 		order3.setWeight(13);
 		order3.setStatus(OrderStatus.PENDING);
 		orderService.saveOrder(order3);

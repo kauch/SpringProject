@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <link rel="stylesheet" href="../css/styleNavbar.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/styleNavbar.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/styleCursor.css}" type="text/css">
     <meta http-equiv="Content-Type">
 </head>
 
@@ -20,11 +21,11 @@
                 </li> 
                 
                 <li class="nav-item" th:if="${#request.userPrincipal != null}" sec:authorize="isAuthenticated()">
-                    <a class="nav-item nav-link" th:href="@{/userInfo}">User Info</a>
+                    <a class="nav-item nav-link" th:href="@{/userInfo}">Info</a>
                 </li>
 
                 <li class="nav-item dropdown" th:if="${#request.userPrincipal != null}" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle cursor-hand" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Admin
         </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -35,7 +36,7 @@
                 </li>
 
                 <li class="nav-item dropdown" th:if="${#request.userPrincipal != null}" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle cursor-hand" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Order
         </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
