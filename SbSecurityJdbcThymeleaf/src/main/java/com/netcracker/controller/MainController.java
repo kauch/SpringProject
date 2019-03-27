@@ -48,19 +48,27 @@ public class MainController {
 	}
 
 	@PostMapping(value = "/registration")
-	public String registrationForm(@RequestParam(value = "username", required = false) String login,
+	public String registrationForm(@RequestParam(value = "login", required = false) String login,
 			@RequestParam(value = "userEmail", required = false) String userEmail,
-			@RequestParam(value = "password", required = false) String password, Model model)
+			@RequestParam(value = "password", required = false) String password,
+			@RequestParam(value = "firstName", required = false) String firstName,
+			@RequestParam(value = "lastName", required = false) String lastName,
+			@RequestParam(value = "exampleRadios", required = false) boolean gender, Model model)
 			throws MessagingException {
 		String resultRegistration = "registrationForm";
-		if (login != null && userEmail != null && password != null) {
+		logger.info("begin user {} {} {} {} {}", login, userEmail, firstName, lastName, gender);
+		if (login != null && userEmail != null && password != null && firstName != null && lastName != null) {
 			Set<Roles> roleUser = new HashSet<>();
 			roleUser.add(rolesService.getRoleByName(RolesName.ROLE_USER.name()));
 			Users newUser = new Users();
 			newUser.setLogin(login);
 			newUser.setUserEmail(userEmail);
 			newUser.setEncrytedPassword(password);
+			newUser.setFirstName(firstName);
+			newUser.setLastName(lastName);
+			newUser.setGender(gender);
 			newUser.setRoles(roleUser);
+			logger.info("user {} {} {} {} {}", login, userEmail, firstName, lastName, gender);
 			try {
 				usersService.saveUser(newUser);
 				String info = "Mail sent to " + userEmail;

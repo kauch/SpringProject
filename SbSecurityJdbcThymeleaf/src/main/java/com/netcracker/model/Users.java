@@ -38,8 +38,8 @@ public class Users implements Serializable {
 	@Column(name = "first_name", length = 36, nullable = false)
 	private String firstName;
 
-	@Column(name = "second_name", length = 36, nullable = false)
-	private String secondName;
+	@Column(name = "last_name", length = 36, nullable = false)
+	private String lastName;
 
 	@Column(name = "gender", length = 5, nullable = false)
 	private boolean gender;
@@ -90,12 +90,12 @@ public class Users implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public String getSecondName() {
-		return secondName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public boolean isGender() {

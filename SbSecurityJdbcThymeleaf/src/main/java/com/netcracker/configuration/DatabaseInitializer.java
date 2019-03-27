@@ -71,7 +71,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		admin.setUserEmail("Admin@myprj.kostya");
 		admin.setEncrytedPassword("123");
 		admin.setFirstName("Vova");
-		admin.setSecondName("Pupkin");
+		admin.setLastName("Pupkin");
 		admin.setGender(true);
 		admin.setRoles(adminSet);
 		usersService.saveUser(admin);
@@ -81,7 +81,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		user1.setUserEmail("User1@myprj.kostya");
 		user1.setEncrytedPassword("123");
 		user1.setFirstName("Serezha");
-		user1.setSecondName("Sidorov");
+		user1.setLastName("Sidorov");
 		user1.setGender(true);
 		user1.setRoles(userSet);
 		usersService.saveUser(user1);
@@ -91,7 +91,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		user2.setUserEmail("User2@myprj.kostya");
 		user2.setEncrytedPassword("123");
 		user2.setFirstName("Elena");
-		user2.setSecondName("Premudraia");
+		user2.setLastName("Premudraia");
 		user2.setGender(false);
 		user2.setRoles(userSet);
 		usersService.saveUser(user2);
@@ -101,7 +101,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		user3.setUserEmail("User3@myprj.kostya");
 		user3.setEncrytedPassword("123");
 		user3.setFirstName("Test");
-		user3.setSecondName("Testov");
+		user3.setLastName("Testov");
 		user3.setGender(true);
 		user3.setRoles(userSet);
 		usersService.saveUser(user3);
@@ -111,7 +111,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		manager.setUserEmail("Manager@myprj.kostya");
 		manager.setEncrytedPassword("123");
 		manager.setFirstName("Sova");
-		manager.setSecondName("Manager");
+		manager.setLastName("Manager");
 		manager.setGender(false);
 		manager.setRoles(managerSet);
 		usersService.saveUser(manager);
@@ -121,7 +121,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		courier.setUserEmail("Courier@myprj.kostya");
 		courier.setEncrytedPassword("123");
 		courier.setFirstName("Yandex");
-		courier.setSecondName("Eda");
+		courier.setLastName("Eda");
 		courier.setGender(true);
 		courier.setRoles(courierSet);
 		usersService.saveUser(courier);
@@ -131,7 +131,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 		superAdmin.setUserEmail("SAdmin@myprj.kostya");
 		superAdmin.setEncrytedPassword("123");
 		superAdmin.setFirstName("Super");
-		superAdmin.setSecondName("Puper");
+		superAdmin.setLastName("Puper");
 		superAdmin.setGender(true);
 		superAdmin.setRoles(allRolesSet);
 		usersService.saveUser(superAdmin);
