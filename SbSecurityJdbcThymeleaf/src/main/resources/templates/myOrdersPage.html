@@ -5,7 +5,9 @@
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.14.6/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap-table/1.14.1/dist/bootstrap-table.min.js}"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-table/1.14.1/dist/bootstrap-table.min.css}"/>
     <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
     <title>My Orders</title>
 </head>
@@ -15,13 +17,16 @@
     <br/>
     <h2>My orders</h2>
     <br/>
-    <table class="table table-hover">
+    <table class="table table-hover"id="table"
+  data-toggle="table"
+  data-sort-name="name"
+  data-sort-order="desc">
         <thead>
             <tr>
-                <th>Order ID</th>
-                <th>Weight</th>
-                <th>Status</th>
-                <th>Destination</th>
+                <th data-field="id" data-sortable="true">Order ID</th>
+                <th data-field="weight" data-sortable="true">Weight</th>
+                <th data-field="status" data-sortable="true">Status</th>
+                <th data-field="dest" data-sortable="true">Destination</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>

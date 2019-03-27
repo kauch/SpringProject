@@ -5,8 +5,10 @@
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.14.6/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap-table/1.14.1/dist/bootstrap-table.min.js}"></script>
     <script src="/js/cursorTable.js"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-table/1.14.1/dist/bootstrap-table.min.css}"/>
     <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
     <title th:utext="${title}"></title>
 </head>
@@ -16,15 +18,18 @@
     <br/>
     <h2>Identity management</h2>
     <br/>
-    <table class="table table-hover">
+    <table class="table table-hover"id="table"
+  data-toggle="table"
+  data-sort-name="name"
+  data-sort-order="desc">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Login</th>
-                <th>Email</th>
-                <th>First name</th>
-                <th>Second name</th>
-                <th>Gender</th>
+                <th data-field="id" data-sortable="true">ID</th>
+                <th data-field="login" data-sortable="true">Login</th>
+                <th data-field="email" data-sortable="true">Email</th>
+                <th data-field="first-name" data-sortable="true">First name</th>
+                <th data-field="second-name" data-sortable="true">Second name</th>
+                <th data-field="gender" data-sortable="true">Gender</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
