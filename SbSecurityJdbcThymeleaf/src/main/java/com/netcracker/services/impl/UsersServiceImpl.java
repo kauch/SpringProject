@@ -17,7 +17,7 @@ import com.netcracker.services.UsersService;
 public class UsersServiceImpl implements UsersService {
 
 	public static final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);
-	
+
 	@Autowired
 	UsersRepository usersRepository;
 
@@ -49,9 +49,7 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public void deleteRoleForUser(Users user, Roles role) {
 		Set<Roles> roles = user.getRoles();
-		roles.stream().forEach(m -> logger.info("roles {}", m.getRoleName()));
 		roles.remove(role);
-		roles.stream().forEach(m -> logger.info("roles {}", m.getRoleName()));
 		user.setRoles(roles);
 		usersRepository.saveAndFlush(user);
 	}

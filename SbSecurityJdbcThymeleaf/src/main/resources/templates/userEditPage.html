@@ -106,7 +106,7 @@
                     </tbody>
                 </table>
                 <br/>
-                <!-- th:action="@{add-roles/{id}-{name-rol}(id=${user.userId}, name-rol=${role.roleName})}" method="post" -->
+                <!--  th:field="*{rol}"-->
                 <form name='r' th:action="@{add-roles/{id}(id=${user.userId})}" method="post">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
