@@ -103,4 +103,11 @@ public class IdentityManagementController {
 		logger.info("delete {} {}", id, role);
 		return "redirect:/admin/edit/{id}";
 	}
+	
+	@PostMapping(value = "admin/edit/add-roles/{id}") 
+	public String addRoleForUser(@PathVariable("id") long id, 
+			Model model) {
+		
+		return "redirect:/admin/edit/{id}";
+	}
 }
