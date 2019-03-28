@@ -2,6 +2,7 @@ package com.netcracker.services;
 
 import java.util.List;
 
+import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
 
 public interface UsersService {
@@ -13,6 +14,8 @@ public interface UsersService {
 	public void saveUser(Users user);
 
 	public void deleteUser(Users user);
+
+	public void deleteRoleForUser(Users user, Roles role);
 
 	public List<Users> getAllUsers();
 }

@@ -1,5 +1,8 @@
 package com.netcracker.controller;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -13,7 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.netcracker.model.Order;
+import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
+import com.netcracker.services.impl.OrderServiceImpl;
+import com.netcracker.services.impl.RolesServiceImpl;
 import com.netcracker.services.impl.UsersServiceImpl;
 
 @Controller
@@ -24,6 +31,12 @@ public class IdentityManagementController {
 	@Autowired
 	private UsersServiceImpl usersService;
 
+	@Autowired
+	private OrderServiceImpl orderService;
+
+	@Autowired
+	private RolesServiceImpl rolesService;
+
 	@GetMapping(value = "/admin")
 	public String adminPage(Model model) {
 		model.addAttribute("usersList", usersService.getAllUsers());
@@ -31,9 +44,11 @@ public class IdentityManagementController {
 	}
 
 	@GetMapping(value = "admin/edit/{id}")
-	public String showUpdateForm(@PathVariable("id") long id, Model model) {
+	public String showUpdateForm(@PathVariable("id") long id, Model modelUser, Model modelRoles) {
 		Users user = usersService.getUserById(id);
-		model.addAttribute("user", user);
+		Set<Roles> roles = user.getRoles();
+		modelUser.addAttribute("user", user);
+		modelRoles.addAttribute("roles", roles);
 		return "userEditPage";
 	}
 
@@ -61,8 +76,20 @@ public class IdentityManagementController {
 	@GetMapping(value = "admin/delete/{id}")
 	public String deleteUser(@PathVariable("id") long id, Model model) {
 		Users user = usersService.getUserById(id);
+		List<Order> orders = orderService.getAllOrdersForUser(user);
+		orders.forEach(m -> orderService.deleteOrder(m));
 		usersService.deleteUser(user);
 		model.addAttribute("usersList", usersService.getAllUsers());
 		return "redirect:/admin";
+	}
+
+	@GetMapping(value = "admin/delete/{id}{name-rol}") // TODO
+
+	public String deleteRoleForUser(@PathVariable("id") long id, @PathVariable("name-rol") String roleName,
+			Model model) {
+		Users user = usersService.getUserById(id);
+		Roles role = rolesService.getRoleByName(roleName);
+		usersService.deleteRoleForUser(user, role);
+		return "redirect:/admin/edit/{id}";
 	}
 }
