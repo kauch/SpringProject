@@ -55,4 +55,33 @@ public class Roles implements Serializable {
 	public void setUsers(Set<Users> users) {
 		this.users = users;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Roles other = (Roles) obj;
+		if (roleId == null) {
+			if (other.roleId != null)
+				return false;
+		} else if (!roleId.equals(other.roleId))
+			return false;
+		if (roleName == null) {
+			if (other.roleName != null)
+				return false;
+		} else if (!roleName.equals(other.roleName))
+			return false;
+		if (users == null) {
+			if (other.users != null)
+				return false;
+		} else if (!users.equals(other.users))
+			return false;
+		return true;
+	}
+	
+	
 }

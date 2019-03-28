@@ -15,16 +15,16 @@
 <body class="bg-light">
     <th:block th:insert="/_menu"></th:block>
     <div class="container">
-    <div class="text-center">
-     <br/>  
-    	<h2>User edit</h2>
-    </div>
+        <div class="text-center">
+            <br/>
+            <h2>User edit</h2>
+        </div>
         <div class="row">
 
             <div class="col-md-6">
-                          <br/>
-    <h4 class="text-center">Customize profile</h4>
-    <br/>
+                <br/>
+                <h4 class="text-center">Customize profile</h4>
+                <br/>
                 <form name='f' th:action="@{{id}(id=${user.userId})}" th:object="${user}" method="post">
                     <div class="form-group row">
                         <label for="inputLogin" class="col-sm-3 col-form-label">Login:</label>
@@ -81,44 +81,46 @@
                 </form>
 
             </div>
-             <div class="col-md-6 text-center">
-              <br/>
-    <h4>Roles user</h4>
-    <br/>
+            <div class="col-md-6 text-center">
+                <br/>
+                <h4>Roles user</h4>
+                <br/>
 
-    <table class="table table-hover" id="table" data-toggle="table" data-sort-name="name" data-sort-order="desc">
-        <thead>
-            <tr>
-                <th data-field="id" data-sortable="true">ID</th>
-                <th data-field="name" data-sortable="true">Role</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="role : ${roles}">
+                <table class="table table-hover" id="table" data-toggle="table" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true">ID</th>
+                            <th data-field="name" data-sortable="true">Role</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="role : ${roles}">
+
+                            <td th:text="${role.getRoleId()}"></td>
+                            <td th:text="${role.getRoleName()}"></td>
+                            <td>
+                                <a th:href="@{delete/{id}-{name-rol}(id=${user.userId}, name-rol=${role.roleName})}"><img th:src="@{~/img/delete-icons.png}" class="cursor-hand" width="24" height="24" border="0"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <!-- th:action="@{add-roles/{id}-{name-rol}(id=${user.userId}, name-rol=${role.roleName})}" method="post" -->
+                <form name='r' >
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="button">Add role to user</button>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect">
+                    	<option value=""> -- </option>
+                        <option th:each="rol : ${listRoles}" th:value="${{rol}}" th:text="${rol.getRoleName()}"></option>
+                    </select>
+                </div>
                 
-                <td th:text="${role.getRoleId()}"></td>
-                <td th:text="${role.getRoleName()}"></td>
-                <td>
-                    <a th:href="@{admin/delete/{id}(id=${user.userId}){name-rol}(name-rol=${role.roleName})}"><img th:src="@{~/img/delete-icons.png}" class="cursor-hand" width="24" height="24" border="0"></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-        <br/>
-             <div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <button class="btn btn-outline-secondary" type="button">Add role to user</button>
-  </div>
-  <select class="custom-select" id="inputGroupSelect03">
-    <option selected></option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
-  </select>
-</div>
-             </div>
-            
+                </form>
+            </div>
+
         </div>
     </div>
 </body>

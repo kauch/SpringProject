@@ -34,7 +34,6 @@
         </thead>
         <tbody>
             <tr th:each="user :${usersList}">
-                <!-- data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="static" -->
                 <td th:text="${user.getUserId()}"></td>
                 <td th:text="${user.getLogin()}"></td>
                 <td th:text="${user.getUserEmail()}"></td>

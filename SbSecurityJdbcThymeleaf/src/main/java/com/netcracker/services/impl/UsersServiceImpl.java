@@ -3,6 +3,8 @@ package com.netcracker.services.impl;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import com.netcracker.services.UsersService;
 @Service
 public class UsersServiceImpl implements UsersService {
 
+	public static final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);
+	
 	@Autowired
 	UsersRepository usersRepository;
 
@@ -45,8 +49,10 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public void deleteRoleForUser(Users user, Roles role) {
 		Set<Roles> roles = user.getRoles();
+		roles.stream().forEach(m -> logger.info("roles {}", m.getRoleName()));
 		roles.remove(role);
+		roles.stream().forEach(m -> logger.info("roles {}", m.getRoleName()));
 		user.setRoles(roles);
-		// TODO: Переопределить equals если будут ошибки
+		usersRepository.saveAndFlush(user);
 	}
 }

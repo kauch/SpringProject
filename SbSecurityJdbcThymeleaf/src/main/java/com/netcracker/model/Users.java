@@ -150,6 +150,66 @@ public class Users implements Serializable {
 		return (gender) ? "Male" : "Female";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Users other = (Users) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (encrytedPassword == null) {
+			if (other.encrytedPassword != null)
+				return false;
+		} else if (!encrytedPassword.equals(other.encrytedPassword))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (gender != other.gender)
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		if (orders == null) {
+			if (other.orders != null)
+				return false;
+		} else if (!orders.equals(other.orders))
+			return false;
+		if (roles == null) {
+			if (other.roles != null)
+				return false;
+		} else if (!roles.equals(other.roles))
+			return false;
+		if (userEmail == null) {
+			if (other.userEmail != null)
+				return false;
+		} else if (!userEmail.equals(other.userEmail))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+
+	
 //	public Long uniqueID() {
 //    	LocalDateTime id = LocalDateTime.now();
 //    	DateTimeFormatter fmt = DateTimeFormatter.ofPattern("YYMMDDHHmmssSSS");

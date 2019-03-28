@@ -1,5 +1,6 @@
 package com.netcracker.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -44,11 +45,19 @@ public class IdentityManagementController {
 	}
 
 	@GetMapping(value = "admin/edit/{id}")
-	public String showUpdateForm(@PathVariable("id") long id, Model modelUser, Model modelRoles) {
+	public String showUpdateForm(@PathVariable("id") long id, Model modelUser, Model modelRoles, Model modelSelectRoles) {
 		Users user = usersService.getUserById(id);
 		Set<Roles> roles = user.getRoles();
+		List<Roles> listRoles = rolesService.getAllRoles();
+		
+		Iterator<Roles> iterator = roles.iterator();
+		while (iterator.hasNext()) {
+			listRoles.remove(iterator.next());
+		}
+		
 		modelUser.addAttribute("user", user);
 		modelRoles.addAttribute("roles", roles);
+		modelSelectRoles.addAttribute("listRoles", listRoles);
 		return "userEditPage";
 	}
 
@@ -83,13 +92,15 @@ public class IdentityManagementController {
 		return "redirect:/admin";
 	}
 
-	@GetMapping(value = "admin/delete/{id}{name-rol}") // TODO
-
+	@GetMapping(value = "admin/edit/delete/{id}-{name-rol}") 
 	public String deleteRoleForUser(@PathVariable("id") long id, @PathVariable("name-rol") String roleName,
 			Model model) {
 		Users user = usersService.getUserById(id);
+		logger.info("user {} {}", id, roleName);
 		Roles role = rolesService.getRoleByName(roleName);
+		logger.info("role {} {}", id, role);
 		usersService.deleteRoleForUser(user, role);
+		logger.info("delete {} {}", id, role);
 		return "redirect:/admin/edit/{id}";
 	}
 }
