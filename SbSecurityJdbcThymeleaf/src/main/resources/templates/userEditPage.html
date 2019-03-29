@@ -106,17 +106,17 @@
                     </tbody>
                 </table>
                 <br/>
-                <!--  th:field="*{rol}"-->
+                <!--  th:selected -->
                 <form name='r' th:action="@{add-roles/{id}(id=${user.userId})}" method="post">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <button class="btn btn-outline-secondary" name="submit-role" type="submit">Add role to user</button>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect">
-                    	<option value=""> -- </option>
+                    <select class="custom-select" name="inputGroupSelect" id="inputGroupSelect">
+                    	<option th:value="null"> --Select Role-- </option>
                         <option th:each="rol : ${listRoles}" 
-                        		th:value="${{rol}}" 
-                        		th:text="${rol.getRoleName()}"></option>
+                        		th:value="${{rol}}"
+                        		th:text="${rol.roleName}"></option>
                     </select>
                 </div>
                 
