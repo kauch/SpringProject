@@ -22,7 +22,7 @@
             <!-- onsubmit="return validate( );" th:action="@{/perform_login}"  -->
             
             <div class="col-12 col-sm-8 col-md-6">
-                <form name='f' th:action="@{/perform_login}"  method='POST'>
+                <form name='f' th:action="@{/perform_login}"  method='POST' onsubmit="return validate_logon( );">
                     <h3 class="text-center">Login</h3>
                     <div class="form-group row">
                         <label for="inputLogin" class="col-sm-3 col-form-label">Login</label>

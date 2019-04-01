@@ -1,25 +1,74 @@
-function validate()
+function validate_registration()
 {
-	var loginInput = document.f.login;
-	var passwordInput = document.f.password;
-//	var uemail = document.f.email;
-//	var umsex = document.f.msex;
-//	var ufsex = document.f.fsex;
-	if(login_validation(loginInput, 4, 12))
-	{
-		if(password_validation(passwordInput, 3, 12))
-		{
-			
-//			if(ValidateEmail(uemail))
-//			{
-//				if(validsex(umsex,ufsex))
-//				{
-//				}
-//			} 
-				
-		}
+  var loginInput = document.f.login;
+  var passwordInput = document.f.password;
+  var emailInput = document.f.userEmail;
+  var firstNameInput = document.f.firstName;
+  var lastNameInput = document.f.lastName;
+  var mGender = document.f.exampleRadios1;
+  var wGender = document.f.exampleRadios2;
+  if(login_validation(loginInput, 4, 12))
+  {
+	if(password_validation(passwordInput, 3, 12))
+	{	
+	  if(ValidateEmail(emailInput))
+	  {
+	    if(ValidateFirstName(firstNameInput))
+	    {
+	      if(ValidateLastName(lastNameInput))
+          {  
+			if(ValidateGender(mGender,wGender))
+			{
+				return true;
+			}
+          }
+        }  
+	  } 
 	}
-	return false;
+  }
+  return false;
+}
+
+function validate_edit_user()
+{
+  var loginInput = document.f.login;
+  var emailInput = document.f.userEmail;
+  var firstNameInput = document.f.firstName;
+  var lastNameInput = document.f.lastName;
+  var mGender = document.f.exampleRadios1;
+  var wGender = document.f.exampleRadios2;
+  if(login_validation(loginInput, 4, 12))
+  {
+	
+	if(ValidateEmail(emailInput))
+	{
+	  if(ValidateFirstName(firstNameInput))
+	  {
+	    if(ValidateLastName(lastNameInput))
+        {  
+		  if(ValidateGender(mGender,wGender))
+		  {
+			return true;
+		  }
+        }
+      }  
+	} 
+  }
+  return false;
+}
+
+function validate_logon()
+{
+  var loginInput = document.f.login;
+  var passwordInput = document.f.password;
+  if(login_validation(loginInput, 4, 12))
+  {
+	if(password_validation(passwordInput, 3, 12))
+	{
+	  return true;  
+	}
+  }
+  return false;
 }
 
 function login_validation(loginInput, mx, my)
@@ -60,42 +109,64 @@ function password_validation(passwordInput, mx, my)
 	return true;
 }
 
-//function ValidateEmail(uemail)
-//{
-//	var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
-//	if(uemail.value.match(mailformat))
-//	{
-//		return true;
-//	}
-//	else
-//	{
-//		alert("You have entered an invalid email address!");
-//		uemail.focus();
-//		return false;
-//	}
-//}
-//
-//function validsex(umsex,ufsex)
-//{
-//	x=0;
-//	if(umsex.checked) 
-//	{
-//		x++;
-//	}
-//	if(ufsex.checked)
-//	{
-//		x++; 
-//	}
-//	if(x==0)
-//	{
-//		alert('Select Male/Female');
-//		umsex.focus();
-//		return false;
-//	}
-//	else
-//	{
-//		alert('Form SuccesfullySubmitted');
-//		window.location.reload()
-//		return true;
-//	}
-//}
+function ValidateEmail(emailInput)
+{
+	var mailformat = /\S+@\S+\.\S+/;
+	if(emailInput.value.match(mailformat))
+	{
+		document.getElementById('emailf').innerHTML = "";
+		return true;
+	}
+	else
+	{
+		document.getElementById('emailf').innerHTML="*you have entered an invalid email address!";
+		emailInput.focus();
+		return false;
+	}
+}
+
+function ValidateFirstName(firstNameInput)
+{
+	var fName_len = firstNameInput.value.length;
+	if (fName_len == 0)
+	{
+		document.getElementById('firstNamef').innerHTML = "*first name should not be empty";
+		firstNameInput.focus();
+		return false;
+	}
+	document.getElementById('firstNamef').innerHTML = "";
+	return true;
+}
+
+function ValidateLastName(lastNameInput)
+{
+	var login_len = lastNameInput.value.length;
+	if (login_len == 0)
+	{
+		document.getElementById('lastNamef').innerHTML = "*last name should not be empty";
+		lastNameInput.focus();
+		return false;
+	}
+	document.getElementById('lastNamef').innerHTML = "";
+	return true;
+}
+
+function ValidateGender(mGender, wGender)
+{
+	x = 0;
+	if(mGender.checked) 
+	{
+		x++;
+	}
+	if(wGender.checked)
+	{
+		x++; 
+	}
+	if(x == 0)
+	{
+		document.getElementById('radButtonf').innerHTML = "*select Male / Female";
+		return false;
+	}
+	document.getElementById('radButtonf').innerHTML = "";
+	return true;
+}

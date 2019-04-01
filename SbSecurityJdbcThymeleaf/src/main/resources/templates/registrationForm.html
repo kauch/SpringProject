@@ -22,7 +22,7 @@
             <div class="col-sm-2 col-md-3 d-none d-sm-block"></div>
             <div class="col-12 col-sm-8 col-md-6">
 
-                <form name='f' th:action="@{/registration}" method='POST'>
+                <form name='f' th:action="@{/registration}" method='POST' onsubmit="return validate_registration( );">
                     <h3 class="text-center">Registration</h3>
                     <div class="form-group row">
                         <label for="inputLogin" class="col-sm-3 col-form-label">Login</label>
@@ -35,6 +35,7 @@
                         <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
                             <input name='userEmail' type="email" class="form-control" id="inputEmail" placeholder="Email">
+                            <span style="color:red" id="emailf"></span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -49,12 +50,14 @@
                         <label for="inputFirstName" class="col-sm-3 col-form-label">First name</label>
                         <div class="col-sm-9">
                             <input name='firstName' class="form-control" type="text" id="inputFirstName" placeholder="First name">
+                            <span style="color:red" id="firstNamef"></span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputLastName" class="col-sm-3 col-form-label">Last name</label>
                         <div class="col-sm-9">
                             <input name='lastName' class="form-control" type="text" id="inputLastName" placeholder="Last name">
+                            <span style="color:red" id="lastNamef"></span>
                         </div>
                     </div>
 
@@ -75,6 +78,7 @@
                                         Female
                                     </label>
                                 </div>
+                            <span style="color:red" id="radButtonf"></span>
                             </div>
                         </div>
                     </fieldset> 
