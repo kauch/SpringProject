@@ -26,7 +26,8 @@ public class ServiceMail {
 	public static final Logger logger = LoggerFactory.getLogger(ServiceMail.class);
 
 	/**
-	 * sendMailForMyProgram@yandex.ru GUIKL_89_ubu3 testformydearprogram@gmail.com
+	 * guikl_89_UBU3 sendMailForMyProgram@yandex.ru GUIKL_89_ubu3
+	 * testformydearprogram@gmail.com
 	 * 
 	 * @throws IOException
 	 */

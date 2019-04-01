@@ -76,13 +76,13 @@ function login_validation(loginInput, mx, my)
 	var login_len = loginInput.value.length;
 	if (login_len == 0)
 	{
-		document.getElementById('loginf').innerHTML = "*login should not be empty";
+		document.getElementById('loginf').innerHTML = "login should not be empty";
 		loginInput.focus();
 		return false;
 	}
 	if (login_len >= my || login_len < mx)
 	{
-		document.getElementById('loginf').innerHTML = "*length be between " + mx + " to " + my;
+		document.getElementById('loginf').innerHTML = "length be between " + mx + " to " + my;
 		loginInput.focus();
 		return false;
 	}
@@ -95,13 +95,13 @@ function password_validation(passwordInput, mx, my)
 	var password_len = passwordInput.value.length;
 	if (password_len == 0)
 	{
-		document.getElementById('passwordf').innerHTML = "*password should not be empty";
+		document.getElementById('passwordf').innerHTML = "password should not be empty";
 		passwordInput.focus();
 		return false;
 	}
 	if (password_len >= my || password_len < mx)
 	{
-		document.getElementById('passwordf').innerHTML="*length be between " + mx + " to " + my;
+		document.getElementById('passwordf').innerHTML="length be between " + mx + " to " + my;
 		passwordInput.focus();
 		return false;
 	}
@@ -119,7 +119,7 @@ function ValidateEmail(emailInput)
 	}
 	else
 	{
-		document.getElementById('emailf').innerHTML="*you have entered an invalid email address!";
+		document.getElementById('emailf').innerHTML="you have entered an invalid email address!";
 		emailInput.focus();
 		return false;
 	}
@@ -130,7 +130,7 @@ function ValidateFirstName(firstNameInput)
 	var fName_len = firstNameInput.value.length;
 	if (fName_len == 0)
 	{
-		document.getElementById('firstNamef').innerHTML = "*first name should not be empty";
+		document.getElementById('firstNamef').innerHTML = "first name should not be empty";
 		firstNameInput.focus();
 		return false;
 	}
@@ -143,7 +143,7 @@ function ValidateLastName(lastNameInput)
 	var login_len = lastNameInput.value.length;
 	if (login_len == 0)
 	{
-		document.getElementById('lastNamef').innerHTML = "*last name should not be empty";
+		document.getElementById('lastNamef').innerHTML = "last name should not be empty";
 		lastNameInput.focus();
 		return false;
 	}
@@ -164,7 +164,7 @@ function ValidateGender(mGender, wGender)
 	}
 	if(x == 0)
 	{
-		document.getElementById('radButtonf').innerHTML = "*select Male / Female";
+		document.getElementById('radButtonf').innerHTML = "select Male / Female";
 		return false;
 	}
 	document.getElementById('radButtonf').innerHTML = "";
