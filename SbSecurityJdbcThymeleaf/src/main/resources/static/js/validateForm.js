@@ -42,12 +42,12 @@ var oValidation = {
 			var login_len = loginInput.value.length;
 			if (login_len == 0)
 			{
-				this.highlightField('loginf', "login should not be empty");
+				this.highlightField(loginInput, 'loginf', "login should not be empty");
 				return false;
 			}
 			if (login_len >= my || login_len < mx)
 			{
-				this.highlightField('loginf', "length be between " + mx + " to " + my);
+				this.highlightField(loginInput, 'loginf', "length be between " + mx + " to " + my);
 				return false;
 			}	
 			return true;
@@ -57,12 +57,12 @@ var oValidation = {
 			var password_len = passwordInput.value.length;
 			if (password_len == 0)
 			{
-				this.highlightField('passwordf', "password should not be empty");
+				this.highlightField(passwordInput, 'passwordf', "password should not be empty");
 				return false;
 			}
 			if (password_len >= my || password_len < mx)
 			{
-				this.highlightField(passwordf, "length be between " + mx + " to " + my);
+				this.highlightField(passwordInput, 'passwordf', "length be between " + mx + " to " + my);
 				return false;
 			}
 			return true;
@@ -76,7 +76,7 @@ var oValidation = {
 			}
 			else
 			{
-				this.highlightField('emailf', "you have entered an invalid email address!");
+				this.highlightField(emailInput, 'emailf', "you have entered an invalid email address!");
 				return false;
 			}
 		},
@@ -85,7 +85,7 @@ var oValidation = {
 			var fName_len = firstNameInput.value.length;
 			if (fName_len == 0)
 			{
-				this.highlightField('firstNamef', "first name should not be empty");
+				this.highlightField(firstNameInput, 'firstNamef', "first name should not be empty");
 				return false;
 			}
 			return true;
@@ -95,7 +95,7 @@ var oValidation = {
 			var lName_len = lastNameInput.value.length;
 			if (lName_len == 0)
 			{
-				this.highlightField('lastNamef', "last name should not be empty");
+				this.highlightField(lastNameInput, 'lastNamef', "last name should not be empty");
 				return false;
 			}
 			return true;
@@ -109,20 +109,25 @@ var oValidation = {
 			}
 			if(x == 0)
 			{
-				this.highlightField('radButtonf', "select Male / Female");
+				this.highlightField(null, 'radButtonf', "select Male / Female");
 				return false;
 			}
 			return true;
 		},
 		
-		highlightField: function (inputField, text){
-			document.getElementById(inputField).innerHTML = text;
+		highlightField: function (inputField, spanSelector, text){
+			document.getElementById(spanSelector).innerHTML = text;
+			inputField.style.borderColor ="red";
 		},
 		
 		clearError: function (){
 			var elems = document.querySelectorAll('.error-span');
 			for (var i = 0; i < elems.length; i++) {
 				elems[i].innerHTML = "";
+			}
+			var inputs = document.querySelectorAll('.form-control');
+			for (var i = 0; i < inputs.length; i++) {
+				inputs[i].style.borderColor ="#ced4da";
 			}
 		}
 		
