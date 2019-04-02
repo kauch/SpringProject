@@ -1,35 +1,48 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="h-100">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.14.6/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
-    <link rel="shortcut icon" href="../img/favicon.png" type="image/png"/>
-    <title th:utext="${title}"></title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<f1ee624c-1150-405d-862b-d1c7f71d3e1e>" type="text/javascript"></script>
+    <script src="/js/mapPage.js"></script>
+    <title>Welcome page</title>
 </head>
 
-<body class="text-center bg-light">
+<body class="bg-light h-100">
     <th:block th:insert="/_menu"></th:block>
-    
-    <div sec:authorize="!isAuthenticated()">
-        This content is only shown to not authenticated users.
-    </div>
-    <div sec:authorize="isAuthenticated()">
-        This content is only shown to authenticated users.
-    </div>
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        This content is only shown to administrators.
-    </div>
-    <div sec:authorize="hasRole('ROLE_USER')">
-        This content is only shown to users.
-    </div>
-    <div sec:authorize="hasRole('ROLE_MANAGER')">
-        This content is only shown to managers.
-    </div>
-    <div sec:authorize="hasRole('ROLE_COURIER')">
-        This content is only shown to couriers.
+
+    <div class="row" style="height: calc(100% - 80px)">
+        <div class="col-md-6 text-center" style="height: calc(100% - 80px)">
+
+            <div sec:authorize="!isAuthenticated()">
+                This content is only shown to not authenticated users.
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                This content is only shown to authenticated users.
+            </div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                This content is only shown to administrators.
+            </div>
+            <div sec:authorize="hasRole('ROLE_USER')">
+                This content is only shown to users.
+            </div>
+            <div sec:authorize="hasRole('ROLE_MANAGER')">
+                This content is only shown to managers.
+            </div>
+            <div sec:authorize="hasRole('ROLE_COURIER')">
+                This content is only shown to couriers.
+            </div>
+
+        </div>
+        <div class="col-md-6" style="height: calc(100% - 80px)">
+            <div id="map" style="height: calc(100% - 80px)"></div>
+        </div>
     </div>
 </body>
 

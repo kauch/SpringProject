@@ -123,8 +123,4 @@ public class MainController {
 		return "successRegistrationPage";
 	}
 
-	@GetMapping(value = "/map")
-	public String getMap(Model model) {
-		return "mapPage";
-	}
 }

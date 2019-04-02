@@ -126,8 +126,8 @@ var oValidation = {
 				elems[i].innerHTML = "";
 			}
 			var inputs = document.querySelectorAll('.form-control');
-			for (var i = 0; i < inputs.length; i++) {
-				inputs[i].style.borderColor ="#ced4da";
+			for (var j = 0; j < inputs.length; j++) {
+				inputs[j].style.borderColor ="#ced4da";
 			}
 		}
 		
