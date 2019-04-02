@@ -19,7 +19,6 @@
 
     <div class="row" style="height: calc(100% - 80px)">
         <div class="col-md-6 text-center" style="height: calc(100% - 80px)">
-
             <div sec:authorize="!isAuthenticated()">
                 This content is only shown to not authenticated users.
             </div>
@@ -38,8 +37,8 @@
             <div sec:authorize="hasRole('ROLE_COURIER')">
                 This content is only shown to couriers.
             </div>
-
         </div>
+        
         <div class="col-md-6" style="height: calc(100% - 80px)">
             <div id="map" style="height: calc(100% - 80px)"></div>
         </div>

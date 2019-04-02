@@ -57,7 +57,8 @@ public class MainController {
 			throws MessagingException {
 		String resultRegistration = "registrationForm";
 		logger.info("begin user {} {} {} {} {}", login, userEmail, firstName, lastName, gender);
-		if (login != null && userEmail != null && password != null && firstName != null && lastName != null) {
+		if (!"".equals(login) && !"".equals(userEmail) && !"".equals(password) && !"".equals(firstName)
+				&& !"".equals(lastName)) {
 			Set<Roles> roleUser = new HashSet<>();
 			roleUser.add(rolesService.getRoleByName(RolesName.ROLE_USER.name()));
 			Users newUser = new Users();

@@ -35,6 +35,7 @@ var oValidation = {
 			if (mGender != null && wGender != null && !this.validateGender(mGender, wGender)) {
 				result = false;
 			}
+			
 			return result;
 		},
 
@@ -103,13 +104,17 @@ var oValidation = {
 		
 		validateGender: function(mGender, wGender) {
 			x = 0;
-			if(mGender.checked || wGender.checked) 
+			if(mGender.checked) 
+			{
+				x++;
+			}
+			if(wGender.checked) 
 			{
 				x++;
 			}
 			if(x == 0)
 			{
-				this.highlightField(null, 'radButtonf', "select Male / Female");
+				document.getElementById('radButtonf').innerHTML = "select Male / Female";
 				return false;
 			}
 			return true;
