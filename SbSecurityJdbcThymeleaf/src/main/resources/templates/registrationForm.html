@@ -5,7 +5,7 @@
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.14.6/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-    <script src="/js/validateRegForm.js"></script>
+    <script src="/js/validateForm.js"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
     <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
     <style type="text/css">
@@ -22,27 +22,27 @@
             <div class="col-sm-2 col-md-3 d-none d-sm-block"></div>
             <div class="col-12 col-sm-8 col-md-6">
 
-                <form name='f' th:action="@{/registration}" method='POST' onsubmit="return validate_registration( );">
+                <form name='f' th:action="@{/registration}" method='POST' onsubmit="return oValidation.isValidated( );">
                     <h3 class="text-center">Registration</h3>
                     <div class="form-group row">
                         <label for="inputLogin" class="col-sm-3 col-form-label">Login</label>
                         <div class="col-sm-9">
                             <input name='login' type="text" class="form-control" id="inputLogin" placeholder="Login">
-                            <span style="color:red" id="loginf"></span>
+                            <span class="error-span" style="color:red" id="loginf"></span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
                             <input name='userEmail' type="text" class="form-control" id="inputEmail" placeholder="Email">
-                            <span style="color:red" id="emailf"></span>
+                            <span class="error-span" style="color:red" id="emailf"></span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
                         <div class="col-sm-9">
                             <input name='password' type="password" class="form-control" id="inputPassword" placeholder="Password">
-                            <span style="color:red" id="passwordf"></span>
+                            <span class="error-span" style="color:red" id="passwordf"></span>
                         </div>
                     </div>
                     
@@ -50,14 +50,14 @@
                         <label for="inputFirstName" class="col-sm-3 col-form-label">First name</label>
                         <div class="col-sm-9">
                             <input name='firstName' class="form-control" type="text" id="inputFirstName" placeholder="First name">
-                            <span style="color:red" id="firstNamef"></span>
+                            <span class="error-span" style="color:red" id="firstNamef"></span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputLastName" class="col-sm-3 col-form-label">Last name</label>
                         <div class="col-sm-9">
                             <input name='lastName' class="form-control" type="text" id="inputLastName" placeholder="Last name">
-                            <span style="color:red" id="lastNamef"></span>
+                            <span class="error-span" style="color:red" id="lastNamef"></span>
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@
                                         Female
                                     </label>
                                 </div>
-                            <span style="color:red" id="radButtonf"></span>
+                            <span class="error-span" style="color:red" id="radButtonf"></span>
                             </div>
                         </div>
                     </fieldset> 
