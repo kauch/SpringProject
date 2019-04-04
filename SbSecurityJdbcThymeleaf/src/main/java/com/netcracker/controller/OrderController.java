@@ -71,12 +71,10 @@ public class OrderController {
 			@RequestParam(value = "weight", required = false) String orderWeight,
 			@RequestParam(value = "destPoint", required = false) String destination, 
 			Model model, HttpServletRequest reqest, Principal principal) {
-		String path = "redirect:/userInfo";
 		
-		Order order = orderService.getOrderById(id);
-		//model.addAttribute("order", order);
-		logger.info("{} {} {}", orderWeight, destination, order);
+		String path = "redirect:/userInfo";
 		if (destination != null && orderWeight != null) {
+		Order order = orderService.getOrderById(id);
 			try {
 				int weight = Integer.parseInt(orderWeight);
 				order.setDestPoint(destination);
