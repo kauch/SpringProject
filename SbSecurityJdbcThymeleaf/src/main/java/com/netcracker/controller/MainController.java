@@ -21,6 +21,7 @@ import com.netcracker.enums.RolesName;
 import com.netcracker.enums.TypeMessage;
 import com.netcracker.model.Roles;
 import com.netcracker.model.Users;
+import com.netcracker.services.impl.OrderServiceImpl;
 import com.netcracker.services.impl.RolesServiceImpl;
 import com.netcracker.services.impl.UsersServiceImpl;
 import com.netcracker.utils.ServiceMail;
@@ -36,6 +37,9 @@ public class MainController {
 
 	@Autowired
 	private RolesServiceImpl rolesService;
+	
+	@Autowired
+	private OrderServiceImpl orderService;
 
 	@GetMapping(value = { "/", "/welcome" })
 	public String welcomePage(Model model) {
@@ -97,12 +101,13 @@ public class MainController {
 	}
 
 	@GetMapping(value = "/userInfo")
-	public String userInfo(Model model, Principal principal) {
-		String userName = principal.getName();
-		logger.info("User Name:  {}", userName);
+	public String userInfo(Model modelInfoUser, Model modelInfoOrders, Principal principal) {
+		String login = principal.getName();
+		logger.info("User Name:  {}", login);
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String userInfo = WebUtils.toString(loginedUser);
-		model.addAttribute("userInfo", userInfo);
+		modelInfoUser.addAttribute("userInfo", userInfo);
+		modelInfoOrders.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByLogin(login)));
 		return "userInfoPage";
 	}
 

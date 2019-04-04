@@ -1,23 +1,65 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" class="h-100">
 
 <head>
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.14.6/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap-table/1.14.1/dist/bootstrap-table.min.js}"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-table/1.14.1/dist/bootstrap-table.min.css}" />
     <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
     <title>User Info</title>
 </head>
 
-<body class="text-center bg-light">
+<body class="bg-light">
     <th:block th:insert="/_menu"></th:block>
-
-    <h2>User Info Page</h2>
-    <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
-
-    <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
-   
+    <div class="container">
+        <div class="text-center">
+            <br/>
+            <h2>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h2>
+        </div>
+        <div class="row">
+            <div class="col-xl-4">
+            <br/>
+                <h4 class="text-center">User info</h4>
+<br/>
+                <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+            </div>
+            <!--  -->
+            <div class="col-xl-8 text-center">
+                <br/>
+                <h4>My orders</h4>
+                <br/>
+                <table class="table table-hover" id="table" data-toggle="table" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true">Order ID</th>
+                            <th data-field="weight" data-sortable="true">Weight</th>
+                            <th data-field="status" data-sortable="true">Status</th>
+                            <th data-field="dest" data-sortable="true">Destination</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="order :${ordersList}">
+                            <td th:text="${order.getOrderId()}">Order ID</td>
+                            <td th:text="${order.getWeight()}">Weight</td>
+                            <td th:text="${order.getStatus()}">Status</td>
+                            <td th:text="${order.getDestPoint()}">Destination</td>
+                            <td>
+                                <a th:href="@{order/edit/{id}(id=${order.orderId})}"><img src="img/edit-icons.png" class="cursor-hand" width="24" height="24" border="0"></a>
+                            </td>
+                            <td>
+                                <a th:href="@{order/delete/{id}(id=${order.orderId})}"><img src="img/delete-icons.png" class="cursor-hand" width="24" height="24" border="0"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

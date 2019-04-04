@@ -17,17 +17,17 @@
             <div class="col-sm-2 col-md-3 d-none d-sm-block"></div>
             <div class="col-12 col-sm-8 col-md-6">
 
-				<form name='f' th:action="@{{id}(id=${order.orderId})}" th:object="${order}" method="post">
+				<form name='f' th:action="@{{id}(id=${order.orderId})}" th:object="${order}" method="POST">
 					<div class="form-group row">
                         <label for="inputWeight" class="col-sm-3 col-form-label">Weight:</label>
                         <div class="col-sm-9">
-                            <input class="form-control" th:field="*{weight}" type="text" id="inputWeight" placeholder="Weight">
+                            <input name='weight' class="form-control" th:field="*{weight}" type="text" id="inputWeight" placeholder="Weight">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputDestination" class="col-sm-3 col-form-label">Destination:</label>
                         <div class="col-sm-9">
-                            <input class="form-control" th:field="*{destPoint}" type="text" id="inputDestination" placeholder="Destination">
+                            <input name='destPoint' class="form-control" th:field="*{destPoint}" type="text" id="inputDestination" placeholder="Destination">
                         </div>
                     </div>
 					

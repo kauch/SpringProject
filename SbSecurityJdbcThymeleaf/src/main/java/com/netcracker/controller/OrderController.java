@@ -46,7 +46,7 @@ public class OrderController {
 				newOrder.setWeight(weight);
 				newOrder.setStatus(OrderStatus.PENDING);
 				orderService.saveOrder(newOrder);
-				resultCreateOrder = "redirect:/my-orders";
+				resultCreateOrder = "redirect:/userInfo";
 			} catch (Exception e) {
 				resultCreateOrder = "createOrderPage";
 			}
@@ -65,12 +65,29 @@ public class OrderController {
 		model.addAttribute("order", order);
 		return "orderEditPage";
 	}
-
-	@GetMapping(value = "/my-orders")
-	public String myOrders(Model model, Principal principal) {
-		String login = principal.getName();
-		model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByLogin(login)));
-		return "myOrdersPage";
+	
+	@PostMapping(value = "order/edit/{id}")
+	public String showUpdateForm(@PathVariable("id") long id,
+			@RequestParam(value = "weight", required = false) String orderWeight,
+			@RequestParam(value = "destPoint", required = false) String destination, 
+			Model model, HttpServletRequest reqest, Principal principal) {
+		String path = "redirect:/userInfo";
+		
+		Order order = orderService.getOrderById(id);
+		//model.addAttribute("order", order);
+		logger.info("{} {} {}", orderWeight, destination, order);
+		if (destination != null && orderWeight != null) {
+			try {
+				int weight = Integer.parseInt(orderWeight);
+				order.setDestPoint(destination);
+				order.setWeight(weight);
+				logger.info("{} {} {}", orderWeight, destination, order);
+				orderService.saveOrder(order);
+			} catch (Exception e) {
+				path = "createEditPage";
+			}
+		}
+		return path;
 	}
 
 	@GetMapping(value = "/all-orders")
@@ -85,8 +102,8 @@ public class OrderController {
 		String login = principal.getName();
 		String newPath;
 		Order order = orderService.getOrderById(id);
-		if (reqest.getHeader("referer").contains("/my-orders")) {
-			newPath = path.concat("/my-orders");
+		if (reqest.getHeader("referer").contains("/userInfo")) {
+			newPath = path.concat("/userInfo");
 			model.addAttribute("ordersList", orderService.getAllOrdersForUser(usersService.getUserByLogin(login)));
 			orderService.deleteOrder(order);
 		} else if (reqest.getHeader("referer").contains("/all-orders")) {

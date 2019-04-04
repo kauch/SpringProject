@@ -36,7 +36,7 @@ public class Order implements Serializable {
 	@Column(name = "dest_point", length = 36, nullable = false)
 	private String destPoint;
 
-	@Column(name = "weight", updatable = false, nullable = false)
+	@Column(name = "weight", nullable = false)
 	private int weight;
 
 	@Column(name = "status", nullable = false)
